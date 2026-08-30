@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#070A14">
+<title>聚佣宝 — 全网推广赚钱平台</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#070A14;--bg2:#0C1122;--bg3:#111832;
+--glass:rgba(255,255,255,.06);--glass2:rgba(255,255,255,.10);--glass3:rgba(255,255,255,.15);
+--border:rgba(255,255,255,.08);--border2:rgba(255,255,255,.14);
+--primary:#7C5CFF;--primary-g:linear-gradient(135deg,#7C5CFF,#5C9CFF);
+--accent:#69E7FF;--accent2:#62FAD3;--gold:#FFD66B;--warn:#FF6B6B;
+--text:#F7FAFF;--text2:#9AA7C7;--text3:#5A6A8A;
+--radius:14px;--radius-s:10px;--radius-xs:6px;
+--shadow:0 4px 24px rgba(0,0,0,.4);
+--safe-b:env(safe-area-inset-bottom,0px);
+--nav-h:60px;
+--font:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+}
+html{font-family:var(--font);font-size:16px;color:var(--text);background:var(--bg);-webkit-tap-highlight-color:transparent;overflow-x:hidden}
+body{min-height:100vh;min-height:100dvh;background:var(--bg);overflow-x:hidden;padding-bottom:calc(var(--nav-h) + var(--safe-b))}
+body::before{content:'';position:fixed;top:-40%;left:-20%;width:80vw;height:80vw;background:radial-gradient(circle,rgba(124,92,255,.12),transparent 70%);pointer-events:none;z-index:0}
+body::after{content:'';position:fixed;bottom:-30%;right:-20%;width:70vw;height:70vw;background:radial-gradient(circle,rgba(105,231,255,.08),transparent 70%);pointer-events:none;z-index:0}
+a{color:var(--accent);text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;font-size:inherit}
+input,select,textarea{font-family:inherit;font-size:inherit;color:var(--text);background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-xs);padding:10px 14px;outline:none;width:100%}
+input:focus,select:focus{border-color:var(--primary)}
+input::placeholder{color:var(--text3)}
+img{max-width:100%;display:block}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
+#app{position:relative;z-index:1;max-width:480px;margin:0 auto;padding:0 0 20px}
+@media(min-width:520px){#app{border-left:1px solid var(--border);border-right:1px solid var(--border)}}
+.header{position:sticky;top:0;z-index:100;padding:12px 16px;display:flex;align-items:center;gap:10px;background:rgba(7,10,20,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.header h1{font-size:18px;font-weight:700;flex:1;background:var(--primary-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.header .logo-icon{font-size:22px}
+.header-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--glass);font-size:16px;transition:background .2s}
+.header-btn:hover{background:var(--glass2)}
+.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;height:calc(var(--nav-h) + var(--safe-b));padding-bottom:var(--safe-b);display:flex;background:rgba(7,10,20,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--border);z-index:200}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--text3);font-size:10px;font-weight:500;transition:color .2s}
+.nav-item.active{color:var(--accent)}
+.nav-item .nav-icon{font-size:22px;line-height:1}
+.nav-item.active .nav-icon{filter:drop-shadow(0 0 6px rgba(105,231,255,.4))}
+.view{display:none;padding:16px;animation:fadeIn .25s ease}
+.view.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card{background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px;transition:border-color .2s}
+.card:hover{border-color:var(--border2)}
+.card-title{font-size:15px;font-weight:600;margin-bottom:8px}
+.hero-banner{background:linear-gradient(135deg,rgba(124,92,255,.25),rgba(105,231,255,.15));border:1px solid rgba(124,92,255,.2);border-radius:var(--radius);padding:24px 20px;text-align:center;margin-bottom:16px;position:relative;overflow:hidden}
+.hero-banner::before{content:'';position:absolute;top:-50%;right:-30%;width:200px;height:200px;background:radial-gradient(circle,rgba(105,231,255,.15),transparent 70%);pointer-events:none}
+.hero-banner h2{font-size:22px;font-weight:800;margin-bottom:6px}
+.hero-banner p{font-size:13px;color:var(--text2);margin-bottom:14px}
+.hero-banner .cta{display:inline-flex;align-items:center;gap:6px;padding:10px 24px;background:var(--primary-g);border-radius:20px;font-size:14px;font-weight:600;color:#fff;transition:transform .15s,box-shadow .15s}
+.hero-banner .cta:hover{transform:scale(1.03);box-shadow:0 4px 20px rgba(124,92,255,.4)}
+.platform-count{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:14px;font-size:12px;font-weight:600;background:rgba(98,250,211,.1);color:var(--accent2);border:1px solid rgba(98,250,211,.15);margin-bottom:16px}
+.search-bar{display:flex;gap:8px;margin-bottom:16px}
+.search-bar input{flex:1;border-radius:20px;padding:10px 18px;background:var(--glass2);font-size:14px}
+.search-bar button{border-radius:20px;padding:10px 18px;background:var(--primary-g);font-weight:600;font-size:14px;color:#fff;white-space:nowrap}
+.cat-scroll{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:14px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.cat-scroll::-webkit-scrollbar{display:none}
+.cat-pill{flex-shrink:0;padding:7px 16px;border-radius:16px;font-size:12px;font-weight:500;background:var(--glass);border:1px solid var(--border);color:var(--text2);transition:all .2s;white-space:nowrap}
+.cat-pill.active,.cat-pill:hover{background:rgba(124,92,255,.2);border-color:var(--primary);color:var(--text)}
+.product-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.product-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:transform .15s,border-color .2s;cursor:pointer}
+.product-card:hover{transform:translateY(-2px);border-color:var(--border2)}
+.product-card .p-img{width:100%;aspect-ratio:1;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:38px;position:relative}
+.product-card .p-tag{position:absolute;top:8px;left:8px;padding:3px 8px;border-radius:4px;font-size:10px;font-weight:600;background:rgba(124,92,255,.8);color:#fff}
+.product-card .p-body{padding:10px 12px}
+.product-card .p-name{font-size:13px;font-weight:600;line-height:1.4;margin-bottom:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.product-card .p-platform{font-size:10px;color:var(--text3);margin-bottom:6px}
+.product-card .p-price{font-size:12px;color:var(--text2);margin-bottom:4px}
+.product-card .p-price span{color:var(--warn);font-weight:700;font-size:15px}
+.product-card .p-comm{display:flex;align-items:center;justify-content:space-between}
+.product-card .p-comm-badge{padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600;background:rgba(98,250,211,.12);color:var(--accent2)}
+.product-card .p-sales{font-size:10px;color:var(--text3)}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.stat-box{background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-s);padding:14px 10px;text-align:center}
+.stat-box .stat-val{font-size:22px;font-weight:800;background:var(--primary-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2}
+.stat-box .stat-label{font-size:11px;color:var(--text3);margin-top:4px}
+.stat-box.highlight .stat-val{background:linear-gradient(135deg,#62FAD3,#69E7FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.comm-section{margin-bottom:16px}
+.comm-section h3{font-size:14px;font-weight:600;margin-bottom:10px;color:var(--text2)}
+.comm-row{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-s);margin-bottom:6px}
+.comm-row .comm-info{display:flex;align-items:center;gap:10px}
+.comm-row .comm-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;background:var(--glass2)}
+.comm-row .comm-detail{font-size:13px}
+.comm-row .comm-detail small{display:block;color:var(--text3);font-size:11px;margin-top:2px}
+.comm-row .comm-amount{font-weight:700;color:var(--accent2);font-size:15px}
+.comm-row .comm-amount.l2{color:var(--gold)}
+.level-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:10px;font-size:11px;font-weight:600}
+.level-badge.l1{background:rgba(98,250,211,.12);color:var(--accent2)}
+.level-badge.l2{background:rgba(255,214,107,.12);color:var(--gold)}
+.invite-card{background:linear-gradient(135deg,rgba(124,92,255,.18),rgba(98,250,211,.1));border:1px solid rgba(124,92,255,.2);border-radius:var(--radius);padding:20px;text-align:center;margin-bottom:16px}
+.invite-card .code-display{font-size:28px;font-weight:800;letter-spacing:4px;color:var(--accent);margin:12px 0;padding:12px;background:var(--glass);border-radius:var(--radius-s);border:1px dashed var(--border2)}
+.invite-card .invite-desc{font-size:13px;color:var(--text2);margin-bottom:14px;line-height:1.6}
+.invite-card .invite-actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.invite-card .invite-actions button{padding:10px 20px;border-radius:20px;font-size:13px;font-weight:600;transition:transform .15s}
+.invite-card .invite-actions .btn-primary{background:var(--primary-g);color:#fff}
+.team-member{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-s);margin-bottom:6px}
+.team-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;background:var(--glass2);flex-shrink:0}
+.team-info{flex:1;min-width:0}
+.team-info .team-name{font-size:13px;font-weight:600}
+.team-info .team-meta{font-size:11px;color:var(--text3);margin-top:2px}
+.team-comm{font-size:13px;font-weight:700;color:var(--accent2);white-space:nowrap}
+.profile-header{text-align:center;padding:24px 0}
+.profile-avatar{width:72px;height:72px;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:30px;background:var(--primary-g);box-shadow:0 4px 20px rgba(124,92,255,.3)}
+.profile-header .profile-name{font-size:18px;font-weight:700}
+.profile-header .profile-role{font-size:12px;color:var(--text3);margin-top:4px}
+.menu-list{margin-bottom:12px}
+.menu-item{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-s);margin-bottom:6px;transition:background .2s;cursor:pointer}
+.menu-item:hover{background:var(--glass2)}
+.menu-item .menu-icon{font-size:20px;width:28px;text-align:center}
+.menu-item .menu-text{flex:1;font-size:14px;font-weight:500}
+.menu-item .menu-arrow{color:var(--text3);font-size:14px}
+.menu-item .menu-badge{padding:2px 8px;border-radius:8px;font-size:11px;font-weight:600;background:rgba(255,107,107,.15);color:var(--warn)}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:500;align-items:flex-end;justify-content:center}
+.modal-overlay.active{display:flex}
+.modal-content{width:100%;max-width:480px;max-height:90vh;background:var(--bg2);border-top:1px solid var(--border2);border-radius:20px 20px 0 0;overflow-y:auto;padding:24px 20px calc(24px + var(--safe-b));animation:slideUp .3s ease}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:none}}
+.modal-content.center-modal{border-radius:var(--radius);max-width:380px;margin:auto;border:1px solid var(--border2)}
+.modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:var(--glass2);display:flex;align-items:center;justify-content:center;font-size:18px;z-index:1}
+.login-form{text-align:center}
+.login-form h2{font-size:22px;font-weight:700;margin-bottom:6px}
+.login-form .login-sub{font-size:13px;color:var(--text3);margin-bottom:24px}
+.login-form .form-group{margin-bottom:14px;text-align:left}
+.login-form .form-group label{display:block;font-size:12px;color:var(--text2);margin-bottom:6px;font-weight:500}
+.login-form .form-btn{width:100%;padding:14px;border-radius:12px;background:var(--primary-g);font-size:15px;font-weight:600;color:#fff;margin-top:8px;transition:transform .15s}
+.login-form .form-btn:hover{transform:scale(1.01)}
+.login-form .form-switch{text-align:center;margin-top:16px;font-size:13px;color:var(--text3)}
+.login-form .form-switch a{color:var(--accent);font-weight:500}
+.invite-input-hint{font-size:11px;color:var(--text3);margin-top:4px}
+.admin-section{margin-bottom:20px}
+.admin-section h3{font-size:14px;font-weight:600;color:var(--accent);margin-bottom:10px}
+.admin-tabs{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px}
+.admin-tab{padding:7px 14px;border-radius:14px;font-size:12px;font-weight:500;background:var(--glass);border:1px solid var(--border);color:var(--text3);white-space:nowrap;flex-shrink:0;cursor:pointer}
+.admin-tab.active{background:rgba(124,92,255,.2);border-color:var(--primary);color:var(--text)}
+.admin-user-row{display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-s);margin-bottom:4px;font-size:12px;flex-wrap:wrap}
+.admin-user-row .a-name{font-weight:600;min-width:60px}
+.admin-user-row .a-code{color:var(--accent);font-family:monospace}
+.admin-user-row .a-stat{color:var(--text2)}
+.admin-user-row .a-actions{margin-left:auto;display:flex;gap:4px}
+.admin-user-row .a-btn{padding:4px 10px;border-radius:6px;font-size:11px;background:var(--glass2);border:1px solid var(--border);cursor:pointer}
+.admin-user-row .a-btn.danger{color:var(--warn);border-color:rgba(255,107,107,.3)}
+.admin-user-row .a-btn:hover{background:var(--glass3)}
+.toast{position:fixed;top:60px;left:50%;transform:translateX(-50%) translateY(-20px);padding:10px 24px;border-radius:20px;font-size:13px;font-weight:500;background:rgba(98,250,211,.15);border:1px solid rgba(98,250,211,.3);color:var(--accent2);z-index:999;opacity:0;transition:all .3s;pointer-events:none;backdrop-filter:blur(8px)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.error{background:rgba(255,107,107,.15);border-color:rgba(255,107,107,.3);color:var(--warn)}
+.empty-state{text-align:center;padding:40px 20px;color:var(--text3)}
+.empty-state .empty-icon{font-size:40px;margin-bottom:12px}
+.empty-state p{font-size:13px;line-height:1.6}
+.pd-img{width:100%;aspect-ratio:1;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:64px;border-radius:var(--radius);margin-bottom:16px}
+.pd-name{font-size:17px;font-weight:700;line-height:1.4;margin-bottom:10px}
+.pd-meta{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.pd-meta span{padding:3px 10px;border-radius:10px;font-size:11px;background:var(--glass2);color:var(--text2)}
+.pd-price-row{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.pd-price{font-size:24px;font-weight:800;color:var(--warn)}
+.pd-comm-badge{padding:4px 12px;border-radius:12px;font-size:13px;font-weight:600;background:rgba(98,250,211,.12);color:var(--accent2)}
+.pd-desc{font-size:13px;color:var(--text2);line-height:1.7;margin:14px 0}
+.pd-go{display:block;width:100%;padding:14px;border-radius:12px;background:var(--primary-g);font-size:15px;font-weight:600;color:#fff;text-align:center;transition:transform .15s;cursor:pointer}
+.pd-go:hover{transform:scale(1.01)}
+.share-options{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
+.share-opt{text-align:center;padding:14px 6px;border-radius:var(--radius-s);background:var(--glass);border:1px solid var(--border);transition:background .2s;cursor:pointer}
+.share-opt:hover{background:var(--glass2)}
+.share-opt .share-opt-icon{font-size:26px;margin-bottom:6px}
+.share-opt .share-opt-text{font-size:11px;color:var(--text2)}
+.share-link-box{display:flex;gap:8px;margin-top:12px}
+.share-link-box input{flex:1;font-size:12px;border-radius:8px;padding:10px 12px}
+.share-link-box button{padding:10px 16px;border-radius:8px;background:var(--primary-g);font-size:13px;font-weight:600;color:#fff;white-space:nowrap;cursor:pointer}
+.platform-category-header{display:flex;align-items:center;gap:8px;padding:12px 0 8px;margin-top:4px}
+.platform-category-header .pch-icon{font-size:18px}
+.platform-category-header .pch-name{font-size:14px;font-weight:600;color:var(--text)}
+.platform-category-header .pch-count{font-size:11px;color:var(--text3);background:var(--glass);padding:2px 8px;border-radius:8px}
+@media print{
+body{background:#fff;color:#000;padding:0}
+.bottom-nav,.header,.modal-overlay,.toast{display:none!important}
+.card,.hero-banner,.product-card,.stat-box,.invite-card{border:1px solid #ccc;background:#f5f5f5;break-inside:avoid}
+.card-title,.product-card .p-name,.stat-box .stat-val,.hero-banner h2{-webkit-text-fill-color:#000;color:#000}
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="header" id="mainHeader">
+    <span class="logo-icon" aria-hidden="true">💎</span>
+    <h1>聚佣宝</h1>
+    <button class="header-btn" id="btnNotif" title="消息" aria-label="消息通知">🔔</button>
+    <button class="header-btn" id="btnSearch" title="搜索" aria-label="搜索商品">🔍</button>
+  </header>
+  <main>
+    <section class="view active" id="viewHome" aria-label="首页">
+      <div class="hero-banner">
+        <h2>全网50+推广平台 一站赚钱</h2>
+        <p>覆盖网盘拉新、APP推广、电商CPS、AI等12大行业</p>
+        <button class="cta" onclick="openModal('modalLogin')" id="heroCta">🚀 立即加入</button>
+      </div>
+      <div class="platform-count" id="platformCount">📡 已接入 50 个推广平台</div>
+      <div class="search-bar">
+        <input type="search" id="searchInput" placeholder="搜索商品、平台、分类..." aria-label="搜索商品">
+        <button onclick="doSearch()">搜索</button>
+      </div>
+      <div class="cat-scroll" id="catScroll" role="tablist" aria-label="商品分类"></div>
+      <div class="product-grid" id="productGrid"></div>
+    </section>
+    <section class="view" id="viewEarnings" aria-label="收益"><div id="earningsContent"></div></section>
+    <section class="view" id="viewTeam" aria-label="团队"><div id="teamContent"></div></section>
+    <section class="view" id="viewProfile" aria-label="我的"><div id="profileContent"></div></section>
+  </main>
+  <nav class="bottom-nav" role="navigation" aria-label="主导航">
+    <button class="nav-item active" data-view="viewHome" onclick="switchView('viewHome',this)"><span class="nav-icon">🏠</span><span>首页</span></button>
+    <button class="nav-item" data-view="viewEarnings" onclick="switchView('viewEarnings',this)"><span class="nav-icon">💰</span><span>收益</span></button>
+    <button class="nav-item" data-view="viewTeam" onclick="switchView('viewTeam',this)"><span class="nav-icon">👥</span><span>团队</span></button>
+    <button class="nav-item" data-view="viewProfile" onclick="switchView('viewProfile',this)"><span class="nav-icon">👤</span><span>我的</span></button>
+  </nav>
+</div>
+<div class="modal-overlay" id="modalLogin"><div class="modal-content center-modal" role="dialog" aria-label="登录注册"><button class="modal-close" onclick="closeModal('modalLogin')" aria-label="关闭">×</button>
+  <div class="login-form" id="loginForm"><h2>欢迎来到聚佣宝</h2><p class="login-sub">登录开启你的推广赚钱之旅</p>
+    <div class="form-group"><label for="loginNick">昵称</label><input id="loginNick" type="text" placeholder="输入昵称" autocomplete="nickname"></div>
+    <div class="form-group"><label for="loginPwd">密码</label><input id="loginPwd" type="password" placeholder="输入密码" autocomplete="current-password"></div>
+    <button class="form-btn" onclick="doLogin()">登 录</button>
+    <div class="form-switch">还没有账号？<a href="#" onclick="showRegister();return false">立即注册</a></div>
+  </div>
+  <div class="login-form" id="registerForm" style="display:none"><h2>注册新账号</h2><p class="login-sub">注册即可获得专属邀请码</p>
+    <div class="form-group"><label for="regNick">昵称</label><input id="regNick" type="text" placeholder="输入昵称" autocomplete="nickname"></div>
+    <div class="form-group"><label for="regPwd">密码</label><input id="regPwd" type="password" placeholder="设置密码（6位以上）" autocomplete="new-password"></div>
+    <div class="form-group"><label for="regInviter">邀请码（选填）</label><input id="regInviter" type="text" placeholder="输入邀请码，享专属福利"><p class="invite-input-hint">填写邀请码，注册后即建立推荐关系</p></div>
+    <button class="form-btn" onclick="doRegister()">注 册</button>
+    <div class="form-switch">已有账号？<a href="#" onclick="showLogin();return false">返回登录</a></div>
+  </div>
+</div></div>
+<div class="modal-overlay" id="modalProduct"><div class="modal-content" role="dialog" aria-label="商品详情"><button class="modal-close" onclick="closeModal('modalProduct')" aria-label="关闭">×</button><div id="productDetail"></div></div></div>
+<div class="modal-overlay" id="modalShare"><div class="modal-content center-modal" role="dialog" aria-label="分享邀请"><button class="modal-close" onclick="closeModal('modalShare')" aria-label="关闭">×</button>
+  <h2 style="font-size:18px;font-weight:700;text-align:center;margin-bottom:4px">邀请好友 一起赚钱</h2>
+  <p style="text-align:center;font-size:13px;color:var(--text3);margin-bottom:16px">好友通过你的链接注册，你们都能赚</p>
+  <div class="share-options">
+    <button class="share-opt" onclick="copyInviteLink()"><div class="share-opt-icon">🔗</div><div class="share-opt-text">复制链接</div></button>
+    <button class="share-opt" onclick="showToast('请复制链接后打开微信分享')"><div class="share-opt-icon">💬</div><div class="share-opt-text">微信</div></button>
+    <button class="share-opt" onclick="showToast('请复制链接后打开QQ分享')"><div class="share-opt-icon">🐧</div><div class="share-opt-text">QQ</div></button>
+    <button class="share-opt" onclick="showToast('海报功能即将上线')"><div class="share-opt-icon">🖼️</div><div class="share-opt-text">海报</div></button>
+  </div>
+  <div class="share-link-box"><input id="shareLinkInput" readonly><button onclick="copyInviteLink()">复制</button></div>
+</div></div>
+<div class="modal-overlay" id="modalAdmin"><div class="modal-content" role="dialog" aria-label="管理后台"><button class="modal-close" onclick="closeModal('modalAdmin')" aria-label="关闭">×</button>
+  <h2 style="font-size:18px;font-weight:700;margin-bottom:16px">⚙️ 管理后台</h2>
+  <div class="admin-tabs" id="adminTabs">
+    <button class="admin-tab active" onclick="switchAdminTab('adminUsers',this)">用户管理</button>
+    <button class="admin-tab" onclick="switchAdminTab('adminProducts',this)">平台管理</button>
+    <button class="admin-tab" onclick="switchAdminTab('adminSettings',this)">佣金设置</button>
+    <button class="admin-tab" onclick="switchAdminTab('adminApi',this)">API配置</button>
+  </div>
+  <div id="adminUsers" class="admin-section"></div>
+  <div id="adminProducts" class="admin-section" style="display:none"></div>
+  <div id="adminSettings" class="admin-section" style="display:none"></div>
+  <div id="adminApi" class="admin-section" style="display:none"></div>
+</div></div>
+<div class="toast" id="toast"></div>
+<script>
+// ===== 50个推广平台数据 =====
+var PLATFORMS=[
+// ── 网盘拉新(5) ──
+{id:'p01',name:'迅雷网盘',emoji:'☁️',price:15,commission:15,rate:'固定¥15',platform:'任推邦',cat:'网盘拉新',link:'https://dt.bd.cn',sales:52340,tags:['热门','高佣']},
+{id:'p02',name:'夸克网盘',emoji:'🌐',price:13,commission:13,rate:'固定¥13',platform:'任推邦',cat:'网盘拉新',link:'https://dt.bd.cn',sales:48200,tags:['热门']},
+{id:'p03',name:'UC网盘',emoji:'💾',price:14,commission:14,rate:'固定¥14',platform:'任推邦',cat:'网盘拉新',link:'https://dt.bd.cn',sales:67100,tags:['高佣']},
+{id:'p04',name:'百度网盘',emoji:'📦',price:12,commission:12,rate:'固定¥12',platform:'任推邦',cat:'网盘拉新',link:'https://dt.bd.cn',sales:31500,tags:['稳定']},
+{id:'p05',name:'移动云盘',emoji:'📱',price:5.5,commission:5.5,rate:'固定¥5.5',platform:'任推邦',cat:'网盘拉新',link:'https://dt.bd.cn',sales:14680,tags:[]},
+// ── APP拉新(6) ──
+{id:'p06',name:'小红书CPA',emoji:'📕',price:25,commission:25,rate:'固定¥25',platform:'任推邦',cat:'APP拉新',link:'https://dt.bd.cn',sales:38900,tags:['高价','热门']},
+{id:'p07',name:'快手极速版',emoji:'🎬',price:22,commission:22,rate:'固定¥22',platform:'任推邦',cat:'APP拉新',link:'https://dt.bd.cn',sales:45700,tags:['热门']},
+{id:'p08',name:'抖音极速版',emoji:'🎵',price:18,commission:18,rate:'固定¥18',platform:'任推邦',cat:'APP拉新',link:'https://dt.bd.cn',sales:62300,tags:['热门','量大']},
+{id:'p09',name:'拼多多拉新',emoji:'🛍️',price:8,commission:8,rate:'固定¥8',platform:'任推邦',cat:'APP拉新',link:'https://dt.bd.cn',sales:85000,tags:['量大']},
+{id:'p10',name:'京东拉新',emoji:'🐶',price:10,commission:10,rate:'固定¥10',platform:'任推邦',cat:'APP拉新',link:'https://dt.bd.cn',sales:38200,tags:[]},
+{id:'p11',name:'美团拉新',emoji:'🍔',price:15,commission:15,rate:'固定¥15',platform:'任推邦',cat:'APP拉新',link:'https://dt.bd.cn',sales:29400,tags:['稳定']},
+// ── 浏览器推广(4) ──
+{id:'p12',name:'迅雷搜索',emoji:'⚡',price:16,commission:16,rate:'固定¥16',platform:'任推邦',cat:'浏览器推广',link:'https://dt.bd.cn',sales:23600,tags:['新品']},
+{id:'p13',name:'迅雷浏览器',emoji:'🔍',price:10,commission:10,rate:'固定¥10',platform:'任推邦',cat:'浏览器推广',link:'https://dt.bd.cn',sales:17400,tags:[]},
+{id:'p14',name:'悟空搜索',emoji:'🐵',price:9,commission:9,rate:'固定¥9',platform:'任推邦',cat:'浏览器推广',link:'https://dt.bd.cn',sales:12300,tags:['新品']},
+{id:'p15',name:'UC浏览器',emoji:'🌍',price:7,commission:7,rate:'固定¥7',platform:'任推邦',cat:'浏览器推广',link:'https://dt.bd.cn',sales:41200,tags:[]},
+// ── AI推广(5) ──
+{id:'p16',name:'通义千问',emoji:'🤖',price:10.5,commission:10.5,rate:'固定¥10.5',platform:'任推邦',cat:'AI推广',link:'https://dt.bd.cn',sales:10080,tags:['AI']},
+{id:'p17',name:'秘塔AI搜索',emoji:'🧠',price:4,commission:4,rate:'固定¥4',platform:'任推邦',cat:'AI推广',link:'https://dt.bd.cn',sales:9060,tags:['AI']},
+{id:'p18',name:'即梦AI',emoji:'🎨',price:6,commission:6,rate:'固定¥6',platform:'任推邦',cat:'AI推广',link:'https://dt.bd.cn',sales:6200,tags:['AI','新品']},
+{id:'p19',name:'Kimi智能助手',emoji:'🌙',price:5,commission:5,rate:'固定¥5',platform:'任推邦',cat:'AI推广',link:'https://dt.bd.cn',sales:15800,tags:['AI','热门']},
+{id:'p20',name:'豆包AI',emoji:'🫘',price:8,commission:8,rate:'固定¥8',platform:'任推邦',cat:'AI推广',link:'https://dt.bd.cn',sales:22100,tags:['AI','热门']},
+// ── 海外项目(5) ──
+{id:'p21',name:'Capcut海外剪映',emoji:'🎥',price:25,commission:25,rate:'固定¥25',platform:'任推邦',cat:'海外项目',link:'https://dt.bd.cn',sales:8290,tags:['海外','高价']},
+{id:'p22',name:'百度网盘国际版',emoji:'🌏',price:12,commission:12,rate:'固定¥12',platform:'任推邦',cat:'海外项目',link:'https://dt.bd.cn',sales:9100,tags:['海外']},
+{id:'p23',name:'Moto Novel小说海外',emoji:'📚',price:0,commission:0,rate:'60%分成',platform:'任推邦',cat:'海外项目',link:'https://dt.bd.cn',sales:3510,tags:['海外','分成']},
+{id:'p24',name:'Goodnovel小说海外',emoji:'📖',price:0,commission:0,rate:'60%分成',platform:'任推邦',cat:'海外项目',link:'https://dt.bd.cn',sales:3830,tags:['海外','分成']},
+{id:'p25',name:'TikTok推广',emoji:'🎶',price:20,commission:20,rate:'固定¥20',platform:'任推邦',cat:'海外项目',link:'https://dt.bd.cn',sales:18500,tags:['海外','热门']},
+// ── 电商CPS(5) ──
+{id:'p26',name:'淘宝联盟',emoji:'🛒',price:0,commission:0,rate:'佣金5-50%',platform:'淘宝联盟',cat:'电商CPS',link:'https://pub.alimama.com',sales:999000,tags:['CPS','海量']},
+{id:'p27',name:'京东联盟',emoji:'🏪',price:0,commission:0,rate:'佣金1-30%',platform:'京东联盟',cat:'电商CPS',link:'https://union.jd.com',sales:580000,tags:['CPS','正品']},
+{id:'p28',name:'多多进宝',emoji:'🧡',price:0,commission:0,rate:'佣金10-70%',platform:'多多进宝',cat:'电商CPS',link:'https://jinbao.pinduoduo.com',sales:720000,tags:['CPS','高佣']},
+{id:'p29',name:'淘宝1分购',emoji:'💝',price:10.8,commission:10.8,rate:'固定¥10.8',platform:'任推邦',cat:'电商CPS',link:'https://dt.bd.cn',sales:38200,tags:['电商']},
+{id:'p30',name:'唯品会联盟',emoji:'💜',price:0,commission:0,rate:'佣金5-15%',platform:'唯品会',cat:'电商CPS',link:'https://union.vip.com',sales:125000,tags:['CPS','品牌']},
+// ── 生活服务(5) ──
+{id:'p31',name:'懂车帝',emoji:'🚗',price:12,commission:12,rate:'固定¥12',platform:'任推邦',cat:'生活服务',link:'https://dt.bd.cn',sales:56150,tags:['热门']},
+{id:'p32',name:'美团收钱助手',emoji:'💳',price:300,commission:300,rate:'¥200-500/户',platform:'美团',cat:'生活服务',link:'https://www.bd.cn',sales:18500,tags:['高佣','蓝海']},
+{id:'p33',name:'饿了么推广',emoji:'🍜',price:8,commission:8,rate:'固定¥8',platform:'任推邦',cat:'生活服务',link:'https://dt.bd.cn',sales:24300,tags:[]},
+{id:'p34',name:'滴滴出行',emoji:'🚕',price:15,commission:15,rate:'固定¥15',platform:'任推邦',cat:'生活服务',link:'https://dt.bd.cn',sales:35600,tags:['稳定']},
+{id:'p35',name:'58同城',emoji:'🏘️',price:10,commission:10,rate:'固定¥10',platform:'任推邦',cat:'生活服务',link:'https://dt.bd.cn',sales:42100,tags:[]},
+// ── 游戏推广(4) ──
+{id:'p36',name:'3387游戏平台',emoji:'🎮',price:0,commission:0,rate:'40%分成',platform:'任推邦',cat:'游戏推广',link:'https://dt.bd.cn',sales:7620,tags:['高分成']},
+{id:'p37',name:'原神推广',emoji:'⚔️',price:30,commission:30,rate:'固定¥30',platform:'任推邦',cat:'游戏推广',link:'https://dt.bd.cn',sales:15800,tags:['高价','热门']},
+{id:'p38',name:'王者荣耀推广',emoji:'👑',price:20,commission:20,rate:'固定¥20',platform:'任推邦',cat:'游戏推广',link:'https://dt.bd.cn',sales:28900,tags:['热门']},
+{id:'p39',name:'小游戏推广联盟',emoji:'🕹️',price:0,commission:0,rate:'30%分成',platform:'任推邦',cat:'游戏推广',link:'https://dt.bd.cn',sales:56300,tags:['分成','量大']},
+// ── 社交推广(4) ──
+{id:'p40',name:'TT语音',emoji:'🎙️',price:6,commission:6,rate:'固定¥6',platform:'任推邦',cat:'社交推广',link:'https://dt.bd.cn',sales:8190,tags:[]},
+{id:'p41',name:'Soul',emoji:'👻',price:8,commission:8,rate:'固定¥8',platform:'任推邦',cat:'社交推广',link:'https://dt.bd.cn',sales:19200,tags:['年轻人']},
+{id:'p42',name:'探探',emoji:'💕',price:12,commission:12,rate:'固定¥12',platform:'任推邦',cat:'社交推广',link:'https://dt.bd.cn',sales:14500,tags:[]},
+{id:'p43',name:'陌陌',emoji:'💬',price:10,commission:10,rate:'固定¥10',platform:'任推邦',cat:'社交推广',link:'https://dt.bd.cn',sales:22800,tags:[]},
+// ── 金融保险(4) ──
+{id:'p44',name:'招商银行信用卡',emoji:'💳',price:80,commission:80,rate:'固定¥80',platform:'任推邦',cat:'金融保险',link:'https://dt.bd.cn',sales:8900,tags:['高佣','蓝海']},
+{id:'p45',name:'花呗推广',emoji:'🌸',price:25,commission:25,rate:'固定¥25',platform:'任推邦',cat:'金融保险',link:'https://dt.bd.cn',sales:35600,tags:['热门']},
+{id:'p46',name:'京东白条',emoji:'🏦',price:30,commission:30,rate:'固定¥30',platform:'任推邦',cat:'金融保险',link:'https://dt.bd.cn',sales:21400,tags:[]},
+{id:'p47',name:'众安保险',emoji:'🛡️',price:15,commission:15,rate:'固定¥15',platform:'任推邦',cat:'金融保险',link:'https://dt.bd.cn',sales:12700,tags:[]},
+// ── 知识付费/教育(3) ──
+{id:'p48',name:'小鹅通分销',emoji:'🎓',price:0,commission:0,rate:'佣金20%',platform:'小鹅通',cat:'知识付费',link:'https://www.xiaoe-tech.com',sales:45000,tags:['知识','分成']},
+{id:'p49',name:'知乎知学堂',emoji:'📝',price:50,commission:50,rate:'固定¥50',platform:'知乎',cat:'知识付费',link:'https://www.zhihu.com',sales:8200,tags:['高价','蓝海']},
+{id:'p50',name:'得到APP',emoji:'📚',price:30,commission:30,rate:'固定¥30',platform:'得到',cat:'知识付费',link:'https://www.igetget.com',sales:15600,tags:['品质']}
+];
+
+var CATEGORIES=['全部','网盘拉新','APP拉新','浏览器推广','AI推广','海外项目','电商CPS','生活服务','游戏推广','社交推广','金融保险','知识付费'];
+var catColors={'网盘拉新':'#69E7FF','APP拉新':'#7C5CFF','浏览器推广':'#FFD66B','AI推广':'#62FAD3','海外项目':'#FF9F43','电商CPS':'#FF6B6B','生活服务':'#A29BFE','游戏推广':'#FD79A8','社交推广':'#00CEC9','金融保险':'#FDCB6E','知识付费':'#E17055'};
+
+/* ===== DATA SERVICE ===== */
+var DS=(function(){
+var K={users:'jyb_u',cur:'jyb_c',orders:'jyb_o',comms:'jyb_cm',set:'jyb_s',admin:'jyb_a'};
+function g(k){try{return JSON.parse(localStorage.getItem(k))||null}catch(e){return null}}
+function s(k,v){localStorage.setItem(k,JSON.stringify(v))}
+var defSet={l1:.10,l2:.03};
+function init(){
+  if(!g(K.users))s(K.users,[]);
+  if(!g(K.orders))s(K.orders,[]);
+  if(!g(K.comms))s(K.comms,[]);
+  if(!g(K.set))s(K.set,defSet);
+  var u=g(K.users);
+  if(!u.find(function(x){return x.nick==='admin'})){
+    u.push({id:'admin001',nick:'admin',pwd:'qq83476086',code:'ADMIN1',inv:null,at:new Date('2026-01-01').toISOString(),earn:0,l1c:0,l2c:0,role:'admin'});
+    s(K.users,u);
+  }
+}
+function users(){return g(K.users)||[]}
+function cur(){var id=g(K.cur);return id?users().find(function(u){return u.id===id}):null}
+function setCur(id){s(K.cur,id)}
+function clrCur(){localStorage.removeItem(K.cur)}
+function reg(nick,pwd,inv){
+  var u=users();
+  if(u.find(function(x){return x.nick===nick}))return{err:'昵称已存在'};
+  if(pwd.length<6)return{err:'密码至少6位'};
+  var inviter=null;
+  if(inv){inviter=u.find(function(x){return x.code===inv.toUpperCase()});if(!inviter)return{err:'邀请码无效'}}
+  var c=genCode();
+  var user={id:'u'+Date.now()+Math.random().toString(36).substr(2,4),nick:nick,pwd:pwd,code:c,inv:inviter?inviter.id:null,at:new Date().toISOString(),earn:0,l1c:0,l2c:0,role:'user'};
+  u.push(user);s(K.users,u);
+  if(inviter){inviter.l1c=(inviter.l1c||0)+1;var a=users();var i=a.findIndex(function(x){return x.id===inviter.id});if(i>=0)a[i]=inviter;s(K.users,a);
+    if(inviter.inv){var si=a.find(function(x){return x.id===inviter.inv});if(si){si.l2c=(si.l2c||0)+1;i=a.findIndex(function(x){return x.id===si.id});if(i>=0)a[i]=si;s(K.users,a)}}}
+  setCur(user.id);return{user:user}
+}
+function login(n,p){var u=users().find(function(x){return x.nick===n});if(!u)return{err:'用户不存在'};if(u.pwd!==p)return{err:'密码错误'};setCur(u.id);return{user:u}}
+function genCode(){var c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',r='';for(var i=0;i<6;i++)r+=c[Math.floor(Math.random()*c.length)];if(users().find(function(x){return x.code===r}))return genCode();return r}
+function simOrder(pid,uid){
+  var p=PLATFORMS.find(function(x){return x.id===pid});if(!p)return;
+  var u=users().find(function(x){return x.id===uid});if(!u)return;
+  var st=g(K.set);var cm=p.commission>0?p.commission:Math.round(p.price*.3*100)/100;
+  var o=g(K.orders)||[];o.push({id:'o'+Date.now(),uid:uid,pid:pid,amt:p.price,cm:cm,st:'ok',ct:new Date().toISOString()});s(K.orders,o);
+  var cs=g(K.comms)||[];
+  if(u.inv){var inv=users().find(function(x){return x.id===u.inv});
+    if(inv){var l1=Math.round(cm*st.l1*100)/100;cs.push({id:'c'+Date.now()+'1',uid:inv.id,oid:o[o.length-1].id,lv:1,amt:l1,ct:new Date().toISOString()});
+      inv.earn=(inv.earn||0)+l1;var a=users();var i=a.findIndex(function(x){return x.id===inv.id});if(i>=0)a[i]=inv;s(K.users,a);
+      if(inv.inv){var si=a.find(function(x){return x.id===inv.inv});if(si){var l2=Math.round(l1*st.l2*100)/100;cs.push({id:'c'+Date.now()+'2',uid:si.id,oid:o[o.length-1].id,lv:2,amt:l2,ct:new Date().toISOString()});
+        si.earn=(si.earn||0)+l2;i=a.findIndex(function(x){return x.id===si.id});if(i>=0)a[i]=si;s(K.users,a)}}}}
+  s(K.comms,cs);
+}
+function earn(uid){var cs=(g(K.comms)||[]).filter(function(c){return c.uid===uid});var l1=cs.filter(function(c){return c.lv===1}).reduce(function(s,c){return s+c.amt},0);var l2=cs.filter(function(c){return c.lv===2}).reduce(function(s,c){return s+c.amt},0);return{t:Math.round((l1+l2)*100)/100,l1:Math.round(l1*100)/100,l2:Math.round(l2*100)/100,r:cs}}
+function team(uid){return users().filter(function(u){return u.inv===uid})}
+function subteam(uid){var d=team(uid),r=[];d.forEach(function(x){team(x.id).forEach(function(y){r.push(y)})});return r}
+return{init:init,users:users,cur:cur,setCur:setCur,clrCur:clrCur,reg:reg,login:login,simOrder:simOrder,earn:earn,team:team,subteam:subteam,
+  getSet:function(){return g(K.set)||defSet},setSet:function(v){s(K.set,v)},
+  isAdmin:function(){return localStorage.getItem(K.admin)==='1'},setAdmin:function(){localStorage.setItem(K.admin,'1')},clrAdmin:function(){localStorage.removeItem(K.admin)},
+  delUser:function(id){s(K.users,users().filter(function(u){return u.id!==id}))}}
+})();
+
+/* ===== UI ===== */
+var curCat='全部',curUser=null,searchQ='';
+function init(){DS.init();curUser=DS.cur();var p=new URLSearchParams(location.search);if(p.get('ref'))sessionStorage.setItem('jyb_ref',p.get('ref'));renderCats();renderProducts();updHeader();updHero()}
+function toast(m,e){var t=document.getElementById('toast');t.textContent=m;t.className='toast'+(e?' error':'')+' show';setTimeout(function(){t.className='toast'},2500)}
+function openModal(id){document.getElementById(id).classList.add('active');if(id==='modalShare'&&curUser){document.getElementById('shareLinkInput').value=location.origin+location.pathname+'?ref='+curUser.code}}
+function closeModal(id){document.getElementById(id).classList.remove('active')}
+document.querySelectorAll('.modal-overlay').forEach(function(m){m.addEventListener('click',function(e){if(e.target===m)closeModal(m.id)})});
+function switchView(v,b){document.querySelectorAll('.view').forEach(function(x){x.classList.remove('active')});document.getElementById(v).classList.add('active');document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active')});b.classList.add('active');curUser=DS.cur();if(v==='viewEarnings')renderEarn();if(v==='viewTeam')renderTeam();if(v==='viewProfile')renderProf();window.scrollTo(0,0)}
+function updHeader(){curUser=DS.cur()}
+function updHero(){curUser=DS.cur();var b=document.getElementById('heroCta');if(curUser){b.textContent='🎯 开始推广';b.onclick=function(){switchView('viewTeam',document.querySelectorAll('.nav-item')[2])}}else{b.textContent='🚀 立即加入';b.onclick=function(){openModal('modalLogin')}}}
+
+function showLogin(){document.getElementById('loginForm').style.display='';document.getElementById('registerForm').style.display='none'}
+function showRegister(){document.getElementById('loginForm').style.display='none';document.getElementById('registerForm').style.display='';var r=sessionStorage.getItem('jyb_ref');if(r)document.getElementById('regInviter').value=r}
+function doLogin(){var n=document.getElementById('loginNick').value.trim(),p=document.getElementById('loginPwd').value;if(!n||!p){toast('请填写完整',true);return}var r=DS.login(n,p);if(r.err){toast(r.err,true);return}curUser=r.user;if(n==='admin'||DS.isAdmin()){closeModal('modalLogin');openModal('modalAdmin');renderAdmin()}else{closeModal('modalLogin');toast('欢迎回来！')}updHeader();updHero();renderProf()}
+function doRegister(){var n=document.getElementById('regNick').value.trim(),p=document.getElementById('regPwd').value,inv=document.getElementById('regInviter').value.trim();if(!n||!p){toast('请填写完整',true);return}var r=DS.reg(n,p,inv);if(r.err){toast(r.err,true);return}curUser=r.user;closeModal('modalLogin');toast('注册成功！邀请码：'+curUser.code);updHeader();updHero();renderProf()}
+
+function renderCats(){var h='';CATEGORIES.forEach(function(c){h+='<button class="cat-pill'+(c===curCat?' active':'')+'" onclick="filterCat(\''+c+'\')">'+c+'</button>'});document.getElementById('catScroll').innerHTML=h}
+function filterCat(c){curCat=c;renderCats();renderProducts()}
+function doSearch(){searchQ=document.getElementById('searchInput').value.trim();renderProducts()}
+document.getElementById('searchInput').addEventListener('keydown',function(e){if(e.key==='Enter')doSearch()});
+document.getElementById('btnSearch').addEventListener('click',function(){document.getElementById('searchInput').focus()});
+
+function renderProducts(){
+  var ps=PLATFORMS;
+  if(searchQ){var q=searchQ.toLowerCase();ps=ps.filter(function(p){return p.name.toLowerCase().indexOf(q)>=0||p.platform.toLowerCase().indexOf(q)>=0||p.cat.toLowerCase().indexOf(q)>=0})}
+  if(curCat!=='全部')ps=ps.filter(function(p){return p.cat===curCat});
+  var h='';
+  ps.forEach(function(p){
+    var tag=p.tags&&p.tags.length>0?'<span class="p-tag">'+p.tags[0]+'</span>':'';
+    var cmText=p.commission>0?'¥'+p.commission:p.rate;
+    h+='<div class="product-card" onclick="openProduct(\''+p.id+'\')" tabindex="0" role="button" aria-label="'+p.name+'">';
+    h+='<div class="p-img">'+tag+p.emoji+'</div>';
+    h+='<div class="p-body">';
+    h+='<div class="p-name">'+p.name+'</div>';
+    h+='<div class="p-platform">'+p.platform+' · '+p.cat+'</div>';
+    h+='<div class="p-price">佣金 <span>'+cmText+'</span></div>';
+    h+='<div class="p-comm"><span class="p-comm-badge">'+p.rate+'</span><span class="p-sales">'+fmtN(p.sales)+'人</span></div>';
+    h+='</div></div>'
+  });
+  if(ps.length===0)h='<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">🔍</div><p>暂无相关商品</p></div>';
+  document.getElementById('productGrid').innerHTML=h;
+  document.getElementById('platformCount').textContent='📡 已接入 '+PLATFORMS.length+' 个推广平台';
+}
+function fmtN(n){if(n>=10000)return(n/10000).toFixed(1)+'万';if(n>=1000)return(n/1000).toFixed(1)+'k';return n}
+
+function openProduct(id){
+  var p=PLATFORMS.find(function(x){return x.id===id});if(!p)return;
+  var cm=p.commission>0?'¥'+p.commission:p.rate;
+  var h='<div class="pd-img">'+p.emoji+'</div>';
+  h+='<div class="pd-name">'+p.name+'</div>';
+  h+='<div class="pd-meta"><span>'+p.platform+'</span><span>'+p.cat+'</span>';
+  if(p.tags)p.tags.forEach(function(t){h+='<span>'+t+'</span>'});
+  h+='</div>';
+  h+='<div class="pd-price-row"><span class="pd-price">佣金 '+cm+'</span><span class="pd-comm-badge">'+p.rate+'</span></div>';
+  h+='<p style="font-size:12px;color:var(--text3);margin-bottom:8px">'+fmtN(p.sales)+'人已参与推广</p>';
+  h+='<div class="pd-desc">通过分享推广链接，邀请好友注册或使用即可获得佣金。佣金实时到账，支持随时提现。平台提供专属推广链接，自动追踪转化。</div>';
+  curUser=DS.cur();
+  if(curUser)h+='<button class="pd-go" onclick="goPromote(\''+p.id+'\')">🔗 获取推广链接</button>';
+  else h+='<button class="pd-go" onclick="openModal(\'modalLogin\')">🔐 登录后获取推广链接</button>';
+  document.getElementById('productDetail').innerHTML=h;
+  openModal('modalProduct');
+}
+function goPromote(pid){
+  var p=PLATFORMS.find(function(x){return x.id===pid});if(!p)return;
+  curUser=DS.cur();
+  if(curUser){toast('推广链接已复制！');var link=location.origin+location.pathname+'?ref='+curUser.code;if(navigator.clipboard)navigator.clipboard.writeText(link).catch(function(){});DS.simOrder(pid,curUser.id)}
+}
+
+function renderEarn(){
+  curUser=DS.cur();
+  if(!curUser){document.getElementById('earningsContent').innerHTML='<div class="empty-state"><div class="empty-icon">🔐</div><p>登录后查看收益</p><br><button class="cta" style="padding:10px 24px;border-radius:20px;background:var(--primary-g);color:#fff;font-weight:600" onclick="openModal(\'modalLogin\')">立即登录</button></div>';return}
+  var e=DS.earn(curUser.id),st=DS.getSet();
+  var h='<div class="stats-row">';
+  h+='<div class="stat-box highlight"><div class="stat-val">¥'+e.t.toFixed(2)+'</div><div class="stat-label">总收益</div></div>';
+  h+='<div class="stat-box"><div class="stat-val">¥'+e.l1.toFixed(2)+'</div><div class="stat-label">一级返佣'+(st.l1*100)+'%</div></div>';
+  h+='<div class="stat-box"><div class="stat-val">¥'+e.l2.toFixed(2)+'</div><div class="stat-label">二级返佣'+(st.l2*100)+'%</div></div></div>';
+  h+='<div class="card"><div class="card-title">💡 返佣规则</div>';
+  h+='<p style="font-size:13px;color:var(--text2);line-height:1.7">一级返佣：直接邀请的好友完成任务，你获得佣金的 <strong style="color:var(--accent2)">'+(st.l1*100)+'%</strong></p>';
+  h+='<p style="font-size:13px;color:var(--text2);line-height:1.7;margin-top:4px">二级返佣：好友再邀请的好友完成任务，你获得佣金的 <strong style="color:var(--gold)">'+(st.l2*100)+'%</strong></p></div>';
+  h+='<div class="comm-section"><h3>📋 收益明细</h3>';
+  if(e.r.length===0)h+='<div class="empty-state" style="padding:20px"><p>暂无收益记录<br>邀请好友参与任务开始赚钱</p></div>';
+  else e.r.slice().reverse().forEach(function(c){
+    var o=(DS.init(),JSON.parse(localStorage.getItem('jyb_o')||'[]')).find(function(x){return x.id===c.oid});
+    var pp=o?PLATFORMS.find(function(x){return x.id===o.pid}):null;
+    h+='<div class="comm-row"><div class="comm-info"><div class="comm-icon">'+(pp?pp.emoji:'📦')+'</div>';
+    h+='<div class="comm-detail">'+(pp?pp.name:'任务')+'<small>'+(c.lv===1?'一级返佣':'二级返佣')+' · '+fmtD(c.ct)+'</small></div></div>';
+    h+='<div class="comm-amount'+(c.lv===2?' l2':'')+'">+¥'+c.amt.toFixed(2)+'</div></div>'
+  });
+  h+='</div>';
+  document.getElementById('earningsContent').innerHTML=h
+}
+function fmtD(s){var d=new Date(s);return(d.getMonth()+1)+'/'+d.getDate()+' '+d.getHours()+':'+String(d.getMinutes()).padStart(2,'0')}
+
+function renderTeam(){
+  curUser=DS.cur();
+  if(!curUser){document.getElementById('teamContent').innerHTML='<div class="empty-state"><div class="empty-icon">🔐</div><p>登录后查看团队</p><br><button class="cta" style="padding:10px 24px;border-radius:20px;background:var(--primary-g);color:#fff;font-weight:600" onclick="openModal(\'modalLogin\')">立即登录</button></div>';return}
+  var h='<div class="invite-card"><h3 style="font-size:16px;font-weight:700;margin-bottom:4px">🎯 邀请好友 赚取佣金</h3>';
+  h+='<p class="invite-desc">分享你的专属邀请码，好友注册即建立推荐关系</p>';
+  h+='<div class="code-display">'+curUser.code+'</div>';
+  h+='<div class="invite-actions"><button class="btn-primary" onclick="openModal(\'modalShare\')">📤 邀请好友</button></div></div>';
+  var m=DS.team(curUser.id),sm=DS.subteam(curUser.id);
+  h+='<div class="stats-row">';
+  h+='<div class="stat-box"><div class="stat-val">'+m.length+'</div><div class="stat-label">一级成员</div></div>';
+  h+='<div class="stat-box"><div class="stat-val">'+sm.length+'</div><div class="stat-label">二级成员</div></div>';
+  h+='<div class="stat-box highlight"><div class="stat-val">'+(m.length+sm.length)+'</div><div class="stat-label">团队总人数</div></div></div>';
+  h+='<div class="comm-section"><h3><span class="level-badge l1">一级</span> 直接邀请</h3>';
+  if(m.length===0)h+='<div class="empty-state" style="padding:20px"><p>还没有邀请好友</p></div>';
+  else m.forEach(function(x){h+='<div class="team-member"><div class="team-avatar">'+x.nick.charAt(0).toUpperCase()+'</div><div class="team-info"><div class="team-name">'+esc(x.nick)+'</div><div class="team-meta">'+x.code+' · '+fmtD(x.at)+'</div></div><div class="team-comm">下级'+DS.team(x.id).length+'人</div></div>'});
+  h+='</div>';
+  h+='<div class="comm-section"><h3><span class="level-badge l2">二级</span> 间接邀请</h3>';
+  if(sm.length===0)h+='<div class="empty-state" style="padding:20px"><p>暂无二级成员</p></div>';
+  else sm.forEach(function(x){var inv=DS.users().find(function(u){return u.id===x.inv});h+='<div class="team-member"><div class="team-avatar" style="background:rgba(255,214,107,.12)">'+x.nick.charAt(0).toUpperCase()+'</div><div class="team-info"><div class="team-name">'+esc(x.nick)+'</div><div class="team-meta">由 '+(inv?esc(inv.nick):'未知')+' 邀请</div></div></div>'});
+  h+='</div>';
+  document.getElementById('teamContent').innerHTML=h
+}
+function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}
+
+function renderProf(){
+  curUser=DS.cur();var h='';
+  if(!curUser){h+='<div style="text-align:center;padding:40px 20px"><div style="font-size:50px;margin-bottom:16px">👤</div><p style="color:var(--text2);margin-bottom:20px">登录解锁更多功能</p><button class="cta" style="padding:12px 32px;border-radius:24px;background:var(--primary-g);color:#fff;font-weight:600" onclick="openModal(\'modalLogin\')">登录 / 注册</button></div>'}
+  else{
+    h+='<div class="profile-header"><div class="profile-avatar">'+curUser.nick.charAt(0).toUpperCase()+'</div><div class="profile-name">'+esc(curUser.nick)+'</div><div class="profile-role">邀请码 '+curUser.code+(curUser.role==='admin'?' · 管理员':'')+'</div></div>';
+    var e=DS.earn(curUser.id);
+    h+='<div class="stats-row"><div class="stat-box highlight"><div class="stat-val">¥'+e.t.toFixed(2)+'</div><div class="stat-label">总收益</div></div><div class="stat-box"><div class="stat-val">'+DS.team(curUser.id).length+'</div><div class="stat-label">我的团队</div></div><div class="stat-box"><div class="stat-val">'+fmtD(curUser.at).split(' ')[0]+'</div><div class="stat-label">加入时间</div></div></div>';
+    h+='<div class="menu-list">';
+    h+='<div class="menu-item" onclick="openModal(\'modalShare\')"><span class="menu-icon">📤</span><span class="menu-text">邀请好友</span><span class="menu-arrow">›</span></div>';
+    h+='<div class="menu-item" onclick="switchView(\'viewEarnings\',document.querySelectorAll(\'.nav-item\')[1])"><span class="menu-icon">💰</span><span class="menu-text">收益明细</span><span class="menu-arrow">›</span></div>';
+    h+='<div class="menu-item" onclick="switchView(\'viewTeam\',document.querySelectorAll(\'.nav-item\')[2])"><span class="menu-icon">👥</span><span class="menu-text">我的团队</span><span class="menu-arrow">›</span></div>';
+    if(curUser.nick==='admin')h+='<div class="menu-item" onclick="openModal(\'modalAdmin\');renderAdmin()"><span class="menu-icon">⚙️</span><span class="menu-text">管理后台</span><span class="menu-badge">管理员</span></div>';
+    else h+='<div class="menu-item" onclick="tryAdmin()"><span class="menu-icon">🔧</span><span class="menu-text">管理入口</span><span class="menu-arrow">›</span></div>';
+    h+='<div class="menu-item" onclick="doLogout()"><span class="menu-icon">🚪</span><span class="menu-text">退出登录</span><span class="menu-arrow">›</span></div></div>'
+  }
+  document.getElementById('profileContent').innerHTML=h
+}
+function doLogout(){DS.clrCur();DS.clrAdmin();curUser=null;toast('已退出');updHeader();updHero();renderProf()}
+function tryAdmin(){var p=prompt('请输入管理密码：');if(p==='qq83476086'){DS.setAdmin();openModal('modalAdmin');renderAdmin()}else if(p!==null)toast('密码错误',true)}
+
+function copyInviteLink(){var l=document.getElementById('shareLinkInput').value;if(navigator.clipboard)navigator.clipboard.writeText(l).then(function(){toast('已复制')}).catch(function(){toast('请手动复制',true)});else{document.getElementById('shareLinkInput').select();document.execCommand('copy');toast('已复制')}}
+
+function switchAdminTab(id,b){document.querySelectorAll('.admin-tab').forEach(function(t){t.classList.remove('active')});b.classList.add('active');document.querySelectorAll('.admin-section').forEach(function(s){s.style.display='none'});document.getElementById(id).style.display=''}
+function renderAdmin(){renderAdmU();renderAdmP();renderAdmS();renderAdmA()}
+function renderAdmU(){
+  var u=DS.users();
+  var h='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-size:13px;color:var(--text2)">共 '+u.length+' 位用户</span><button style="padding:6px 14px;border-radius:8px;background:var(--glass2);font-size:12px;cursor:pointer" onclick="exportCSV()">📥 导出</button></div>';
+  u.forEach(function(x){var e=DS.earn(x.id);var t=DS.team(x.id).length;h+='<div class="admin-user-row"><span class="a-name">'+esc(x.nick)+(x.role==='admin'?' 👑':'')+'</span><span class="a-code">'+x.code+'</span><span class="a-stat">¥'+e.t.toFixed(2)+' · '+t+'人</span>';if(x.nick!=='admin')h+='<span class="a-actions"><button class="a-btn danger" onclick="delUser(\''+x.id+'\')">删除</button></span>';h+='</div>'});
+  document.getElementById('adminUsers').innerHTML=h
+}
+function delUser(id){if(!confirm('确定删除？'))return;DS.delUser(id);renderAdmU();toast('已删除')}
+function exportCSV(){var u=DS.users();var c='\uFEFF昵称,邀请码,收益,团队成员,注册时间\n';u.forEach(function(x){var e=DS.earn(x.id);c+=x.nick+','+x.code+','+e.t.toFixed(2)+','+DS.team(x.id).length+','+x.at+'\n'});var b=new Blob([c],{type:'text/csv;charset=utf-8'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='用户数据.csv';a.click();toast('导出成功')}
+function renderAdmP(){
+  var h='<div style="font-size:13px;color:var(--text2);margin-bottom:10px">共 '+PLATFORMS.length+' 个推广平台</div>';
+  CATEGORIES.filter(function(c){return c!=='全部'}).forEach(function(cat){
+    var ps=PLATFORMS.filter(function(p){return p.cat===cat});
+    h+='<div class="platform-category-header"><span class="pch-icon">'+(ps[0]?ps[0].emoji:'📌')+'</span><span class="pch-name">'+cat+'</span><span class="pch-count">'+ps.length+'个平台</span></div>';
+    ps.forEach(function(p){h+='<div class="admin-user-row"><span>'+p.emoji+'</span><span class="a-name" style="min-width:100px">'+p.name+'</span><span class="a-stat">'+p.rate+' · '+p.platform+'</span></div>'})
+  });
+  document.getElementById('adminProducts').innerHTML=h
+}
+function renderAdmS(){
+  var st=DS.getSet();
+  var h='<div class="card"><div class="card-title">返佣比例设置</div>';
+  h+='<div class="form-group"><label style="font-size:12px;color:var(--text2);display:block;margin-bottom:6px">一级返佣比例（%）</label><input id="s1" type="number" value="'+(st.l1*100)+'" min="0" max="100"><p style="font-size:11px;color:var(--text3);margin-top:4px">直接邀请好友完成任务的佣金比例</p></div>';
+  h+='<div class="form-group" style="margin-top:12px"><label style="font-size:12px;color:var(--text2);display:block;margin-bottom:6px">二级返佣比例（%）</label><input id="s2" type="number" value="'+(st.l2*100)+'" min="0" max="100"><p style="font-size:11px;color:var(--text3);margin-top:4px">好友再邀请好友完成任务的佣金比例</p></div>';
+  h+='<button style="width:100%;padding:12px;border-radius:10px;background:var(--primary-g);color:#fff;font-weight:600;margin-top:16px;cursor:pointer" onclick="saveSet()">保存设置</button></div>';
+  document.getElementById('adminSettings').innerHTML=h
+}
+function saveSet(){var l1=parseFloat(document.getElementById('s1').value)||0,l2=parseFloat(document.getElementById('s2').value)||0;var st=DS.getSet();st.l1=l1/100;st.l2=l2/100;DS.setSet(st);toast('设置已保存')}
+function renderAdmA(){
+  var apis=[
+    {id:'p01',n:'迅雷网盘',cat:'网盘拉新',ep:'☁️',k:'API Key',s:'API Secret'},
+    {id:'p02',n:'夸克网盘',cat:'网盘拉新',ep:'🌐',k:'API Key',s:'API Secret'},
+    {id:'p03',n:'UC网盘',cat:'网盘拉新',ep:'💾',k:'API Key',s:'API Secret'},
+    {id:'p04',n:'百度网盘',cat:'网盘拉新',ep:'📦',k:'API Key',s:'API Secret'},
+    {id:'p05',n:'移动云盘',cat:'网盘拉新',ep:'📱',k:'API Key',s:'API Secret'},
+    {id:'p06',n:'小红书CPA',cat:'APP拉新',ep:'📕',k:'API Key',s:'API Secret'},
+    {id:'p07',n:'快手极速版',cat:'APP拉新',ep:'🎬',k:'API Key',s:'API Secret'},
+    {id:'p08',n:'抖音极速版',cat:'APP拉新',ep:'🎵',k:'API Key',s:'API Secret'},
+    {id:'p09',n:'拼多多拉新',cat:'APP拉新',ep:'🛍️',k:'API Key',s:'API Secret'},
+    {id:'p10',n:'京东拉新',cat:'APP拉新',ep:'🐶',k:'API Key',s:'API Secret'},
+    {id:'p11',n:'美团拉新',cat:'APP拉新',ep:'🍔',k:'API Key',s:'API Secret'},
+    {id:'p12',n:'迅雷搜索',cat:'浏览器推广',ep:'⚡',k:'API Key',s:'API Secret'},
+    {id:'p13',n:'迅雷浏览器',cat:'浏览器推广',ep:'🔍',k:'API Key',s:'API Secret'},
+    {id:'p14',n:'悟空搜索',cat:'浏览器推广',ep:'🐵',k:'API Key',s:'API Secret'},
+    {id:'p15',n:'UC浏览器',cat:'浏览器推广',ep:'🌍',k:'API Key',s:'API Secret'},
+    {id:'p16',n:'通义千问',cat:'AI推广',ep:'🤖',k:'API Key',s:'API Secret'},
+    {id:'p17',n:'秘塔AI搜索',cat:'AI推广',ep:'🧠',k:'API Key',s:'API Secret'},
+    {id:'p18',n:'即梦AI',cat:'AI推广',ep:'🎨',k:'API Key',s:'API Secret'},
+    {id:'p19',n:'Kimi智能助手',cat:'AI推广',ep:'🌙',k:'API Key',s:'API Secret'},
+    {id:'p20',n:'豆包AI',cat:'AI推广',ep:'🫘',k:'API Key',s:'API Secret'},
+    {id:'p21',n:'Capcut海外剪映',cat:'海外项目',ep:'🎥',k:'API Key',s:'API Secret'},
+    {id:'p22',n:'百度网盘国际版',cat:'海外项目',ep:'🌏',k:'API Key',s:'API Secret'},
+    {id:'p23',n:'Moto Novel',cat:'海外项目',ep:'📚',k:'API Key',s:'API Secret'},
+    {id:'p24',n:'Goodnovel',cat:'海外项目',ep:'📖',k:'API Key',s:'API Secret'},
+    {id:'p25',n:'TikTok推广',cat:'海外项目',ep:'🎶',k:'API Key',s:'API Secret'},
+    {id:'p26',n:'淘宝联盟',cat:'电商CPS',ep:'🛒',k:'AppKey',s:'AppSecret'},
+    {id:'p27',n:'京东联盟',cat:'电商CPS',ep:'🏪',k:'AppKey',s:'AppSecret'},
+    {id:'p28',n:'多多进宝',cat:'电商CPS',ep:'🧡',k:'ClientID',s:'ClientSecret'},
+    {id:'p29',n:'淘宝1分购',cat:'电商CPS',ep:'💝',k:'API Key',s:'API Secret'},
+    {id:'p30',n:'唯品会联盟',cat:'电商CPS',ep:'💜',k:'API Key',s:'API Secret'},
+    {id:'p31',n:'懂车帝',cat:'生活服务',ep:'🚗',k:'API Key',s:'API Secret'},
+    {id:'p32',n:'美团收钱助手',cat:'生活服务',ep:'💳',k:'API Key',s:'API Secret'},
+    {id:'p33',n:'饿了么推广',cat:'生活服务',ep:'🍜',k:'API Key',s:'API Secret'},
+    {id:'p34',n:'滴滴出行',cat:'生活服务',ep:'🚕',k:'API Key',s:'API Secret'},
+    {id:'p35',n:'58同城',cat:'生活服务',ep:'🏘️',k:'API Key',s:'API Secret'},
+    {id:'p36',n:'3387游戏平台',cat:'游戏推广',ep:'🎮',k:'API Key',s:'API Secret'},
+    {id:'p37',n:'原神推广',cat:'游戏推广',ep:'⚔️',k:'API Key',s:'API Secret'},
+    {id:'p38',n:'王者荣耀推广',cat:'游戏推广',ep:'👑',k:'API Key',s:'API Secret'},
+    {id:'p39',n:'小游戏推广联盟',cat:'游戏推广',ep:'🕹️',k:'API Key',s:'API Secret'},
+    {id:'p40',n:'TT语音',cat:'社交推广',ep:'🎙️',k:'API Key',s:'API Secret'},
+    {id:'p41',n:'Soul',cat:'社交推广',ep:'👻',k:'API Key',s:'API Secret'},
+    {id:'p42',n:'探探',cat:'社交推广',ep:'💕',k:'API Key',s:'API Secret'},
+    {id:'p43',n:'陌陌',cat:'社交推广',ep:'💬',k:'API Key',s:'API Secret'},
+    {id:'p44',n:'招商银行信用卡',cat:'金融保险',ep:'💳',k:'API Key',s:'API Secret'},
+    {id:'p45',n:'花呗推广',cat:'金融保险',ep:'🌸',k:'API Key',s:'API Secret'},
+    {id:'p46',n:'京东白条',cat:'金融保险',ep:'🏦',k:'API Key',s:'API Secret'},
+    {id:'p47',n:'众安保险',cat:'金融保险',ep:'🛡️',k:'API Key',s:'API Secret'},
+    {id:'p48',n:'小鹅通分销',cat:'知识付费',ep:'🎓',k:'API Key',s:'API Secret'},
+    {id:'p49',n:'知乎知学堂',cat:'知识付费',ep:'📝',k:'API Key',s:'API Secret'},
+    {id:'p50',n:'得到APP',cat:'知识付费',ep:'📚',k:'API Key',s:'API Secret'}
+  ];
+  var savedApi=JSON.parse(localStorage.getItem('jyb_api')||'{}');
+  var cats=['网盘拉新','APP拉新','浏览器推广','AI推广','海外项目','电商CPS','生活服务','游戏推广','社交推广','金融保险','知识付费'];
+  var h='<div class="card"><div class="card-title">🔑 API接口配置 <span style="font-size:12px;font-weight:400;color:var(--text3)">（50个平台）</span></div>';
+  h+='<p style="font-size:12px;color:var(--text3);margin-bottom:10px">为每个平台配置独立的API密钥，部署后同步到后端</p>';
+  h+='<div style="display:flex;gap:8px;margin-bottom:12px"><input id="apiSearch" type="text" placeholder="🔍 搜索平台名称..." style="flex:1" oninput="filterApi()"><select id="apiCatFilter" style="padding:8px 12px;border-radius:10px;background:var(--glass);border:1px solid var(--border);color:var(--text);font-size:13px" onchange="filterApi()"><option value="">全部分类</option>';
+  cats.forEach(function(c){h+='<option value="'+c+'">'+c+'</option>'});
+  h+='</select></div>';
+  h+='<div id="apiListContainer" style="max-height:55vh;overflow-y:auto;-webkit-overflow-scrolling:touch">';
+  var curCat='';
+  apis.forEach(function(a){
+    if(a.cat!==curCat){
+      curCat=a.cat;
+      var cc=cats.indexOf(curCat);
+      h+='<div class="cat-group" data-cat="'+curCat+'"><div style="display:flex;align-items:center;gap:6px;margin:12px 0 8px;padding:6px 10px;background:linear-gradient(90deg,var(--glass2),transparent);border-radius:var(--radius-s);font-size:13px;font-weight:700;color:var(--accent)">'+catsEmoji[cc]+' '+curCat+'</div></div>';
+    }
+    var sv=savedApi[a.id]||{};
+    h+='<div class="api-item" data-name="'+a.n+'" data-cat="'+a.cat+'" style="margin-bottom:10px;padding:10px 12px;background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-s)">';
+    h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px"><div style="font-size:13px;font-weight:600;display:flex;align-items:center;gap:4px"><span>'+a.ep+'</span><span>'+a.n+'</span></div>';
+    h+='<span class="api-status" id="st_'+a.id+'" style="font-size:10px;padding:2px 8px;border-radius:10px;'+(sv.k1?'background:rgba(0,245,212,.15);color:var(--accent)':'background:var(--glass2);color:var(--text3)')+'">'+(sv.k1?'✓ 已配置':'未配置')+'</span></div>';
+    h+='<div style="display:flex;gap:6px"><input type="text" id="ak_'+a.id+'" placeholder="'+a.k+'" value="'+(sv.k1||'')+'" style="flex:1;padding:8px 10px;border-radius:8px;background:var(--glass2);border:1px solid var(--border);color:var(--text);font-size:12px"><input type="password" id="as_'+a.id+'" placeholder="'+a.s+'" value="'+(sv.k2||'')+'" style="flex:1;padding:8px 10px;border-radius:8px;background:var(--glass2);border:1px solid var(--border);color:var(--text);font-size:12px"></div>';
+    h+='</div>'
+  });
+  h+='</div>';
+  h+='<div style="margin-top:12px;padding:10px;background:var(--glass);border-radius:var(--radius-s);display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px;color:var(--text3)">已配置: <span id="apiCountDone" style="color:var(--accent);font-weight:700">0</span>/50</span>';
+  h+='<button style="padding:10px 24px;border-radius:10px;background:var(--accent);border:none;color:#0a0818;font-weight:700;cursor:pointer;font-size:13px" onclick="saveAllApi()">💾 保存全部配置</button></div>';
+  h+='<p style="font-size:10px;color:var(--text3);margin-top:8px;text-align:center">💡 部署到Cloudflare Workers后，密钥自动同步到后端环境变量</p>';
+  h+='</div>';
+  document.getElementById('adminApi').innerHTML=h;
+  updateApiCount()
+}
+function filterApi(){
+  var q=(document.getElementById('apiSearch').value||'').toLowerCase();
+  var cat=document.getElementById('apiCatFilter').value;
+  var items=document.querySelectorAll('.api-item');
+  var groups=document.querySelectorAll('.cat-group');
+  items.forEach(function(el){
+    var match=(!q||el.getAttribute('data-name').toLowerCase().indexOf(q)>-1)&&(!cat||el.getAttribute('data-cat')===cat);
+    el.style.display=match?'':'none'
+  });
+  groups.forEach(function(el){
+    var c=el.getAttribute('data-cat');
+    var show=!cat||c===cat;
+    el.style.display=show?'':'none'
+  })
+}
+function saveAllApi(){
+  var apiCfg={};
+  for(var i=1;i<=50;i++){
+    var id='p'+(i<10?'0'+i:i);
+    var k1=document.getElementById('ak_'+id);
+    var k2=document.getElementById('as_'+id);
+    if(k1&&k2&&(k1.value||k2.value)){
+      apiCfg[id]={k1:k1.value,k2:k2.value}
+    }
+  }
+  localStorage.setItem('jyb_api',JSON.stringify(apiCfg));
+  var cnt=Object.keys(apiCfg).length;
+  document.getElementById('apiCountDone').textContent=cnt;
+  document.querySelectorAll('.api-item').forEach(function(el){
+    var id=el.querySelector('[id^="ak_"]');
+    if(id){
+      var pid=id.id.replace('ak_','');
+      var stEl=document.getElementById('st_'+pid);
+      if(stEl){
+        var configured=apiCfg[pid]&&apiCfg[pid].k1;
+        stEl.textContent=configured?'✓ 已配置':'未配置';
+        stEl.style.cssText='font-size:10px;padding:2px 8px;border-radius:10px;'+(configured?'background:rgba(0,245,212,.15);color:var(--accent)':'background:var(--glass2);color:var(--text3)')
+      }
+    }
+  });
+  toast('已保存 '+cnt+' 个平台的API配置')
+}
+function updateApiCount(){
+  var apiCfg=JSON.parse(localStorage.getItem('jyb_api')||'{}');
+  var el=document.getElementById('apiCountDone');
+  if(el)el.textContent=Object.keys(apiCfg).length
+}
+
+document.getElementById('btnNotif').addEventListener('click',function(){toast('暂无新消息')});
+init();
+</script>
+</body>
+</html>
