@@ -28,8 +28,9 @@ body::before{content:'';position:fixed;top:-40%;left:-20%;width:80vw;height:80vw
 body::after{content:'';position:fixed;bottom:-30%;right:-20%;width:70vw;height:70vw;background:radial-gradient(circle,rgba(105,231,255,.08),transparent 70%);pointer-events:none;z-index:0}
 a{color:var(--accent);text-decoration:none}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;font-size:inherit}
-input,select,textarea{font-family:inherit;font-size:inherit;color:var(--text);background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-xs);padding:10px 14px;outline:none;width:100%}
-input:focus,select:focus{border-color:var(--primary)}
+input,select,textarea{font-family:inherit;font-size:inherit;color:var(--text);background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-xs);padding:10px 14px;outline:none;width:100%;-webkit-appearance:none;-moz-appearance:none;appearance:none}
+input:focus,select:focus,textarea:focus{border-color:var(--primary);z-index:1}
+input[readonly]{background:var(--glass2);opacity:.7}
 input::placeholder{color:var(--text3)}
 img{max-width:100%;display:block}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
@@ -241,9 +242,13 @@ body{background:#fff;color:#000;padding:0}
   <p style="text-align:center;font-size:13px;color:var(--text3);margin-bottom:16px">好友通过你的链接注册，你们都能赚</p>
   <div class="share-options">
     <button class="share-opt" onclick="copyInviteLink()"><div class="share-opt-icon">🔗</div><div class="share-opt-text">复制链接</div></button>
-    <button class="share-opt" onclick="showToast('请复制链接后打开微信分享')"><div class="share-opt-icon">💬</div><div class="share-opt-text">微信</div></button>
-    <button class="share-opt" onclick="showToast('请复制链接后打开QQ分享')"><div class="share-opt-icon">🐧</div><div class="share-opt-text">QQ</div></button>
-    <button class="share-opt" onclick="showToast('海报功能即将上线')"><div class="share-opt-icon">🖼️</div><div class="share-opt-text">海报</div></button>
+    <button class="share-opt" onclick="shareWechat()"><div class="share-opt-icon">💬</div><div class="share-opt-text">微信</div></button>
+    <button class="share-opt" onclick="shareQQ()"><div class="share-opt-icon">🐧</div><div class="share-opt-text">QQ</div></button>
+    <button class="share-opt" onclick="genPoster()"><div class="share-opt-icon">🖼️</div><div class="share-opt-text">海报</div></button>
+  </div>
+  <div id="posterArea" style="display:none;text-align:center;margin-top:12px">
+    <canvas id="posterCanvas" style="max-width:100%;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,.4)"></canvas>
+    <button style="margin-top:10px;padding:10px 24px;border-radius:12px;background:var(--primary-g);color:#fff;font-weight:600;font-size:13px;cursor:pointer" onclick="savePoster()">💾 保存海报图片</button>
   </div>
   <div class="share-link-box"><input id="shareLinkInput" readonly><button onclick="copyInviteLink()">复制</button></div>
 </div></div>
@@ -254,11 +259,28 @@ body{background:#fff;color:#000;padding:0}
     <button class="admin-tab" onclick="switchAdminTab('adminProducts',this)">平台管理</button>
     <button class="admin-tab" onclick="switchAdminTab('adminSettings',this)">佣金设置</button>
     <button class="admin-tab" onclick="switchAdminTab('adminApi',this)">API配置</button>
+    <button class="admin-tab" onclick="switchAdminTab('adminSync',this)">数据同步</button>
   </div>
   <div id="adminUsers" class="admin-section"></div>
   <div id="adminProducts" class="admin-section" style="display:none"></div>
   <div id="adminSettings" class="admin-section" style="display:none"></div>
   <div id="adminApi" class="admin-section" style="display:none"></div>
+  <div id="adminSync" class="admin-section" style="display:none">
+    <div class="card">
+      <div class="card-title">📦 数据同步</div>
+      <p style="font-size:12px;color:var(--text3);margin-bottom:14px">手机和电脑数据不同步？用这个功能导出电脑数据，导入到手机</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button style="flex:1;min-width:140px;padding:14px;border-radius:12px;background:var(--primary-g);color:#fff;font-weight:600;font-size:14px;cursor:pointer" onclick="exportAllData()">📤 导出数据</button>
+        <button style="flex:1;min-width:140px;padding:14px;border-radius:12px;background:rgba(105,231,255,.15);border:1px solid rgba(105,231,255,.3);color:var(--accent);font-weight:600;font-size:14px;cursor:pointer" onclick="importData()">📥 导入数据</button>
+      </div>
+      <div style="margin-top:14px;padding:12px;background:var(--glass);border-radius:var(--radius-s);font-size:12px;color:var(--text2);line-height:1.8">
+        <strong>使用步骤：</strong><br>
+        ① 在电脑上点"导出数据" → 下载JSON文件<br>
+        ② 在手机上打开网站 → 点"导入数据" → 选择刚才的JSON文件<br>
+        ③ 手机数据就和电脑一样了
+      </div>
+    </div>
+  </div>
 </div></div>
 <div class="toast" id="toast"></div>
 <script>
@@ -328,6 +350,7 @@ var PLATFORMS=[
 ];
 
 var CATEGORIES=['全部','网盘拉新','APP拉新','浏览器推广','AI推广','海外项目','电商CPS','生活服务','游戏推广','社交推广','金融保险','知识付费'];
+var catsEmoji=['📋','☁️','📱','🔍','🤖','🌏','🛒','💳','🎮','💬','💰','🎓'];
 var catColors={'网盘拉新':'#69E7FF','APP拉新':'#7C5CFF','浏览器推广':'#FFD66B','AI推广':'#62FAD3','海外项目':'#FF9F43','电商CPS':'#FF6B6B','生活服务':'#A29BFE','游戏推广':'#FD79A8','社交推广':'#00CEC9','金融保险':'#FDCB6E','知识付费':'#E17055'};
 
 /* ===== DATA SERVICE ===== */
@@ -450,10 +473,21 @@ function openProduct(id){
   document.getElementById('productDetail').innerHTML=h;
   openModal('modalProduct');
 }
+function renderHome(){renderProducts();updHero()}
 function goPromote(pid){
   var p=PLATFORMS.find(function(x){return x.id===pid});if(!p)return;
   curUser=DS.cur();
-  if(curUser){toast('推广链接已复制！');var link=location.origin+location.pathname+'?ref='+curUser.code;if(navigator.clipboard)navigator.clipboard.writeText(link).catch(function(){});DS.simOrder(pid,curUser.id)}
+  if(curUser){
+    var savedLinks=JSON.parse(localStorage.getItem('jyb_links')||'{}');
+    var realLink=savedLinks[pid]||p.link||'';
+    if(realLink&&realLink!=='https://dt.bd.cn'){
+      window.open(realLink,'_blank');
+      toast('正在跳转到推广页面...')
+    }else{
+      toast('此平台暂未配置推广链接，请联系管理员')
+    }
+    DS.simOrder(pid,curUser.id)
+  }
 }
 
 function renderEarn(){
@@ -538,13 +572,63 @@ function renderAdmU(){
 function delUser(id){if(!confirm('确定删除？'))return;DS.delUser(id);renderAdmU();toast('已删除')}
 function exportCSV(){var u=DS.users();var c='\uFEFF昵称,邀请码,收益,团队成员,注册时间\n';u.forEach(function(x){var e=DS.earn(x.id);c+=x.nick+','+x.code+','+e.t.toFixed(2)+','+DS.team(x.id).length+','+x.at+'\n'});var b=new Blob([c],{type:'text/csv;charset=utf-8'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='用户数据.csv';a.click();toast('导出成功')}
 function renderAdmP(){
-  var h='<div style="font-size:13px;color:var(--text2);margin-bottom:10px">共 '+PLATFORMS.length+' 个推广平台</div>';
+  var savedLinks=JSON.parse(localStorage.getItem('jyb_links')||'{}');
+  var h='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-size:13px;color:var(--text2)">共 '+PLATFORMS.length+' 个推广平台</span>';
+  h+='<button style="padding:6px 14px;border-radius:8px;background:var(--primary-g);font-size:12px;color:#fff;cursor:pointer" onclick="addNewPlatform()">➕ 新增平台</button></div>';
+  h+='<input id="platSearch" type="text" placeholder="🔍 搜索平台名称..." style="margin-bottom:10px;padding:8px 12px;border-radius:8px;font-size:12px" oninput="filterPlat()">';
   CATEGORIES.filter(function(c){return c!=='全部'}).forEach(function(cat){
     var ps=PLATFORMS.filter(function(p){return p.cat===cat});
-    h+='<div class="platform-category-header"><span class="pch-icon">'+(ps[0]?ps[0].emoji:'📌')+'</span><span class="pch-name">'+cat+'</span><span class="pch-count">'+ps.length+'个平台</span></div>';
-    ps.forEach(function(p){h+='<div class="admin-user-row"><span>'+p.emoji+'</span><span class="a-name" style="min-width:100px">'+p.name+'</span><span class="a-stat">'+p.rate+' · '+p.platform+'</span></div>'})
+    h+='<div class="plat-group" data-cat="'+cat+'"><div class="platform-category-header"><span class="pch-icon">'+(ps[0]?ps[0].emoji:'📌')+'</span><span class="pch-name">'+cat+'</span><span class="pch-count">'+ps.length+'个平台</span></div>';
+    ps.forEach(function(p){
+      var link=savedLinks[p.id]||p.link||'';
+      h+='<div class="plat-item" data-name="'+p.name+'" style="padding:10px 12px;background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-s);margin-bottom:6px">';
+      h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-size:20px">'+p.emoji+'</span><span style="font-weight:600;font-size:13px;flex:1">'+p.name+'</span>';
+      h+='<button class="a-btn" onclick="editPlatform(\''+p.id+'\')">✏️编辑</button>';
+      h+='<button class="a-btn danger" onclick="delPlatform(\''+p.id+'\')">🗑️</button></div>';
+      h+='<div style="font-size:11px;color:var(--text2);margin-bottom:4px">💰 '+p.rate+' · 来源: '+p.platform+'</div>';
+      h+='<div style="font-size:11px;color:var(--text3)">🔗 '+((link.length>40)?link.substring(0,40)+'...':link)+'</div>';
+      h+='</div>'
+    });
+    h+='</div>'
   });
   document.getElementById('adminProducts').innerHTML=h
+}
+function filterPlat(){
+  var q=(document.getElementById('platSearch').value||'').toLowerCase();
+  document.querySelectorAll('.plat-item').forEach(function(el){
+    el.style.display=el.getAttribute('data-name').toLowerCase().indexOf(q)>-1?'':'none'
+  })
+}
+function editPlatform(id){
+  var p=PLATFORMS.find(function(x){return x.id===id});if(!p)return;
+  var savedLinks=JSON.parse(localStorage.getItem('jyb_links')||'{}');
+  var curLink=savedLinks[id]||p.link||'';
+  var newRate=prompt('修改佣金（当前: '+p.rate+'）：\n输入新的佣金金额或比例',p.rate);
+  if(newRate===null)return;
+  var newLink=prompt('修改推广链接（当前: '+curLink.substring(0,50)+'...）：\n粘贴新的推广链接',curLink);
+  if(newLink===null)return;
+  p.rate=newRate;
+  savedLinks[id]=newLink;
+  localStorage.setItem('jyb_links',JSON.stringify(savedLinks));
+  toast('✅ 已更新 '+p.name);
+  renderAdmP();renderHome()
+}
+function delPlatform(id){
+  var p=PLATFORMS.find(function(x){return x.id===id});
+  if(!p||!confirm('确定删除 '+p.name+' ？'))return;
+  var idx=PLATFORMS.indexOf(p);PLATFORMS.splice(idx,1);
+  toast('已删除 '+p.name);renderAdmP();renderHome()
+}
+function addNewPlatform(){
+  var name=prompt('平台名称：');if(!name)return;
+  var cat=prompt('分类（网盘拉新/APP拉新/浏览器推广/AI推广/海外项目/电商CPS/生活服务/游戏推广/社交推广/金融保险/知识付费）：');if(!cat)return;
+  var rate=prompt('佣金（如: 固定¥15 或 60%分成）：');if(!rate)return;
+  var link=prompt('推广链接：');if(!link)return;
+  var newId='p'+(PLATFORMS.length+1).toString().padStart(2,'0');
+  PLATFORMS.push({id:newId,name:name,emoji:'📌',price:parseFloat(rate.replace(/[^0-9.]/g,''))||0,commission:0,rate:rate,platform:'自定义',cat:cat,link:link,sales:0,tags:['新品']});
+  var savedLinks=JSON.parse(localStorage.getItem('jyb_links')||'{}');
+  savedLinks[newId]=link;localStorage.setItem('jyb_links',JSON.stringify(savedLinks));
+  toast('✅ 已添加 '+name);renderAdmP();renderHome()
 }
 function renderAdmS(){
   var st=DS.getSet();
@@ -684,6 +768,97 @@ function updateApiCount(){
   var apiCfg=JSON.parse(localStorage.getItem('jyb_api')||'{}');
   var el=document.getElementById('apiCountDone');
   if(el)el.textContent=Object.keys(apiCfg).length
+}
+
+// ===== 分享功能 =====
+function shareWechat(){
+  var u=DS.cur();if(!u){toast('请先登录',true);return}
+  var link=getInviteLink(u);
+  var title='聚佣宝 - 全网50+推广平台 一起赚钱';
+  var desc='覆盖网盘拉新、APP推广、电商CPS等12大行业，注册即赚！';
+  if(navigator.share){
+    navigator.share({title:title,text:desc,url:link}).catch(function(){})
+  }else{
+    copyInviteLink();
+    toast('链接已复制，打开微信发给好友')
+  }
+}
+function shareQQ(){
+  var u=DS.cur();if(!u){toast('请先登录',true);return}
+  var link=getInviteLink(u);
+  var title='聚佣宝 - 全网50+推广平台 一起赚钱';
+  var qqUrl='https://connect.qq.com/widget/shareqq/index.html?url='+encodeURIComponent(link)+'&title='+encodeURIComponent(title)+'&desc='+encodeURIComponent('覆盖网盘拉新、APP推广、电商CPS等12大行业');
+  window.open(qqUrl,'_blank','width=600,height=400')
+}
+function getInviteLink(u){
+  var base=location.origin+location.pathname;
+  return base+'?invite='+u.code
+}
+function genPoster(){
+  var u=DS.cur();if(!u){toast('请先登录',true);return}
+  var canvas=document.getElementById('posterCanvas');
+  var ctx=canvas.getContext('2d');
+  canvas.width=640;canvas.height=960;
+  var grad=ctx.createLinearGradient(0,0,640,960);
+  grad.addColorStop(0,'#0f0524');grad.addColorStop(0.5,'#1a0a3e');grad.addColorStop(1,'#070A14');
+  ctx.fillStyle=grad;ctx.fillRect(0,0,640,960);
+  ctx.fillStyle='rgba(124,92,255,0.15)';ctx.beginPath();ctx.arc(500,150,200,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='rgba(105,231,255,0.1)';ctx.beginPath();ctx.arc(100,700,250,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#fff';ctx.font='bold 42px sans-serif';ctx.textAlign='center';ctx.fillText('💎 聚佣宝',320,120);
+  ctx.fillStyle='#69E7FF';ctx.font='bold 28px sans-serif';ctx.fillText('全网50+推广平台',320,180);
+  ctx.fillText('一站赚钱',320,220);
+  ctx.fillStyle='#9AA7C7';ctx.font='16px sans-serif';
+  var cats=['网盘拉新','APP推广','浏览器推广','AI推广','海外项目','电商CPS','生活服务','游戏推广','社交推广','金融保险','知识付费'];
+  cats.forEach(function(c,i){ctx.fillText('· '+c,320,280+i*30)});
+  ctx.fillStyle='#FFD66B';ctx.font='bold 22px sans-serif';ctx.fillText('🎁 注册即享专属福利',320,660);
+  ctx.fillStyle='rgba(255,255,255,0.08)';roundRect(ctx,160,700,320,80,16);ctx.fill();
+  ctx.strokeStyle='rgba(105,231,255,0.4)';ctx.lineWidth=2;ctx.setLineDash([6,4]);roundRect(ctx,160,700,320,80,16);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#69E7FF';ctx.font='bold 32px monospace';ctx.fillText(u.code,320,745);
+  ctx.fillStyle='#5A6A8A';ctx.font='13px sans-serif';ctx.fillText('邀请码 · 长按图中二维码注册',320,770);
+  ctx.fillStyle='#7C5CFF';roundRect(ctx,180,810,280,50,25);ctx.fill();
+  ctx.fillStyle='#fff';ctx.font='bold 16px sans-serif';ctx.fillText('📱 扫码立即加入',320,842);
+  ctx.fillStyle='#5A6A8A';ctx.font='12px sans-serif';ctx.fillText(getInviteLink(u),320,900);
+  document.getElementById('posterArea').style.display='block'
+}
+function roundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y)}
+function savePoster(){
+  var canvas=document.getElementById('posterCanvas');
+  var link=document.createElement('a');link.download='聚佣宝推广海报.png';link.href=canvas.toDataURL('image/png');link.click();toast('海报已保存')
+}
+// ===== 数据同步（导入导出） =====
+function exportAllData(){
+  var data={
+    users:DS.users(),
+    links:JSON.parse(localStorage.getItem('jyb_links')||'{}'),
+    api:JSON.parse(localStorage.getItem('jyb_api')||'{}'),
+    settings:JSON.parse(localStorage.getItem('jyb_s')||'{}'),
+    orders:JSON.parse(localStorage.getItem('jyb_o')||'[]'),
+    commission:JSON.parse(localStorage.getItem('jyb_cm')||'{}'),
+    time:new Date().toISOString()
+  };
+  var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='聚佣宝数据备份_'+new Date().toISOString().slice(0,10)+'.json';a.click();toast('✅ 数据已导出')
+}
+function importData(){
+  var input=document.createElement('input');input.type='file';input.accept='.json';
+  input.onchange=function(e){
+    var file=e.target.files[0];if(!file)return;
+    var reader=new FileReader();
+    reader.onload=function(ev){
+      try{
+        var data=JSON.parse(ev.target.result);
+        if(data.users)localStorage.setItem('jyb_u',JSON.stringify(data.users));
+        if(data.links)localStorage.setItem('jyb_links',JSON.stringify(data.links));
+        if(data.api)localStorage.setItem('jyb_api',JSON.stringify(data.api));
+        if(data.settings)localStorage.setItem('jyb_s',JSON.stringify(data.settings));
+        if(data.orders)localStorage.setItem('jyb_o',JSON.stringify(data.orders));
+        if(data.commission)localStorage.setItem('jyb_cm',JSON.stringify(data.commission));
+        init();toast('✅ 数据已导入 ('+data.time.slice(0,10)+')')
+      }catch(err){toast('文件格式错误',true)}
+    };
+    reader.readAsText(file)
+  };
+  input.click()
 }
 
 document.getElementById('btnNotif').addEventListener('click',function(){toast('暂无新消息')});
