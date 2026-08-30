@@ -970,8 +970,8 @@ function savePoster(){
 }
 
 /* ===== ADMIN ===== */
-function switchAdminTab(id,b){document.querySelectorAll('.admin-tab').forEach(function(t){t.classList.remove('active')});b.classList.add('active');document.querySelectorAll('.admin-section').forEach(function(s){s.style.display='none'});document.getElementById(id).style.display='';if(id==='adminSync')renderSyncStatus();if(id==='adminEarnings')renderAdmEarnings()}
-function renderAdmin(){renderAdmU();renderAdmP();renderAdmS();renderAdmEarnings();renderAdmA();renderSyncStatus()}
+function switchAdminTab(id,b){document.querySelectorAll('.admin-tab').forEach(function(t){t.classList.remove('active')});b.classList.add('active');document.querySelectorAll('.admin-section').forEach(function(s){s.style.display='none'});document.getElementById(id).style.display='';if(id==='adminSync')renderSyncStatus();if(id==='adminEarnings')renderAdmEarnings();if(id==='adminLeaders')renderAdmLeaders()}
+function renderAdmin(){renderAdmU();renderAdmP();renderAdmS();renderAdmEarnings();renderAdmLeaders();renderAdmA();renderSyncStatus()}
 
 function renderAdmU(){
   var u=DS.users();
