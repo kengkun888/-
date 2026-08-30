@@ -1,10 +1,9 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#070A14">
 <title>聚佣宝 — 全网推广赚钱平台</title>
 <style>
@@ -20,7 +19,7 @@
 --shadow:0 4px 24px rgba(0,0,0,.4);
 --safe-b:env(safe-area-inset-bottom,0px);
 --nav-h:60px;
---font:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+--font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
 }
 html{font-family:var(--font);font-size:16px;color:var(--text);background:var(--bg);-webkit-tap-highlight-color:transparent;overflow-x:hidden}
 body{min-height:100vh;min-height:100dvh;background:var(--bg);overflow-x:hidden;padding-bottom:calc(var(--nav-h) + var(--safe-b))}
@@ -29,9 +28,10 @@ body::after{content:'';position:fixed;bottom:-30%;right:-20%;width:70vw;height:7
 a{color:var(--accent);text-decoration:none}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;font-size:inherit}
 input,select,textarea{font-family:inherit;font-size:inherit;color:var(--text);background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-xs);padding:10px 14px;outline:none;width:100%;-webkit-appearance:none;-moz-appearance:none;appearance:none}
-input:focus,select:focus,textarea:focus{border-color:var(--primary);z-index:1}
+input:focus,select:focus,textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(124,92,255,.2)}
 input[readonly]{background:var(--glass2);opacity:.7}
 input::placeholder{color:var(--text3)}
+textarea{resize:vertical;min-height:80px}
 img{max-width:100%;display:block}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
 ::-webkit-scrollbar{width:4px;height:4px}
@@ -45,22 +45,18 @@ img{max-width:100%;display:block}
 .header-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--glass);font-size:16px;transition:background .2s}
 .header-btn:hover{background:var(--glass2)}
 .bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;height:calc(var(--nav-h) + var(--safe-b));padding-bottom:var(--safe-b);display:flex;background:rgba(7,10,20,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--border);z-index:200}
-.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--text3);font-size:10px;font-weight:500;transition:color .2s}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--text3);font-size:10px;font-weight:500;transition:color .2s;-webkit-tap-highlight-color:transparent}
 .nav-item.active{color:var(--accent)}
 .nav-item .nav-icon{font-size:22px;line-height:1}
 .nav-item.active .nav-icon{filter:drop-shadow(0 0 6px rgba(105,231,255,.4))}
 .view{display:none;padding:16px;animation:fadeIn .25s ease}
 .view.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.card{background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px;transition:border-color .2s}
-.card:hover{border-color:var(--border2)}
+.card{background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px}
 .card-title{font-size:15px;font-weight:600;margin-bottom:8px}
-.hero-banner{background:linear-gradient(135deg,rgba(124,92,255,.25),rgba(105,231,255,.15));border:1px solid rgba(124,92,255,.2);border-radius:var(--radius);padding:24px 20px;text-align:center;margin-bottom:16px;position:relative;overflow:hidden}
-.hero-banner::before{content:'';position:absolute;top:-50%;right:-30%;width:200px;height:200px;background:radial-gradient(circle,rgba(105,231,255,.15),transparent 70%);pointer-events:none}
+.hero-banner{background:linear-gradient(135deg,rgba(124,92,255,.25),rgba(105,231,255,.15));border:1px solid rgba(124,92,255,.2);border-radius:var(--radius);padding:24px 20px;text-align:center;margin-bottom:16px}
 .hero-banner h2{font-size:22px;font-weight:800;margin-bottom:6px}
 .hero-banner p{font-size:13px;color:var(--text2);margin-bottom:14px}
-.hero-banner .cta{display:inline-flex;align-items:center;gap:6px;padding:10px 24px;background:var(--primary-g);border-radius:20px;font-size:14px;font-weight:600;color:#fff;transition:transform .15s,box-shadow .15s}
-.hero-banner .cta:hover{transform:scale(1.03);box-shadow:0 4px 20px rgba(124,92,255,.4)}
 .platform-count{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:14px;font-size:12px;font-weight:600;background:rgba(98,250,211,.1);color:var(--accent2);border:1px solid rgba(98,250,211,.15);margin-bottom:16px}
 .search-bar{display:flex;gap:8px;margin-bottom:16px}
 .search-bar input{flex:1;border-radius:20px;padding:10px 18px;background:var(--glass2);font-size:14px}
@@ -99,151 +95,197 @@ img{max-width:100%;display:block}
 .level-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:10px;font-size:11px;font-weight:600}
 .level-badge.l1{background:rgba(98,250,211,.12);color:var(--accent2)}
 .level-badge.l2{background:rgba(255,214,107,.12);color:var(--gold)}
-.invite-card{background:linear-gradient(135deg,rgba(124,92,255,.18),rgba(98,250,211,.1));border:1px solid rgba(124,92,255,.2);border-radius:var(--radius);padding:20px;text-align:center;margin-bottom:16px}
-.invite-card .code-display{font-size:28px;font-weight:800;letter-spacing:4px;color:var(--accent);margin:12px 0;padding:12px;background:var(--glass);border-radius:var(--radius-s);border:1px dashed var(--border2)}
-.invite-card .invite-desc{font-size:13px;color:var(--text2);margin-bottom:14px;line-height:1.6}
-.invite-card .invite-actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-.invite-card .invite-actions button{padding:10px 20px;border-radius:20px;font-size:13px;font-weight:600;transition:transform .15s}
-.invite-card .invite-actions .btn-primary{background:var(--primary-g);color:#fff}
-.team-member{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-s);margin-bottom:6px}
-.team-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;background:var(--glass2);flex-shrink:0}
-.team-info{flex:1;min-width:0}
-.team-info .team-name{font-size:13px;font-weight:600}
-.team-info .team-meta{font-size:11px;color:var(--text3);margin-top:2px}
-.team-comm{font-size:13px;font-weight:700;color:var(--accent2);white-space:nowrap}
-.profile-header{text-align:center;padding:24px 0}
-.profile-avatar{width:72px;height:72px;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:30px;background:var(--primary-g);box-shadow:0 4px 20px rgba(124,92,255,.3)}
-.profile-header .profile-name{font-size:18px;font-weight:700}
-.profile-header .profile-role{font-size:12px;color:var(--text3);margin-top:4px}
-.menu-list{margin-bottom:12px}
-.menu-item{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-s);margin-bottom:6px;transition:background .2s;cursor:pointer}
+.invite-card{background:linear-gradient(135deg,rgba(124,92,255,.2),rgba(105,231,255,.1));border:1px solid rgba(124,92,255,.2);border-radius:var(--radius);padding:20px;text-align:center;margin-bottom:16px}
+.invite-card h3{font-size:16px;font-weight:700;margin-bottom:4px}
+.invite-desc{font-size:12px;color:var(--text2);margin-bottom:12px}
+.code-display{font-size:28px;font-weight:800;letter-spacing:4px;color:var(--accent);background:var(--glass);border-radius:var(--radius-s);padding:12px;margin-bottom:12px;border:1px dashed var(--primary)}
+.invite-actions .btn-primary{padding:12px 32px;border-radius:24px;background:var(--primary-g);color:#fff;font-weight:600;font-size:14px}
+.team-member{display:flex;align-items:center;gap:12px;padding:12px;background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-s);margin-bottom:6px}
+.team-avatar{width:40px;height:40px;border-radius:50%;background:var(--primary-g);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;flex-shrink:0}
+.team-info{flex:1}
+.team-name{font-size:13px;font-weight:600}
+.team-meta{font-size:11px;color:var(--text3);margin-top:2px}
+.team-comm{font-size:12px;color:var(--accent2);font-weight:600}
+.profile-header{text-align:center;padding:20px 0}
+.profile-avatar{width:64px;height:64px;border-radius:50%;background:var(--primary-g);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;color:#fff;margin:0 auto 12px}
+.profile-name{font-size:18px;font-weight:700}
+.profile-role{font-size:12px;color:var(--text3);margin-top:4px}
+.menu-list{margin-top:8px}
+.menu-item{display:flex;align-items:center;padding:14px 16px;background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-s);margin-bottom:6px;cursor:pointer;transition:background .2s}
 .menu-item:hover{background:var(--glass2)}
-.menu-item .menu-icon{font-size:20px;width:28px;text-align:center}
-.menu-item .menu-text{flex:1;font-size:14px;font-weight:500}
-.menu-item .menu-arrow{color:var(--text3);font-size:14px}
-.menu-item .menu-badge{padding:2px 8px;border-radius:8px;font-size:11px;font-weight:600;background:rgba(255,107,107,.15);color:var(--warn)}
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:500;align-items:flex-end;justify-content:center}
+.menu-icon{font-size:18px;margin-right:12px}
+.menu-text{flex:1;font-size:14px}
+.menu-arrow{color:var(--text3);font-size:18px}
+.menu-badge{font-size:11px;padding:3px 10px;border-radius:10px;background:rgba(124,92,255,.2);color:var(--primary)}
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:500;display:none;align-items:center;justify-content:center;padding:16px}
 .modal-overlay.active{display:flex}
-.modal-content{width:100%;max-width:480px;max-height:90vh;background:var(--bg2);border-top:1px solid var(--border2);border-radius:20px 20px 0 0;overflow-y:auto;padding:24px 20px calc(24px + var(--safe-b));animation:slideUp .3s ease}
-@keyframes slideUp{from{transform:translateY(100%)}to{transform:none}}
-.modal-content.center-modal{border-radius:var(--radius);max-width:380px;margin:auto;border:1px solid var(--border2)}
-.modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:var(--glass2);display:flex;align-items:center;justify-content:center;font-size:18px;z-index:1}
-.login-form{text-align:center}
-.login-form h2{font-size:22px;font-weight:700;margin-bottom:6px}
-.login-form .login-sub{font-size:13px;color:var(--text3);margin-bottom:24px}
-.login-form .form-group{margin-bottom:14px;text-align:left}
-.login-form .form-group label{display:block;font-size:12px;color:var(--text2);margin-bottom:6px;font-weight:500}
-.login-form .form-btn{width:100%;padding:14px;border-radius:12px;background:var(--primary-g);font-size:15px;font-weight:600;color:#fff;margin-top:8px;transition:transform .15s}
-.login-form .form-btn:hover{transform:scale(1.01)}
-.login-form .form-switch{text-align:center;margin-top:16px;font-size:13px;color:var(--text3)}
-.login-form .form-switch a{color:var(--accent);font-weight:500}
-.invite-input-hint{font-size:11px;color:var(--text3);margin-top:4px}
-.admin-section{margin-bottom:20px}
-.admin-section h3{font-size:14px;font-weight:600;color:var(--accent);margin-bottom:10px}
-.admin-tabs{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px}
-.admin-tab{padding:7px 14px;border-radius:14px;font-size:12px;font-weight:500;background:var(--glass);border:1px solid var(--border);color:var(--text3);white-space:nowrap;flex-shrink:0;cursor:pointer}
-.admin-tab.active{background:rgba(124,92,255,.2);border-color:var(--primary);color:var(--text)}
-.admin-user-row{display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-s);margin-bottom:4px;font-size:12px;flex-wrap:wrap}
-.admin-user-row .a-name{font-weight:600;min-width:60px}
-.admin-user-row .a-code{color:var(--accent);font-family:monospace}
-.admin-user-row .a-stat{color:var(--text2)}
-.admin-user-row .a-actions{margin-left:auto;display:flex;gap:4px}
-.admin-user-row .a-btn{padding:4px 10px;border-radius:6px;font-size:11px;background:var(--glass2);border:1px solid var(--border);cursor:pointer}
-.admin-user-row .a-btn.danger{color:var(--warn);border-color:rgba(255,107,107,.3)}
-.admin-user-row .a-btn:hover{background:var(--glass3)}
-.toast{position:fixed;top:60px;left:50%;transform:translateX(-50%) translateY(-20px);padding:10px 24px;border-radius:20px;font-size:13px;font-weight:500;background:rgba(98,250,211,.15);border:1px solid rgba(98,250,211,.3);color:var(--accent2);z-index:999;opacity:0;transition:all .3s;pointer-events:none;backdrop-filter:blur(8px)}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.toast.error{background:rgba(255,107,107,.15);border-color:rgba(255,107,107,.3);color:var(--warn)}
-.empty-state{text-align:center;padding:40px 20px;color:var(--text3)}
-.empty-state .empty-icon{font-size:40px;margin-bottom:12px}
-.empty-state p{font-size:13px;line-height:1.6}
-.pd-img{width:100%;aspect-ratio:1;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:64px;border-radius:var(--radius);margin-bottom:16px}
-.pd-name{font-size:17px;font-weight:700;line-height:1.4;margin-bottom:10px}
-.pd-meta{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
-.pd-meta span{padding:3px 10px;border-radius:10px;font-size:11px;background:var(--glass2);color:var(--text2)}
-.pd-price-row{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
-.pd-price{font-size:24px;font-weight:800;color:var(--warn)}
-.pd-comm-badge{padding:4px 12px;border-radius:12px;font-size:13px;font-weight:600;background:rgba(98,250,211,.12);color:var(--accent2)}
-.pd-desc{font-size:13px;color:var(--text2);line-height:1.7;margin:14px 0}
-.pd-go{display:block;width:100%;padding:14px;border-radius:12px;background:var(--primary-g);font-size:15px;font-weight:600;color:#fff;text-align:center;transition:transform .15s;cursor:pointer}
-.pd-go:hover{transform:scale(1.01)}
+.modal-content{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius);max-width:460px;width:100%;max-height:90vh;overflow-y:auto;padding:24px;position:relative;animation:slideUp .3s ease}
+.center-modal{text-align:center}
+@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:none;opacity:1}}
+.modal-close{position:absolute;top:12px;right:16px;font-size:24px;color:var(--text2);z-index:10;line-height:1}
+.modal-close:hover{color:var(--text)}
 .share-options{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
-.share-opt{text-align:center;padding:14px 6px;border-radius:var(--radius-s);background:var(--glass);border:1px solid var(--border);transition:background .2s;cursor:pointer}
+.share-opt{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 8px;background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-s);transition:background .2s}
 .share-opt:hover{background:var(--glass2)}
-.share-opt .share-opt-icon{font-size:26px;margin-bottom:6px}
-.share-opt .share-opt-text{font-size:11px;color:var(--text2)}
+.share-opt-icon{font-size:24px}
+.share-opt-text{font-size:11px;color:var(--text2)}
 .share-link-box{display:flex;gap:8px;margin-top:12px}
-.share-link-box input{flex:1;font-size:12px;border-radius:8px;padding:10px 12px}
-.share-link-box button{padding:10px 16px;border-radius:8px;background:var(--primary-g);font-size:13px;font-weight:600;color:#fff;white-space:nowrap;cursor:pointer}
-.platform-category-header{display:flex;align-items:center;gap:8px;padding:12px 0 8px;margin-top:4px}
-.platform-category-header .pch-icon{font-size:18px}
-.platform-category-header .pch-name{font-size:14px;font-weight:600;color:var(--text)}
-.platform-category-header .pch-count{font-size:11px;color:var(--text3);background:var(--glass);padding:2px 8px;border-radius:8px}
-@media print{
-body{background:#fff;color:#000;padding:0}
-.bottom-nav,.header,.modal-overlay,.toast{display:none!important}
-.card,.hero-banner,.product-card,.stat-box,.invite-card{border:1px solid #ccc;background:#f5f5f5;break-inside:avoid}
-.card-title,.product-card .p-name,.stat-box .stat-val,.hero-banner h2{-webkit-text-fill-color:#000;color:#000}
-}
+.share-link-box input{flex:1;border-radius:20px;padding:10px 16px;background:var(--glass);font-size:12px}
+.share-link-box button{border-radius:20px;padding:10px 18px;background:var(--primary-g);color:#fff;font-weight:600;font-size:13px;white-space:nowrap}
+.login-form,.register-form{margin-top:16px}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:12px;color:var(--text2);margin-bottom:6px}
+.form-group input{border-radius:var(--radius-s);padding:12px 14px}
+.form-switch{text-align:center;font-size:13px;color:var(--text3);margin-top:16px}
+.form-switch a{color:var(--accent);cursor:pointer}
+.btn-primary{width:100%;padding:14px;border-radius:var(--radius-s);background:var(--primary-g);color:#fff;font-weight:600;font-size:15px;margin-top:8px;cursor:pointer}
+.admin-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:10px;margin-bottom:16px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.admin-tabs::-webkit-scrollbar{display:none}
+.admin-tab{flex-shrink:0;padding:8px 14px;border-radius:10px;font-size:12px;font-weight:500;background:var(--glass);border:1px solid var(--border);color:var(--text2);transition:all .2s;white-space:nowrap}
+.admin-tab.active{background:rgba(124,92,255,.2);border-color:var(--primary);color:var(--text)}
+.admin-section{animation:fadeIn .2s}
+.admin-user-row{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-s);margin-bottom:6px;flex-wrap:wrap}
+.a-name{font-size:13px;font-weight:600;flex:1;min-width:80px}
+.a-code{font-size:11px;color:var(--text3);background:var(--glass2);padding:2px 8px;border-radius:6px}
+.a-stat{font-size:12px;color:var(--accent2)}
+.a-actions{display:flex;gap:4px}
+.a-btn{padding:4px 10px;border-radius:6px;font-size:11px;cursor:pointer}
+.a-btn.danger{background:rgba(255,107,107,.15);color:var(--warn)}
+.plat-card{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-s);margin-bottom:6px}
+.plat-emoji{font-size:22px;flex-shrink:0}
+.plat-info{flex:1}
+.plat-name{font-size:13px;font-weight:600}
+.plat-meta{font-size:11px;color:var(--text3)}
+.plat-actions{display:flex;gap:4px}
+.empty-state{text-align:center;padding:30px 20px;color:var(--text3)}
+.empty-icon{font-size:40px;margin-bottom:12px}
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-100px);padding:12px 24px;border-radius:12px;font-size:13px;font-weight:500;z-index:9999;transition:transform .3s ease;pointer-events:none}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast.error{background:var(--warn);color:#fff}
+.toast:not(.error){background:var(--accent2);color:#070A14}
+.pd-img{width:100%;aspect-ratio:16/9;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:60px;border-radius:var(--radius);margin-bottom:14px}
+.pd-name{font-size:20px;font-weight:700;margin-bottom:6px}
+.pd-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.pd-meta span{font-size:11px;padding:3px 10px;border-radius:10px;background:var(--glass);color:var(--text2)}
+.pd-price-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.pd-price{font-size:18px;font-weight:700;color:var(--warn)}
+.pd-comm-badge{padding:4px 12px;border-radius:12px;font-size:12px;font-weight:600;background:rgba(98,250,211,.12);color:var(--accent2)}
+.pd-desc{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:16px}
+.pd-go{width:100%;padding:14px;border-radius:12px;background:var(--primary-g);color:#fff;font-weight:600;font-size:15px;cursor:pointer}
+/* Edit Modal Styles */
+.edit-form .edit-field{margin-bottom:14px}
+.edit-form .edit-field label{display:block;font-size:12px;color:var(--text2);margin-bottom:6px;font-weight:500}
+.edit-form .edit-field input,.edit-form .edit-field textarea,.edit-form .edit-field select{width:100%;border-radius:var(--radius-s);padding:12px 14px;font-size:14px}
+.edit-form .edit-field textarea{min-height:70px;line-height:1.6}
+.edit-form .emoji-picker{display:flex;gap:6px;flex-wrap:wrap}
+.edit-form .emoji-opt{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;background:var(--glass);border:1px solid var(--border);cursor:pointer;transition:all .2s}
+.edit-form .emoji-opt.active,.edit-form .emoji-opt:hover{background:rgba(124,92,255,.2);border-color:var(--primary)}
+.img-upload-area{border:2px dashed var(--border2);border-radius:var(--radius-s);padding:16px;text-align:center;cursor:pointer;transition:border-color .2s;margin-top:6px}
+.img-upload-area:hover{border-color:var(--primary)}
+.img-upload-area input[type="file"]{display:none}
+.img-upload-area .upload-hint{font-size:12px;color:var(--text3)}
+.img-preview-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.img-preview-item{position:relative;width:72px;height:72px;border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+.img-preview-item img{width:100%;height:100%;object-fit:cover}
+.img-preview-item .img-remove{position:absolute;top:2px;right:2px;width:20px;height:20px;border-radius:50%;background:rgba(255,107,107,.9);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.edit-actions{display:flex;gap:10px;margin-top:20px}
+.edit-actions .btn-save{flex:1;padding:14px;border-radius:var(--radius-s);background:var(--primary-g);color:#fff;font-weight:600;font-size:15px;cursor:pointer}
+.edit-actions .btn-cancel{flex:1;padding:14px;border-radius:var(--radius-s);background:var(--glass);border:1px solid var(--border);color:var(--text2);font-weight:600;font-size:15px;cursor:pointer}
+/* Sync Status */
+.sync-status{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:var(--radius-s);margin-bottom:12px;font-size:12px}
+.sync-status.ok{background:rgba(98,250,211,.1);color:var(--accent2);border:1px solid rgba(98,250,211,.15)}
+.sync-status.off{background:var(--glass);color:var(--text3);border:1px solid var(--border)}
+.sync-status.err{background:rgba(255,107,107,.1);color:var(--warn);border:1px solid rgba(255,107,107,.15)}
+.sync-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.sync-status.ok .sync-dot{background:var(--accent2)}
+.sync-status.off .sync-dot{background:var(--text3)}
+.sync-status.err .sync-dot{background:var(--warn)}
+/* Team Leader Styles */
+.leader-card{background:linear-gradient(135deg,rgba(255,214,107,.15),rgba(124,92,255,.1));border:1px solid rgba(255,214,107,.2);border-radius:var(--radius);padding:20px;margin-bottom:16px;text-align:center}
+.leader-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:14px;font-size:12px;font-weight:700;background:linear-gradient(135deg,rgba(255,214,107,.2),rgba(255,214,107,.1));color:var(--gold);border:1px solid rgba(255,214,107,.2);margin-bottom:10px}
+.leader-member-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-s);padding:14px;margin-bottom:8px}
+.leader-member-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.leader-member-avatar{width:36px;height:36px;border-radius:50%;background:var(--primary-g);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;flex-shrink:0}
+.leader-member-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.leader-member-stat{background:var(--glass2);border-radius:8px;padding:8px 6px;text-align:center}
+.leader-member-stat .lm-val{font-size:15px;font-weight:700;color:var(--accent)}
+.leader-member-stat .lm-label{font-size:10px;color:var(--text3);margin-top:2px}
+.apply-status-badge{display:inline-flex;padding:4px 12px;border-radius:10px;font-size:11px;font-weight:600}
+.apply-status-badge.pending{background:rgba(255,214,107,.12);color:var(--gold)}
+.apply-status-badge.approved{background:rgba(98,250,211,.12);color:var(--accent2)}
+.apply-status-badge.rejected{background:rgba(255,107,107,.12);color:var(--warn)}
+.settle-row{display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-s);margin-bottom:6px;flex-wrap:wrap}
+.settle-row .settle-name{font-size:13px;font-weight:600;flex:1;min-width:80px}
+.settle-row .settle-info{font-size:11px;color:var(--text3);flex:2}
+.settle-row .settle-amount{font-size:14px;font-weight:700;color:var(--accent2)}
+.settle-row .settle-status{font-size:11px;padding:3px 10px;border-radius:8px}
+.settle-row .settle-status.paid{background:rgba(98,250,211,.12);color:var(--accent2)}
+.settle-row .settle-status.unpaid{background:rgba(255,214,107,.12);color:var(--gold)}
 </style>
 </head>
 <body>
 <div id="app">
-  <header class="header" id="mainHeader">
-    <span class="logo-icon" aria-hidden="true">💎</span>
-    <h1>聚佣宝</h1>
-    <button class="header-btn" id="btnNotif" title="消息" aria-label="消息通知">🔔</button>
-    <button class="header-btn" id="btnSearch" title="搜索" aria-label="搜索商品">🔍</button>
-  </header>
-  <main>
-    <section class="view active" id="viewHome" aria-label="首页">
-      <div class="hero-banner">
-        <h2>全网50+推广平台 一站赚钱</h2>
-        <p>覆盖网盘拉新、APP推广、电商CPS、AI等12大行业</p>
-        <button class="cta" onclick="openModal('modalLogin')" id="heroCta">🚀 立即加入</button>
-      </div>
-      <div class="platform-count" id="platformCount">📡 已接入 50 个推广平台</div>
-      <div class="search-bar">
-        <input type="search" id="searchInput" placeholder="搜索商品、平台、分类..." aria-label="搜索商品">
-        <button onclick="doSearch()">搜索</button>
-      </div>
-      <div class="cat-scroll" id="catScroll" role="tablist" aria-label="商品分类"></div>
-      <div class="product-grid" id="productGrid"></div>
-    </section>
-    <section class="view" id="viewEarnings" aria-label="收益"><div id="earningsContent"></div></section>
-    <section class="view" id="viewTeam" aria-label="团队"><div id="teamContent"></div></section>
-    <section class="view" id="viewProfile" aria-label="我的"><div id="profileContent"></div></section>
-  </main>
-  <nav class="bottom-nav" role="navigation" aria-label="主导航">
-    <button class="nav-item active" data-view="viewHome" onclick="switchView('viewHome',this)"><span class="nav-icon">🏠</span><span>首页</span></button>
-    <button class="nav-item" data-view="viewEarnings" onclick="switchView('viewEarnings',this)"><span class="nav-icon">💰</span><span>收益</span></button>
-    <button class="nav-item" data-view="viewTeam" onclick="switchView('viewTeam',this)"><span class="nav-icon">👥</span><span>团队</span></button>
-    <button class="nav-item" data-view="viewProfile" onclick="switchView('viewProfile',this)"><span class="nav-icon">👤</span><span>我的</span></button>
-  </nav>
+<!-- Header -->
+<div class="header">
+  <span class="logo-icon">💎</span>
+  <h1>聚佣宝</h1>
+  <button class="header-btn" onclick="curUser&&curUser.nick==='admin'?(openModal('modalAdmin'),renderAdmin()):tryAdmin()" aria-label="管理">⚙️</button>
 </div>
-<div class="modal-overlay" id="modalLogin"><div class="modal-content center-modal" role="dialog" aria-label="登录注册"><button class="modal-close" onclick="closeModal('modalLogin')" aria-label="关闭">×</button>
-  <div class="login-form" id="loginForm"><h2>欢迎来到聚佣宝</h2><p class="login-sub">登录开启你的推广赚钱之旅</p>
-    <div class="form-group"><label for="loginNick">昵称</label><input id="loginNick" type="text" placeholder="输入昵称" autocomplete="nickname"></div>
-    <div class="form-group"><label for="loginPwd">密码</label><input id="loginPwd" type="password" placeholder="输入密码" autocomplete="current-password"></div>
-    <button class="form-btn" onclick="doLogin()">登 录</button>
-    <div class="form-switch">还没有账号？<a href="#" onclick="showRegister();return false">立即注册</a></div>
+
+<!-- Home View -->
+<div class="view active" id="viewHome">
+  <div class="hero-banner">
+    <h2>🔥 全网推广赚钱平台</h2>
+    <p>50+平台 · 零门槛 · 佣金实时到账</p>
+    <button class="cta" id="heroCta" style="display:inline-flex;align-items:center;gap:6px;padding:10px 24px;background:var(--primary-g);border-radius:20px;font-size:14px;font-weight:600;color:#fff;cursor:pointer">🚀 立即加入</button>
   </div>
-  <div class="login-form" id="registerForm" style="display:none"><h2>注册新账号</h2><p class="login-sub">注册即可获得专属邀请码</p>
-    <div class="form-group"><label for="regNick">昵称</label><input id="regNick" type="text" placeholder="输入昵称" autocomplete="nickname"></div>
-    <div class="form-group"><label for="regPwd">密码</label><input id="regPwd" type="password" placeholder="设置密码（6位以上）" autocomplete="new-password"></div>
-    <div class="form-group"><label for="regInviter">邀请码（选填）</label><input id="regInviter" type="text" placeholder="输入邀请码，享专属福利"><p class="invite-input-hint">填写邀请码，注册后即建立推荐关系</p></div>
-    <button class="form-btn" onclick="doRegister()">注 册</button>
-    <div class="form-switch">已有账号？<a href="#" onclick="showLogin();return false">返回登录</a></div>
+  <div class="platform-count" id="platformCount">📡 已接入 50 个推广平台</div>
+  <div class="search-bar">
+    <input id="searchInput" type="text" placeholder="🔍 搜索平台名称...">
+    <button id="btnSearch" style="cursor:pointer">搜索</button>
+  </div>
+  <div class="cat-scroll" id="catScroll"></div>
+  <div class="product-grid" id="productGrid"></div>
+</div>
+
+<!-- Product Detail Modal -->
+<div class="modal-overlay" id="modalProduct">
+<div class="modal-content" role="dialog" aria-label="平台详情">
+  <button class="modal-close" onclick="closeModal('modalProduct')" aria-label="关闭">×</button>
+  <div id="productDetail"></div>
+</div></div>
+
+<!-- Login Modal -->
+<div class="modal-overlay" id="modalLogin">
+<div class="modal-content center-modal" role="dialog" aria-label="登录">
+  <button class="modal-close" onclick="closeModal('modalLogin')" aria-label="关闭">×</button>
+  <h2 style="font-size:18px;font-weight:700;text-align:center;margin-bottom:4px">欢迎回来</h2>
+  <p style="text-align:center;font-size:13px;color:var(--text3);margin-bottom:16px">登录或注册开始赚钱</p>
+  <div id="loginForm" class="login-form">
+    <div class="form-group"><label>昵称</label><input id="loginNick" type="text" placeholder="请输入昵称"></div>
+    <div class="form-group"><label>密码</label><input id="loginPwd" type="password" placeholder="请输入密码"></div>
+    <button class="btn-primary" onclick="doLogin()">登 录</button>
+    <div class="form-switch">没有账号？<a onclick="showRegister()">立即注册</a></div>
+  </div>
+  <div id="registerForm" class="register-form" style="display:none">
+    <div class="form-group"><label>昵称</label><input id="regNick" type="text" placeholder="设置昵称"></div>
+    <div class="form-group"><label>密码（至少6位）</label><input id="regPwd" type="password" placeholder="设置密码"></div>
+    <div class="form-group"><label>邀请码（可选）</label><input id="regInviter" type="text" placeholder="好友邀请码"></div>
+    <button class="btn-primary" onclick="doRegister()">注 册</button>
+    <div class="form-switch">已有账号？<a onclick="showLogin()">去登录</a></div>
   </div>
 </div></div>
-<div class="modal-overlay" id="modalProduct"><div class="modal-content" role="dialog" aria-label="商品详情"><button class="modal-close" onclick="closeModal('modalProduct')" aria-label="关闭">×</button><div id="productDetail"></div></div></div>
-<div class="modal-overlay" id="modalShare"><div class="modal-content center-modal" role="dialog" aria-label="分享邀请"><button class="modal-close" onclick="closeModal('modalShare')" aria-label="关闭">×</button>
+
+<!-- Share Modal -->
+<div class="modal-overlay" id="modalShare">
+<div class="modal-content center-modal" role="dialog" aria-label="分享邀请">
+  <button class="modal-close" onclick="closeModal('modalShare')" aria-label="关闭">×</button>
   <h2 style="font-size:18px;font-weight:700;text-align:center;margin-bottom:4px">邀请好友 一起赚钱</h2>
   <p style="text-align:center;font-size:13px;color:var(--text3);margin-bottom:16px">好友通过你的链接注册，你们都能赚</p>
   <div class="share-options">
     <button class="share-opt" onclick="copyInviteLink()"><div class="share-opt-icon">🔗</div><div class="share-opt-text">复制链接</div></button>
     <button class="share-opt" onclick="shareWechat()"><div class="share-opt-icon">💬</div><div class="share-opt-text">微信</div></button>
-    <button class="share-opt" onclick="shareQQ()"><div class="share-opt-icon">🐧</div><div class="share-opt-text">QQ</div></button>
+    <button class="share-opt" onclick="shareQQ()"><div class="share-opt-icon"></div><div class="share-opt-text">QQ</div></button>
     <button class="share-opt" onclick="genPoster()"><div class="share-opt-icon">🖼️</div><div class="share-opt-text">海报</div></button>
   </div>
   <div id="posterArea" style="display:none;text-align:center;margin-top:12px">
@@ -252,113 +294,312 @@ body{background:#fff;color:#000;padding:0}
   </div>
   <div class="share-link-box"><input id="shareLinkInput" readonly><button onclick="copyInviteLink()">复制</button></div>
 </div></div>
-<div class="modal-overlay" id="modalAdmin"><div class="modal-content" role="dialog" aria-label="管理后台"><button class="modal-close" onclick="closeModal('modalAdmin')" aria-label="关闭">×</button>
+
+<!-- Admin Modal -->
+<div class="modal-overlay" id="modalAdmin">
+<div class="modal-content" role="dialog" aria-label="管理后台">
+  <button class="modal-close" onclick="closeModal('modalAdmin')" aria-label="关闭">×</button>
   <h2 style="font-size:18px;font-weight:700;margin-bottom:16px">⚙️ 管理后台</h2>
   <div class="admin-tabs" id="adminTabs">
     <button class="admin-tab active" onclick="switchAdminTab('adminUsers',this)">用户管理</button>
     <button class="admin-tab" onclick="switchAdminTab('adminProducts',this)">平台管理</button>
     <button class="admin-tab" onclick="switchAdminTab('adminSettings',this)">佣金设置</button>
+    <button class="admin-tab" onclick="switchAdminTab('adminEarnings',this)">收益审核</button>
+    <button class="admin-tab" onclick="switchAdminTab('adminLeaders',this)">团长管理</button>
     <button class="admin-tab" onclick="switchAdminTab('adminApi',this)">API配置</button>
-    <button class="admin-tab" onclick="switchAdminTab('adminSync',this)">数据同步</button>
+    <button class="admin-tab" onclick="switchAdminTab('adminSync',this)">云同步</button>
   </div>
   <div id="adminUsers" class="admin-section"></div>
   <div id="adminProducts" class="admin-section" style="display:none"></div>
   <div id="adminSettings" class="admin-section" style="display:none"></div>
+  <div id="adminEarnings" class="admin-section" style="display:none"></div>
+  <div id="adminLeaders" class="admin-section" style="display:none"></div>
   <div id="adminApi" class="admin-section" style="display:none"></div>
   <div id="adminSync" class="admin-section" style="display:none">
     <div class="card">
-      <div class="card-title">📦 数据同步</div>
-      <p style="font-size:12px;color:var(--text3);margin-bottom:14px">手机和电脑数据不同步？用这个功能导出电脑数据，导入到手机</p>
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <button style="flex:1;min-width:140px;padding:14px;border-radius:12px;background:var(--primary-g);color:#fff;font-weight:600;font-size:14px;cursor:pointer" onclick="exportAllData()">📤 导出数据</button>
-        <button style="flex:1;min-width:140px;padding:14px;border-radius:12px;background:rgba(105,231,255,.15);border:1px solid rgba(105,231,255,.3);color:var(--accent);font-weight:600;font-size:14px;cursor:pointer" onclick="importData()">📥 导入数据</button>
+      <div class="card-title">☁️ 云同步设置</div>
+      <p style="font-size:12px;color:var(--text3);margin-bottom:12px">使用免费 JSONBin.io 服务实现电脑↔手机真实同步。设置后所有数据自动上云，换设备打开网页数据就在。</p>
+      <div id="syncStatusBox"></div>
+      <div class="form-group"><label>API Key（从 jsonbin.io 获取）</label><input id="syncApiKey" type="text" placeholder="粘贴你的 JSONBin Master Key"></div>
+      <div class="form-group"><label>Bin ID（数据仓库ID）</label><input id="syncBinId" type="text" placeholder="粘贴你的 Bin ID"></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+        <button style="flex:1;min-width:120px;padding:12px;border-radius:10px;background:var(--primary-g);color:#fff;font-weight:600;font-size:13px;cursor:pointer" onclick="saveSyncConfig()">💾 保存配置</button>
+        <button style="flex:1;min-width:120px;padding:12px;border-radius:10px;background:rgba(105,231,255,.15);border:1px solid rgba(105,231,255,.3);color:var(--accent);font-weight:600;font-size:13px;cursor:pointer" onclick="syncFromCloud()">⬇️ 从云端拉取</button>
       </div>
       <div style="margin-top:14px;padding:12px;background:var(--glass);border-radius:var(--radius-s);font-size:12px;color:var(--text2);line-height:1.8">
-        <strong>使用步骤：</strong><br>
-        ① 在电脑上点"导出数据" → 下载JSON文件<br>
-        ② 在手机上打开网站 → 点"导入数据" → 选择刚才的JSON文件<br>
-        ③ 手机数据就和电脑一样了
+        <strong>首次设置步骤：</strong><br>
+        ① 打开 jsonbin.io → 注册免费账号<br>
+        ② 创建新 Bin → 随便填内容 → 保存<br>
+        ③ 复制 Master Key 和 Bin ID<br>
+        ④ 粘贴到上方输入框 → 点"保存配置"<br>
+        ⑤ 以后每次修改数据自动同步到云端<br><br>
+        <strong>换设备同步：</strong>在新设备打开网页 → 登录管理后台 → 点"从云端拉取" → 数据就过来了
+      </div>
+      <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+        <button style="flex:1;min-width:120px;padding:10px;border-radius:10px;background:var(--glass);border:1px solid var(--border);color:var(--text2);font-size:12px;cursor:pointer" onclick="exportAllData()">📤 导出数据</button>
+        <button style="flex:1;min-width:120px;padding:10px;border-radius:10px;background:var(--glass);border:1px solid var(--border);color:var(--text2);font-size:12px;cursor:pointer" onclick="importData()"> 导入数据</button>
       </div>
     </div>
   </div>
 </div></div>
+
+<!-- Edit Platform Modal -->
+<div class="modal-overlay" id="modalEditPlatform">
+<div class="modal-content" role="dialog" aria-label="编辑平台">
+  <button class="modal-close" onclick="closeModal('modalEditPlatform')" aria-label="关闭">×</button>
+  <h2 style="font-size:18px;font-weight:700;margin-bottom:16px" id="editModalTitle">️ 编辑平台</h2>
+  <div class="edit-form" id="editForm">
+    <input type="hidden" id="editPlatId">
+    <div class="edit-field"><label>📌 平台名称</label><input id="editName" type="text" placeholder="如：迅雷网盘"></div>
+    <div class="edit-field"><label>🎨 图标 Emoji</label>
+      <div class="emoji-picker" id="emojiPicker"></div>
+    </div>
+    <div class="edit-field"><label>💰 佣金（如：固定¥15 或 60%分成）</label><input id="editRate" type="text" placeholder="如：固定¥15"></div>
+    <div class="edit-field"><label>🔗 推广链接</label><input id="editLink" type="url" placeholder="粘贴你的专属推广链接"></div>
+    <div class="edit-field"><label> 任务要求/说明</label><textarea id="editReq" placeholder="描述任务要求，如：新用户注册、完成实名认证等"></textarea></div>
+    <div class="edit-field"><label>🖼️ 任务图片（最多5张，点击上传或粘贴URL）</label>
+      <input id="editImgUrl" type="url" placeholder="粘贴图片URL后点添加" style="margin-bottom:6px">
+      <button onclick="addImgFromUrl()" style="padding:8px 16px;border-radius:8px;background:var(--glass);border:1px solid var(--border);font-size:12px;color:var(--text2);cursor:pointer;margin-bottom:6px">+ 从URL添加</button>
+      <div class="img-upload-area" onclick="document.getElementById('editImgFile').click()">
+        <input id="editImgFile" type="file" accept="image/*" multiple onchange="handleImgUpload(event)">
+        <div class="upload-hint">📁 点击上传本地图片（每张≤500KB）</div>
+      </div>
+      <div class="img-preview-row" id="imgPreviewRow"></div>
+    </div>
+    <div class="edit-actions">
+      <button class="btn-cancel" onclick="closeModal('modalEditPlatform')">取消</button>
+      <button class="btn-save" onclick="saveEditPlatform()">💾 保存</button>
+    </div>
+  </div>
+</div></div>
+
+<!-- Add Platform Modal -->
+<div class="modal-overlay" id="modalAddPlatform">
+<div class="modal-content" role="dialog" aria-label="新增平台">
+  <button class="modal-close" onclick="closeModal('modalAddPlatform')" aria-label="关闭">×</button>
+  <h2 style="font-size:18px;font-weight:700;margin-bottom:16px">➕ 新增推广平台</h2>
+  <div class="edit-form">
+    <div class="edit-field"><label>📌 平台名称</label><input id="addName" type="text" placeholder="如：XX网盘"></div>
+    <div class="edit-field"><label>📂 分类</label>
+      <select id="addCat">
+        <option value="网盘拉新">网盘拉新</option>
+        <option value="APP拉新">APP拉新</option>
+        <option value="浏览器推广">浏览器推广</option>
+        <option value="AI推广">AI推广</option>
+        <option value="海外项目">海外项目</option>
+        <option value="电商CPS">电商CPS</option>
+        <option value="生活服务">生活服务</option>
+        <option value="游戏推广">游戏推广</option>
+        <option value="社交推广">社交推广</option>
+        <option value="金融保险">金融保险</option>
+        <option value="知识付费">知识付费</option>
+      </select>
+    </div>
+    <div class="edit-field"><label>💰 佣金</label><input id="addRate" type="text" placeholder="如：固定¥15"></div>
+    <div class="edit-field"><label>🏢 来源平台</label><input id="addSource" type="text" placeholder="如：任推邦"></div>
+    <div class="edit-field"><label>🔗 推广链接</label><input id="addLink" type="url" placeholder="推广链接"></div>
+    <div class="edit-field"><label> 任务要求</label><textarea id="addReq" placeholder="任务说明（可选）"></textarea></div>
+    <div class="edit-actions">
+      <button class="btn-cancel" onclick="closeModal('modalAddPlatform')">取消</button>
+      <button class="btn-save" onclick="saveAddPlatform()">✅ 添加</button>
+    </div>
+  </div>
+</div></div>
+
+<!-- Report Earnings Modal -->
+<div class="modal-overlay" id="modalReportEarning">
+<div class="modal-content" role="dialog" aria-label="上报收益">
+  <button class="modal-close" onclick="closeModal('modalReportEarning')" aria-label="关闭">×</button>
+  <h2 style="font-size:18px;font-weight:700;margin-bottom:4px">📊 上报推广收益</h2>
+  <p style="font-size:12px;color:var(--text3);margin-bottom:16px">完成推广任务后，在此上报你的实际收益，管理员审核通过后计入你的总收益</p>
+  <div class="edit-form">
+    <div class="edit-field"><label>📌 选择推广平台</label>
+      <select id="reportPlatform"></select>
+    </div>
+    <div class="edit-field"><label>💰 实际收益金额（元）</label><input id="reportAmount" type="number" step="0.01" min="0" placeholder="在任推邦赚了多少就填多少"></div>
+    <div class="edit-field"><label>📋 完成单数</label><input id="reportOrders" type="number" min="1" placeholder="完成了多少单"></div>
+    <div class="edit-field"><label>📝 备注说明（可选）</label><textarea id="reportNote" placeholder="如：迅雷网盘拉新3单、快手极速版2单等"></textarea></div>
+    <div class="edit-actions">
+      <button class="btn-cancel" onclick="closeModal('modalReportEarning')">取消</button>
+      <button class="btn-save" onclick="submitEarningReport()">📤 提交上报</button>
+    </div>
+  </div>
+</div></div>
+
+<!-- Team Leader Apply Modal -->
+<div class="modal-overlay" id="modalLeaderApply">
+<div class="modal-content" role="dialog" aria-label="申请成为团长">
+  <button class="modal-close" onclick="closeModal('modalLeaderApply')">×</button>
+  <h2 style="font-size:18px;font-weight:700;margin-bottom:4px">👑 申请成为团长</h2>
+  <p style="font-size:12px;color:var(--text3);margin-bottom:16px">成为团长后，你可以招募下属推广者，获得团队管理奖金</p>
+  <div class="edit-form">
+    <div class="edit-field"><label>📌 真实姓名</label><input id="applyName" type="text" placeholder="请填写真实姓名"></div>
+    <div class="edit-field"><label>💬 微信号</label><input id="applyWechat" type="text" placeholder="方便管理员联系你"></div>
+    <div class="edit-field"><label>📝 申请理由</label><textarea id="applyReason" placeholder="为什么想成为团长？有什么推广经验？"></textarea></div>
+    <div style="padding:12px;background:var(--glass);border-radius:var(--radius-s);margin-bottom:14px">
+      <p style="font-size:12px;color:var(--text2);line-height:1.8">
+        <strong>团长权益：</strong><br>
+        ✅ 招募下属推广者，组建自己的团队<br>
+        ✅ 获得团队成员推广佣金的管理奖金<br>
+        ✅ 专属团长标识和独立数据面板<br>
+        ✅ 优先获取高佣金任务资源
+      </p>
+    </div>
+    <div class="edit-actions">
+      <button class="btn-cancel" onclick="closeModal('modalLeaderApply')">取消</button>
+      <button class="btn-save" onclick="submitLeaderApply()">📤 提交申请</button>
+    </div>
+  </div>
+</div></div>
+
+<!-- Team Leader Dashboard -->
+<div class="view" id="viewLeader"><div id="leaderContent"></div></div>
+
+<!-- Earnings View -->
+<div class="view" id="viewEarnings"><div id="earningsContent"></div></div>
+
+<!-- Team View -->
+<div class="view" id="viewTeam"><div id="teamContent"></div></div>
+
+<!-- Profile View -->
+<div class="view" id="viewProfile"><div id="profileContent"></div></div>
+
+<!-- Bottom Nav -->
+<nav class="bottom-nav" role="navigation" aria-label="底部导航">
+  <button class="nav-item active" onclick="switchView('viewHome',this)" aria-label="首页"><span class="nav-icon">🏠</span><span>首页</span></button>
+  <button class="nav-item" onclick="switchView('viewEarnings',this)" aria-label="收益"><span class="nav-icon">💰</span><span>收益</span></button>
+  <button class="nav-item" id="navLeader" style="display:none" onclick="switchView('viewLeader',this)" aria-label="团长"><span class="nav-icon">👑</span><span>团长</span></button>
+  <button class="nav-item" onclick="switchView('viewTeam',this)" aria-label="团队"><span class="nav-icon">👥</span><span>团队</span></button>
+  <button class="nav-item" onclick="switchView('viewProfile',this)" aria-label="我的"><span class="nav-icon">👤</span><span>我的</span></button>
+</nav>
+</div>
+
 <div class="toast" id="toast"></div>
+
 <script>
 // ===== 50个推广平台数据 =====
 var PLATFORMS=[
-// ── 网盘拉新(5) ──
-{id:'p01',name:'迅雷网盘',emoji:'☁️',price:15,commission:15,rate:'固定¥15',platform:'任推邦',cat:'网盘拉新',link:'https://dt.bd.cn',sales:52340,tags:['热门','高佣']},
-{id:'p02',name:'夸克网盘',emoji:'🌐',price:13,commission:13,rate:'固定¥13',platform:'任推邦',cat:'网盘拉新',link:'https://dt.bd.cn',sales:48200,tags:['热门']},
-{id:'p03',name:'UC网盘',emoji:'💾',price:14,commission:14,rate:'固定¥14',platform:'任推邦',cat:'网盘拉新',link:'https://dt.bd.cn',sales:67100,tags:['高佣']},
-{id:'p04',name:'百度网盘',emoji:'📦',price:12,commission:12,rate:'固定¥12',platform:'任推邦',cat:'网盘拉新',link:'https://dt.bd.cn',sales:31500,tags:['稳定']},
-{id:'p05',name:'移动云盘',emoji:'📱',price:5.5,commission:5.5,rate:'固定¥5.5',platform:'任推邦',cat:'网盘拉新',link:'https://dt.bd.cn',sales:14680,tags:[]},
-// ── APP拉新(6) ──
-{id:'p06',name:'小红书CPA',emoji:'📕',price:25,commission:25,rate:'固定¥25',platform:'任推邦',cat:'APP拉新',link:'https://dt.bd.cn',sales:38900,tags:['高价','热门']},
-{id:'p07',name:'快手极速版',emoji:'🎬',price:22,commission:22,rate:'固定¥22',platform:'任推邦',cat:'APP拉新',link:'https://dt.bd.cn',sales:45700,tags:['热门']},
-{id:'p08',name:'抖音极速版',emoji:'🎵',price:18,commission:18,rate:'固定¥18',platform:'任推邦',cat:'APP拉新',link:'https://dt.bd.cn',sales:62300,tags:['热门','量大']},
-{id:'p09',name:'拼多多拉新',emoji:'🛍️',price:8,commission:8,rate:'固定¥8',platform:'任推邦',cat:'APP拉新',link:'https://dt.bd.cn',sales:85000,tags:['量大']},
-{id:'p10',name:'京东拉新',emoji:'🐶',price:10,commission:10,rate:'固定¥10',platform:'任推邦',cat:'APP拉新',link:'https://dt.bd.cn',sales:38200,tags:[]},
-{id:'p11',name:'美团拉新',emoji:'🍔',price:15,commission:15,rate:'固定¥15',platform:'任推邦',cat:'APP拉新',link:'https://dt.bd.cn',sales:29400,tags:['稳定']},
-// ── 浏览器推广(4) ──
-{id:'p12',name:'迅雷搜索',emoji:'⚡',price:16,commission:16,rate:'固定¥16',platform:'任推邦',cat:'浏览器推广',link:'https://dt.bd.cn',sales:23600,tags:['新品']},
-{id:'p13',name:'迅雷浏览器',emoji:'🔍',price:10,commission:10,rate:'固定¥10',platform:'任推邦',cat:'浏览器推广',link:'https://dt.bd.cn',sales:17400,tags:[]},
-{id:'p14',name:'悟空搜索',emoji:'🐵',price:9,commission:9,rate:'固定¥9',platform:'任推邦',cat:'浏览器推广',link:'https://dt.bd.cn',sales:12300,tags:['新品']},
-{id:'p15',name:'UC浏览器',emoji:'🌍',price:7,commission:7,rate:'固定¥7',platform:'任推邦',cat:'浏览器推广',link:'https://dt.bd.cn',sales:41200,tags:[]},
-// ── AI推广(5) ──
-{id:'p16',name:'通义千问',emoji:'🤖',price:10.5,commission:10.5,rate:'固定¥10.5',platform:'任推邦',cat:'AI推广',link:'https://dt.bd.cn',sales:10080,tags:['AI']},
-{id:'p17',name:'秘塔AI搜索',emoji:'🧠',price:4,commission:4,rate:'固定¥4',platform:'任推邦',cat:'AI推广',link:'https://dt.bd.cn',sales:9060,tags:['AI']},
-{id:'p18',name:'即梦AI',emoji:'🎨',price:6,commission:6,rate:'固定¥6',platform:'任推邦',cat:'AI推广',link:'https://dt.bd.cn',sales:6200,tags:['AI','新品']},
-{id:'p19',name:'Kimi智能助手',emoji:'🌙',price:5,commission:5,rate:'固定¥5',platform:'任推邦',cat:'AI推广',link:'https://dt.bd.cn',sales:15800,tags:['AI','热门']},
-{id:'p20',name:'豆包AI',emoji:'🫘',price:8,commission:8,rate:'固定¥8',platform:'任推邦',cat:'AI推广',link:'https://dt.bd.cn',sales:22100,tags:['AI','热门']},
-// ── 海外项目(5) ──
-{id:'p21',name:'Capcut海外剪映',emoji:'🎥',price:25,commission:25,rate:'固定¥25',platform:'任推邦',cat:'海外项目',link:'https://dt.bd.cn',sales:8290,tags:['海外','高价']},
-{id:'p22',name:'百度网盘国际版',emoji:'🌏',price:12,commission:12,rate:'固定¥12',platform:'任推邦',cat:'海外项目',link:'https://dt.bd.cn',sales:9100,tags:['海外']},
-{id:'p23',name:'Moto Novel小说海外',emoji:'📚',price:0,commission:0,rate:'60%分成',platform:'任推邦',cat:'海外项目',link:'https://dt.bd.cn',sales:3510,tags:['海外','分成']},
-{id:'p24',name:'Goodnovel小说海外',emoji:'📖',price:0,commission:0,rate:'60%分成',platform:'任推邦',cat:'海外项目',link:'https://dt.bd.cn',sales:3830,tags:['海外','分成']},
-{id:'p25',name:'TikTok推广',emoji:'🎶',price:20,commission:20,rate:'固定¥20',platform:'任推邦',cat:'海外项目',link:'https://dt.bd.cn',sales:18500,tags:['海外','热门']},
-// ── 电商CPS(5) ──
-{id:'p26',name:'淘宝联盟',emoji:'🛒',price:0,commission:0,rate:'佣金5-50%',platform:'淘宝联盟',cat:'电商CPS',link:'https://pub.alimama.com',sales:999000,tags:['CPS','海量']},
-{id:'p27',name:'京东联盟',emoji:'🏪',price:0,commission:0,rate:'佣金1-30%',platform:'京东联盟',cat:'电商CPS',link:'https://union.jd.com',sales:580000,tags:['CPS','正品']},
-{id:'p28',name:'多多进宝',emoji:'🧡',price:0,commission:0,rate:'佣金10-70%',platform:'多多进宝',cat:'电商CPS',link:'https://jinbao.pinduoduo.com',sales:720000,tags:['CPS','高佣']},
-{id:'p29',name:'淘宝1分购',emoji:'💝',price:10.8,commission:10.8,rate:'固定¥10.8',platform:'任推邦',cat:'电商CPS',link:'https://dt.bd.cn',sales:38200,tags:['电商']},
-{id:'p30',name:'唯品会联盟',emoji:'💜',price:0,commission:0,rate:'佣金5-15%',platform:'唯品会',cat:'电商CPS',link:'https://union.vip.com',sales:125000,tags:['CPS','品牌']},
-// ── 生活服务(5) ──
-{id:'p31',name:'懂车帝',emoji:'🚗',price:12,commission:12,rate:'固定¥12',platform:'任推邦',cat:'生活服务',link:'https://dt.bd.cn',sales:56150,tags:['热门']},
-{id:'p32',name:'美团收钱助手',emoji:'💳',price:300,commission:300,rate:'¥200-500/户',platform:'美团',cat:'生活服务',link:'https://www.bd.cn',sales:18500,tags:['高佣','蓝海']},
-{id:'p33',name:'饿了么推广',emoji:'🍜',price:8,commission:8,rate:'固定¥8',platform:'任推邦',cat:'生活服务',link:'https://dt.bd.cn',sales:24300,tags:[]},
-{id:'p34',name:'滴滴出行',emoji:'🚕',price:15,commission:15,rate:'固定¥15',platform:'任推邦',cat:'生活服务',link:'https://dt.bd.cn',sales:35600,tags:['稳定']},
-{id:'p35',name:'58同城',emoji:'🏘️',price:10,commission:10,rate:'固定¥10',platform:'任推邦',cat:'生活服务',link:'https://dt.bd.cn',sales:42100,tags:[]},
-// ── 游戏推广(4) ──
-{id:'p36',name:'3387游戏平台',emoji:'🎮',price:0,commission:0,rate:'40%分成',platform:'任推邦',cat:'游戏推广',link:'https://dt.bd.cn',sales:7620,tags:['高分成']},
-{id:'p37',name:'原神推广',emoji:'⚔️',price:30,commission:30,rate:'固定¥30',platform:'任推邦',cat:'游戏推广',link:'https://dt.bd.cn',sales:15800,tags:['高价','热门']},
-{id:'p38',name:'王者荣耀推广',emoji:'👑',price:20,commission:20,rate:'固定¥20',platform:'任推邦',cat:'游戏推广',link:'https://dt.bd.cn',sales:28900,tags:['热门']},
-{id:'p39',name:'小游戏推广联盟',emoji:'🕹️',price:0,commission:0,rate:'30%分成',platform:'任推邦',cat:'游戏推广',link:'https://dt.bd.cn',sales:56300,tags:['分成','量大']},
-// ── 社交推广(4) ──
-{id:'p40',name:'TT语音',emoji:'🎙️',price:6,commission:6,rate:'固定¥6',platform:'任推邦',cat:'社交推广',link:'https://dt.bd.cn',sales:8190,tags:[]},
-{id:'p41',name:'Soul',emoji:'👻',price:8,commission:8,rate:'固定¥8',platform:'任推邦',cat:'社交推广',link:'https://dt.bd.cn',sales:19200,tags:['年轻人']},
-{id:'p42',name:'探探',emoji:'💕',price:12,commission:12,rate:'固定¥12',platform:'任推邦',cat:'社交推广',link:'https://dt.bd.cn',sales:14500,tags:[]},
-{id:'p43',name:'陌陌',emoji:'💬',price:10,commission:10,rate:'固定¥10',platform:'任推邦',cat:'社交推广',link:'https://dt.bd.cn',sales:22800,tags:[]},
-// ── 金融保险(4) ──
-{id:'p44',name:'招商银行信用卡',emoji:'💳',price:80,commission:80,rate:'固定¥80',platform:'任推邦',cat:'金融保险',link:'https://dt.bd.cn',sales:8900,tags:['高佣','蓝海']},
-{id:'p45',name:'花呗推广',emoji:'🌸',price:25,commission:25,rate:'固定¥25',platform:'任推邦',cat:'金融保险',link:'https://dt.bd.cn',sales:35600,tags:['热门']},
-{id:'p46',name:'京东白条',emoji:'🏦',price:30,commission:30,rate:'固定¥30',platform:'任推邦',cat:'金融保险',link:'https://dt.bd.cn',sales:21400,tags:[]},
-{id:'p47',name:'众安保险',emoji:'🛡️',price:15,commission:15,rate:'固定¥15',platform:'任推邦',cat:'金融保险',link:'https://dt.bd.cn',sales:12700,tags:[]},
-// ── 知识付费/教育(3) ──
-{id:'p48',name:'小鹅通分销',emoji:'🎓',price:0,commission:0,rate:'佣金20%',platform:'小鹅通',cat:'知识付费',link:'https://www.xiaoe-tech.com',sales:45000,tags:['知识','分成']},
-{id:'p49',name:'知乎知学堂',emoji:'📝',price:50,commission:50,rate:'固定¥50',platform:'知乎',cat:'知识付费',link:'https://www.zhihu.com',sales:8200,tags:['高价','蓝海']},
-{id:'p50',name:'得到APP',emoji:'📚',price:30,commission:30,rate:'固定¥30',platform:'得到',cat:'知识付费',link:'https://www.igetget.com',sales:15600,tags:['品质']}
+{id:'p01',name:'迅雷网盘',emoji:'️',price:15,commission:15,rate:'固定¥15',platform:'任推邦',cat:'网盘拉新',link:'https://dt.bd.cn',sales:52340,tags:['热门','高佣'],req:'',imgs:[]},
+{id:'p02',name:'夸克网盘',emoji:'🌐',price:13,commission:13,rate:'固定¥13',platform:'任推邦',cat:'网盘拉新',link:'https://dt.bd.cn',sales:48200,tags:['热门'],req:'',imgs:[]},
+{id:'p03',name:'UC网盘',emoji:'💾',price:14,commission:14,rate:'固定¥14',platform:'任推邦',cat:'网盘拉新',link:'https://dt.bd.cn',sales:67100,tags:['高佣'],req:'',imgs:[]},
+{id:'p04',name:'百度网盘',emoji:'📦',price:12,commission:12,rate:'固定¥12',platform:'任推邦',cat:'网盘拉新',link:'https://dt.bd.cn',sales:31500,tags:['稳定'],req:'',imgs:[]},
+{id:'p05',name:'移动云盘',emoji:'📱',price:5.5,commission:5.5,rate:'固定¥5.5',platform:'任推邦',cat:'网盘拉新',link:'https://dt.bd.cn',sales:14680,tags:[],req:'',imgs:[]},
+{id:'p06',name:'小红书CPA',emoji:'📕',price:25,commission:25,rate:'固定¥25',platform:'任推邦',cat:'APP拉新',link:'https://dt.bd.cn',sales:38900,tags:['高价','热门'],req:'',imgs:[]},
+{id:'p07',name:'快手极速版',emoji:'🎬',price:22,commission:22,rate:'固定¥22',platform:'任推邦',cat:'APP拉新',link:'https://dt.bd.cn',sales:45700,tags:['热门'],req:'',imgs:[]},
+{id:'p08',name:'抖音极速版',emoji:'🎵',price:18,commission:18,rate:'固定¥18',platform:'任推邦',cat:'APP拉新',link:'https://dt.bd.cn',sales:62300,tags:['热门','量大'],req:'',imgs:[]},
+{id:'p09',name:'拼多多拉新',emoji:'🛍️',price:8,commission:8,rate:'固定¥8',platform:'任推邦',cat:'APP拉新',link:'https://dt.bd.cn',sales:85000,tags:['量大'],req:'',imgs:[]},
+{id:'p10',name:'京东拉新',emoji:'🐶',price:10,commission:10,rate:'固定¥10',platform:'任推邦',cat:'APP拉新',link:'https://dt.bd.cn',sales:38200,tags:[],req:'',imgs:[]},
+{id:'p11',name:'美团拉新',emoji:'🍔',price:15,commission:15,rate:'固定¥15',platform:'任推邦',cat:'APP拉新',link:'https://dt.bd.cn',sales:29400,tags:['稳定'],req:'',imgs:[]},
+{id:'p12',name:'迅雷搜索',emoji:'⚡',price:16,commission:16,rate:'固定¥16',platform:'任推邦',cat:'浏览器推广',link:'https://dt.bd.cn',sales:23600,tags:['新品'],req:'',imgs:[]},
+{id:'p13',name:'迅雷浏览器',emoji:'🔍',price:10,commission:10,rate:'固定¥10',platform:'任推邦',cat:'浏览器推广',link:'https://dt.bd.cn',sales:17400,tags:[],req:'',imgs:[]},
+{id:'p14',name:'悟空搜索',emoji:'🐵',price:9,commission:9,rate:'固定¥9',platform:'任推邦',cat:'浏览器推广',link:'https://dt.bd.cn',sales:12300,tags:['新品'],req:'',imgs:[]},
+{id:'p15',name:'UC浏览器',emoji:'🌍',price:7,commission:7,rate:'固定¥7',platform:'任推邦',cat:'浏览器推广',link:'https://dt.bd.cn',sales:41200,tags:[],req:'',imgs:[]},
+{id:'p16',name:'通义千问',emoji:'',price:10.5,commission:10.5,rate:'固定¥10.5',platform:'任推邦',cat:'AI推广',link:'https://dt.bd.cn',sales:10080,tags:['AI'],req:'',imgs:[]},
+{id:'p17',name:'秘塔AI搜索',emoji:'🧠',price:4,commission:4,rate:'固定¥4',platform:'任推邦',cat:'AI推广',link:'https://dt.bd.cn',sales:9060,tags:['AI'],req:'',imgs:[]},
+{id:'p18',name:'即梦AI',emoji:'🎨',price:6,commission:6,rate:'固定¥6',platform:'任推邦',cat:'AI推广',link:'https://dt.bd.cn',sales:6200,tags:['AI','新品'],req:'',imgs:[]},
+{id:'p19',name:'Kimi智能助手',emoji:'🌙',price:5,commission:5,rate:'固定¥5',platform:'任推邦',cat:'AI推广',link:'https://dt.bd.cn',sales:15800,tags:['AI','热门'],req:'',imgs:[]},
+{id:'p20',name:'豆包AI',emoji:'🫘',price:8,commission:8,rate:'固定¥8',platform:'任推邦',cat:'AI推广',link:'https://dt.bd.cn',sales:22100,tags:['AI','热门'],req:'',imgs:[]},
+{id:'p21',name:'Capcut海外剪映',emoji:'🎥',price:25,commission:25,rate:'固定¥25',platform:'任推邦',cat:'海外项目',link:'https://dt.bd.cn',sales:8290,tags:['海外','高价'],req:'',imgs:[]},
+{id:'p22',name:'百度网盘国际版',emoji:'🌏',price:12,commission:12,rate:'固定¥12',platform:'任推邦',cat:'海外项目',link:'https://dt.bd.cn',sales:9100,tags:['海外'],req:'',imgs:[]},
+{id:'p23',name:'Moto Novel小说海外',emoji:'',price:0,commission:0,rate:'60%分成',platform:'任推邦',cat:'海外项目',link:'https://dt.bd.cn',sales:3510,tags:['海外','分成'],req:'',imgs:[]},
+{id:'p24',name:'Goodnovel小说海外',emoji:'📖',price:0,commission:0,rate:'60%分成',platform:'任推邦',cat:'海外项目',link:'https://dt.bd.cn',sales:3830,tags:['海外','分成'],req:'',imgs:[]},
+{id:'p25',name:'TikTok推广',emoji:'🎶',price:20,commission:20,rate:'固定¥20',platform:'任推邦',cat:'海外项目',link:'https://dt.bd.cn',sales:18500,tags:['海外','热门'],req:'',imgs:[]},
+{id:'p26',name:'淘宝联盟',emoji:'🛒',price:0,commission:0,rate:'佣金5-50%',platform:'淘宝联盟',cat:'电商CPS',link:'https://pub.alimama.com',sales:999000,tags:['CPS','海量'],req:'',imgs:[]},
+{id:'p27',name:'京东联盟',emoji:'🏪',price:0,commission:0,rate:'佣金1-30%',platform:'京东联盟',cat:'电商CPS',link:'https://union.jd.com',sales:580000,tags:['CPS','正品'],req:'',imgs:[]},
+{id:'p28',name:'多多进宝',emoji:'🧡',price:0,commission:0,rate:'佣金10-70%',platform:'多多进宝',cat:'电商CPS',link:'https://jinbao.pinduoduo.com',sales:720000,tags:['CPS','高佣'],req:'',imgs:[]},
+{id:'p29',name:'淘宝1分购',emoji:'💝',price:10.8,commission:10.8,rate:'固定¥10.8',platform:'任推邦',cat:'电商CPS',link:'https://dt.bd.cn',sales:38200,tags:['电商'],req:'',imgs:[]},
+{id:'p30',name:'唯品会联盟',emoji:'💜',price:0,commission:0,rate:'佣金5-15%',platform:'唯品会',cat:'电商CPS',link:'https://union.vip.com',sales:125000,tags:['CPS','品牌'],req:'',imgs:[]},
+{id:'p31',name:'懂车帝',emoji:'🚗',price:12,commission:12,rate:'固定¥12',platform:'任推邦',cat:'生活服务',link:'https://dt.bd.cn',sales:56150,tags:['热门'],req:'',imgs:[]},
+{id:'p32',name:'美团收钱助手',emoji:'💳',price:300,commission:300,rate:'¥200-500/户',platform:'美团',cat:'生活服务',link:'https://www.bd.cn',sales:18500,tags:['高佣','蓝海'],req:'',imgs:[]},
+{id:'p33',name:'饿了么推广',emoji:'',price:8,commission:8,rate:'固定¥8',platform:'任推邦',cat:'生活服务',link:'https://dt.bd.cn',sales:24300,tags:[],req:'',imgs:[]},
+{id:'p34',name:'滴滴出行',emoji:'🚕',price:15,commission:15,rate:'固定¥15',platform:'任推邦',cat:'生活服务',link:'https://dt.bd.cn',sales:35600,tags:['稳定'],req:'',imgs:[]},
+{id:'p35',name:'58同城',emoji:'🏘️',price:10,commission:10,rate:'固定¥10',platform:'任推邦',cat:'生活服务',link:'https://dt.bd.cn',sales:42100,tags:[],req:'',imgs:[]},
+{id:'p36',name:'3387游戏平台',emoji:'🎮',price:0,commission:0,rate:'40%分成',platform:'任推邦',cat:'游戏推广',link:'https://dt.bd.cn',sales:7620,tags:['高分成'],req:'',imgs:[]},
+{id:'p37',name:'原神推广',emoji:'⚔️',price:30,commission:30,rate:'固定¥30',platform:'任推邦',cat:'游戏推广',link:'https://dt.bd.cn',sales:15800,tags:['高价','热门'],req:'',imgs:[]},
+{id:'p38',name:'王者荣耀推广',emoji:'👑',price:20,commission:20,rate:'固定¥20',platform:'任推邦',cat:'游戏推广',link:'https://dt.bd.cn',sales:28900,tags:['热门'],req:'',imgs:[]},
+{id:'p39',name:'小游戏推广联盟',emoji:'️',price:0,commission:0,rate:'30%分成',platform:'任推邦',cat:'游戏推广',link:'https://dt.bd.cn',sales:56300,tags:['分成','量大'],req:'',imgs:[]},
+{id:'p40',name:'TT语音',emoji:'️',price:6,commission:6,rate:'固定¥6',platform:'任推邦',cat:'社交推广',link:'https://dt.bd.cn',sales:8190,tags:[],req:'',imgs:[]},
+{id:'p41',name:'Soul',emoji:'👻',price:8,commission:8,rate:'固定¥8',platform:'任推邦',cat:'社交推广',link:'https://dt.bd.cn',sales:19200,tags:['年轻人'],req:'',imgs:[]},
+{id:'p42',name:'探探',emoji:'💕',price:12,commission:12,rate:'固定¥12',platform:'任推邦',cat:'社交推广',link:'https://dt.bd.cn',sales:14500,tags:[],req:'',imgs:[]},
+{id:'p43',name:'陌陌',emoji:'💬',price:10,commission:10,rate:'固定¥10',platform:'任推邦',cat:'社交推广',link:'https://dt.bd.cn',sales:22800,tags:[],req:'',imgs:[]},
+{id:'p44',name:'招商银行信用卡',emoji:'💳',price:80,commission:80,rate:'固定¥80',platform:'任推邦',cat:'金融保险',link:'https://dt.bd.cn',sales:8900,tags:['高佣','蓝海'],req:'',imgs:[]},
+{id:'p45',name:'花呗推广',emoji:'🌸',price:25,commission:25,rate:'固定¥25',platform:'任推邦',cat:'金融保险',link:'https://dt.bd.cn',sales:35600,tags:['热门'],req:'',imgs:[]},
+{id:'p46',name:'京东白条',emoji:'🏦',price:30,commission:30,rate:'固定¥30',platform:'任推邦',cat:'金融保险',link:'https://dt.bd.cn',sales:21400,tags:[],req:'',imgs:[]},
+{id:'p47',name:'众安保险',emoji:'🛡️',price:15,commission:15,rate:'固定¥15',platform:'任推邦',cat:'金融保险',link:'https://dt.bd.cn',sales:12700,tags:[],req:'',imgs:[]},
+{id:'p48',name:'小鹅通分销',emoji:'🎓',price:0,commission:0,rate:'佣金20%',platform:'小鹅通',cat:'知识付费',link:'https://www.xiaoe-tech.com',sales:45000,tags:['知识','分成'],req:'',imgs:[]},
+{id:'p49',name:'知乎知学堂',emoji:'📝',price:50,commission:50,rate:'固定¥50',platform:'知乎',cat:'知识付费',link:'https://www.zhihu.com',sales:8200,tags:['高价','蓝海'],req:'',imgs:[]},
+{id:'p50',name:'得到APP',emoji:'',price:30,commission:30,rate:'固定¥30',platform:'得到',cat:'知识付费',link:'https://www.igetget.com',sales:15600,tags:['品质'],req:'',imgs:[]}
 ];
 
 var CATEGORIES=['全部','网盘拉新','APP拉新','浏览器推广','AI推广','海外项目','电商CPS','生活服务','游戏推广','社交推广','金融保险','知识付费'];
-var catsEmoji=['📋','☁️','📱','🔍','🤖','🌏','🛒','💳','🎮','💬','💰','🎓'];
-var catColors={'网盘拉新':'#69E7FF','APP拉新':'#7C5CFF','浏览器推广':'#FFD66B','AI推广':'#62FAD3','海外项目':'#FF9F43','电商CPS':'#FF6B6B','生活服务':'#A29BFE','游戏推广':'#FD79A8','社交推广':'#00CEC9','金融保险':'#FDCB6E','知识付费':'#E17055'};
+var catsEmoji=['','☁️','📱','','🤖','🌏','','💳','🎮','','💰','🎓'];
+var EMOJI_OPTS=['☁️','🌐','💾','📦','','📕','🎬','','🛍️','🐶','','⚡','🔍','','🌍','🤖','','🎨','🌙','','🎥','🌏','','📖','🎶','','🏪','🧡','','💜','🚗','','🍜','🚕','️','🎮','⚔️','👑','🕹️','🎙️','👻','💕','💬','🏦','🛡️','🎓','📝','','🔥','⭐','📌','🎯','💎','','🎪'];
+
+/* ===== CLOUD SYNC (JSONBin.io) ===== */
+var SYNC={
+  apiKey:'',binId:'',
+  loadConfig:function(){
+    var c=JSON.parse(localStorage.getItem('jyb_sync')||'null');
+    if(c){SYNC.apiKey=c.k||'';SYNC.binId=c.b||''}
+  },
+  saveConfig:function(k,b){
+    SYNC.apiKey=k;SYNC.binId=b;
+    localStorage.setItem('jyb_sync',JSON.stringify({k:k,b:b}));
+  },
+  isConfigured:function(){return SYNC.apiKey&&SYNC.binId},
+  getStatus:function(){
+    if(!SYNC.isConfigured())return{ok:false,msg:'未配置云同步'};
+    return{ok:true,msg:'云同步已启用'};
+  },
+  push:function(){
+    if(!SYNC.isConfigured())return Promise.resolve(false);
+    var data={
+      platforms:PLATFORMS,
+      links:JSON.parse(localStorage.getItem('jyb_links')||'{}'),
+      users:JSON.parse(localStorage.getItem('jyb_u')||'[]'),
+      orders:JSON.parse(localStorage.getItem('jyb_o')||'[]'),
+      comms:JSON.parse(localStorage.getItem('jyb_cm')||'[]'),
+      settings:JSON.parse(localStorage.getItem('jyb_s')||'{"l1":0.1,"l2":0.03}'),
+      reports:JSON.parse(localStorage.getItem('jyb_reports')||'[]'),
+      leaders:JSON.parse(localStorage.getItem('jyb_leaders')||'[]'),
+      ts:Date.now()
+    };
+    return fetch('https://api.jsonbin.io/v3/b/'+SYNC.binId,{
+      method:'PUT',
+      headers:{'Content-Type':'application/json','X-Master-Key':SYNC.apiKey},
+      body:JSON.stringify(data)
+    }).then(function(r){return r.ok}).catch(function(){return false});
+  },
+  pull:function(){
+    if(!SYNC.isConfigured())return Promise.resolve(false);
+    return fetch('https://api.jsonbin.io/v3/b/'+SYNC.binId+'/latest',{
+      headers:{'X-Master-Key':SYNC.apiKey}
+    }).then(function(r){
+      if(!r.ok)return false;
+      return r.json();
+    }).then(function(res){
+      if(!res||!res.record)return false;
+      var d=res.record;
+      if(d.platforms&&d.platforms.length>0)PLATFORMS=d.platforms;
+      if(d.links)localStorage.setItem('jyb_links',JSON.stringify(d.links));
+      if(d.users)localStorage.setItem('jyb_u',JSON.stringify(d.users));
+      if(d.orders)localStorage.setItem('jyb_o',JSON.stringify(d.orders));
+      if(d.comms)localStorage.setItem('jyb_cm',JSON.stringify(d.comms));
+      if(d.settings)localStorage.setItem('jyb_s',JSON.stringify(d.settings));
+      if(d.reports)localStorage.setItem('jyb_reports',JSON.stringify(d.reports));
+      if(d.leaders)localStorage.setItem('jyb_leaders',JSON.stringify(d.leaders));
+      localStorage.setItem('jyb_sync_ts',String(d.ts||Date.now()));
+      return true;
+    }).catch(function(){return false});
+  }
+};
 
 /* ===== DATA SERVICE ===== */
 var DS=(function(){
 var K={users:'jyb_u',cur:'jyb_c',orders:'jyb_o',comms:'jyb_cm',set:'jyb_s',admin:'jyb_a'};
 function g(k){try{return JSON.parse(localStorage.getItem(k))||null}catch(e){return null}}
 function s(k,v){localStorage.setItem(k,JSON.stringify(v))}
-var defSet={l1:.10,l2:.03};
+var defSet={platformReward:.03,leaderShare:.01,silverMin:5,silverEarn:100,silverShare:.01,goldMin:15,goldEarn:500,goldShare:.015};
 function init(){
   if(!g(K.users))s(K.users,[]);
   if(!g(K.orders))s(K.orders,[]);
@@ -413,12 +654,28 @@ return{init:init,users:users,cur:cur,setCur:setCur,clrCur:clrCur,reg:reg,login:l
 
 /* ===== UI ===== */
 var curCat='全部',curUser=null,searchQ='';
-function init(){DS.init();curUser=DS.cur();var p=new URLSearchParams(location.search);if(p.get('ref'))sessionStorage.setItem('jyb_ref',p.get('ref'));renderCats();renderProducts();updHeader();updHero()}
+var editImgs=[]; // temporary image array for edit modal
+
+function init(){
+  DS.init();SYNC.loadConfig();
+  // Try to load from cloud if configured
+  if(SYNC.isConfigured()){
+    SYNC.pull().then(function(ok){
+      if(ok)toast('☁️ 已从云端同步数据');
+    }).catch(function(){});
+  }
+  curUser=DS.cur();
+  var p=new URLSearchParams(location.search);
+  if(p.get('ref'))sessionStorage.setItem('jyb_ref',p.get('ref'));
+  renderCats();renderProducts();updHeader();updHero();updateLeaderNav();
+}
+
 function toast(m,e){var t=document.getElementById('toast');t.textContent=m;t.className='toast'+(e?' error':'')+' show';setTimeout(function(){t.className='toast'},2500)}
 function openModal(id){document.getElementById(id).classList.add('active');if(id==='modalShare'&&curUser){document.getElementById('shareLinkInput').value=location.origin+location.pathname+'?ref='+curUser.code}}
 function closeModal(id){document.getElementById(id).classList.remove('active')}
 document.querySelectorAll('.modal-overlay').forEach(function(m){m.addEventListener('click',function(e){if(e.target===m)closeModal(m.id)})});
-function switchView(v,b){document.querySelectorAll('.view').forEach(function(x){x.classList.remove('active')});document.getElementById(v).classList.add('active');document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active')});b.classList.add('active');curUser=DS.cur();if(v==='viewEarnings')renderEarn();if(v==='viewTeam')renderTeam();if(v==='viewProfile')renderProf();window.scrollTo(0,0)}
+
+function switchView(v,b){document.querySelectorAll('.view').forEach(function(x){x.classList.remove('active')});document.getElementById(v).classList.add('active');document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active')});b.classList.add('active');curUser=DS.cur();if(v==='viewEarnings')renderEarn();if(v==='viewTeam')renderTeam();if(v==='viewProfile')renderProf();if(v==='viewLeader')renderLeaderDashboard();updateLeaderNav();window.scrollTo(0,0)}
 function updHeader(){curUser=DS.cur()}
 function updHero(){curUser=DS.cur();var b=document.getElementById('heroCta');if(curUser){b.textContent='🎯 开始推广';b.onclick=function(){switchView('viewTeam',document.querySelectorAll('.nav-item')[2])}}else{b.textContent='🚀 立即加入';b.onclick=function(){openModal('modalLogin')}}}
 
@@ -441,8 +698,14 @@ function renderProducts(){
   ps.forEach(function(p){
     var tag=p.tags&&p.tags.length>0?'<span class="p-tag">'+p.tags[0]+'</span>':'';
     var cmText=p.commission>0?'¥'+p.commission:p.rate;
+    // Use first image if available
+    var imgHtml=p.emoji;
+    if(p.imgs&&p.imgs.length>0&&p.imgs[0]){
+      var src=p.imgs[0].url||p.imgs[0];
+      imgHtml='<img src="'+src+'" style="width:100%;height:100%;object-fit:cover" onerror="this.parentElement.innerHTML=\''+p.emoji+'\'">';
+    }
     h+='<div class="product-card" onclick="openProduct(\''+p.id+'\')" tabindex="0" role="button" aria-label="'+p.name+'">';
-    h+='<div class="p-img">'+tag+p.emoji+'</div>';
+    h+='<div class="p-img">'+tag+imgHtml+'</div>';
     h+='<div class="p-body">';
     h+='<div class="p-name">'+p.name+'</div>';
     h+='<div class="p-platform">'+p.platform+' · '+p.cat+'</div>';
@@ -459,14 +722,31 @@ function fmtN(n){if(n>=10000)return(n/10000).toFixed(1)+'万';if(n>=1000)return(
 function openProduct(id){
   var p=PLATFORMS.find(function(x){return x.id===id});if(!p)return;
   var cm=p.commission>0?'¥'+p.commission:p.rate;
-  var h='<div class="pd-img">'+p.emoji+'</div>';
+  var h='';
+  // Show first image or emoji
+  if(p.imgs&&p.imgs.length>0&&p.imgs[0]){
+    var src=p.imgs[0].url||p.imgs[0];
+    h+='<div class="pd-img"><img src="'+src+'" style="max-width:100%;max-height:100%;object-fit:contain" onerror="this.parentElement.innerHTML=\''+p.emoji+'\'"></div>';
+  }else{
+    h+='<div class="pd-img">'+p.emoji+'</div>';
+  }
   h+='<div class="pd-name">'+p.name+'</div>';
   h+='<div class="pd-meta"><span>'+p.platform+'</span><span>'+p.cat+'</span>';
   if(p.tags)p.tags.forEach(function(t){h+='<span>'+t+'</span>'});
   h+='</div>';
   h+='<div class="pd-price-row"><span class="pd-price">佣金 '+cm+'</span><span class="pd-comm-badge">'+p.rate+'</span></div>';
   h+='<p style="font-size:12px;color:var(--text3);margin-bottom:8px">'+fmtN(p.sales)+'人已参与推广</p>';
-  h+='<div class="pd-desc">通过分享推广链接，邀请好友注册或使用即可获得佣金。佣金实时到账，支持随时提现。平台提供专属推广链接，自动追踪转化。</div>';
+  if(p.req)h+='<div style="padding:12px;background:var(--glass);border-radius:var(--radius-s);margin-bottom:14px;font-size:13px;color:var(--text2);line-height:1.7"><strong style="color:var(--text)">📋 任务要求：</strong><br>'+p.req.replace(/\n/g,'<br>')+'</div>';
+  else h+='<p style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:14px">通过分享推广链接，邀请好友注册或使用即可获得佣金。佣金实时到账，支持随时提现。</p>';
+  // Show all images
+  if(p.imgs&&p.imgs.length>1){
+    h+='<div style="display:flex;gap:6px;overflow-x:auto;padding-bottom:8px;margin-bottom:14px">';
+    for(var i=1;i<p.imgs.length;i++){
+      var s=p.imgs[i].url||p.imgs[i];
+      h+='<img src="'+s+'" style="width:80px;height:80px;object-fit:cover;border-radius:8px;flex-shrink:0;border:1px solid var(--border)" onerror="this.style.display=\'none\'">';
+    }
+    h+='</div>';
+  }
   curUser=DS.cur();
   if(curUser)h+='<button class="pd-go" onclick="goPromote(\''+p.id+'\')">🔗 获取推广链接</button>';
   else h+='<button class="pd-go" onclick="openModal(\'modalLogin\')">🔐 登录后获取推广链接</button>';
@@ -494,15 +774,39 @@ function renderEarn(){
   curUser=DS.cur();
   if(!curUser){document.getElementById('earningsContent').innerHTML='<div class="empty-state"><div class="empty-icon">🔐</div><p>登录后查看收益</p><br><button class="cta" style="padding:10px 24px;border-radius:20px;background:var(--primary-g);color:#fff;font-weight:600" onclick="openModal(\'modalLogin\')">立即登录</button></div>';return}
   var e=DS.earn(curUser.id),st=DS.getSet();
+  // Get user's reported earnings
+  var myReports=getReports().filter(function(r){return r.uid===curUser.id});
+  var myApproved=myReports.filter(function(r){return r.status==='approved'});
+  var myPending=myReports.filter(function(r){return r.status==='pending'});
+  var myTotal=myApproved.reduce(function(s,r){return s+r.amount},0);
+  var myPendingTotal=myPending.reduce(function(s,r){return s+r.amount},0);
   var h='<div class="stats-row">';
-  h+='<div class="stat-box highlight"><div class="stat-val">¥'+e.t.toFixed(2)+'</div><div class="stat-label">总收益</div></div>';
+  h+='<div class="stat-box highlight"><div class="stat-val">¥'+(e.t+myTotal).toFixed(2)+'</div><div class="stat-label">总收益</div></div>';
   h+='<div class="stat-box"><div class="stat-val">¥'+e.l1.toFixed(2)+'</div><div class="stat-label">一级返佣'+(st.l1*100)+'%</div></div>';
-  h+='<div class="stat-box"><div class="stat-val">¥'+e.l2.toFixed(2)+'</div><div class="stat-label">二级返佣'+(st.l2*100)+'%</div></div></div>';
-  h+='<div class="card"><div class="card-title">💡 返佣规则</div>';
-  h+='<p style="font-size:13px;color:var(--text2);line-height:1.7">一级返佣：直接邀请的好友完成任务，你获得佣金的 <strong style="color:var(--accent2)">'+(st.l1*100)+'%</strong></p>';
-  h+='<p style="font-size:13px;color:var(--text2);line-height:1.7;margin-top:4px">二级返佣：好友再邀请的好友完成任务，你获得佣金的 <strong style="color:var(--gold)">'+(st.l2*100)+'%</strong></p></div>';
-  h+='<div class="comm-section"><h3>📋 收益明细</h3>';
-  if(e.r.length===0)h+='<div class="empty-state" style="padding:20px"><p>暂无收益记录<br>邀请好友参与任务开始赚钱</p></div>';
+  h+='<div class="stat-box"><div class="stat-val" style="font-size:16px;color:var(--gold);background:none;-webkit-text-fill-color:var(--gold)">¥'+myPendingTotal.toFixed(0)+'</div><div class="stat-label">待审核</div></div></div>';
+  // Report earnings button
+  h+='<button class="btn-primary" style="margin-bottom:16px;border-radius:14px;font-size:14px" onclick="openReportModal()">📊 上报推广收益</button>';
+  // My reported earnings
+  if(myReports.length>0){
+    h+='<div class="comm-section"><h3>📊 我的上报记录</h3>';
+    myReports.slice().reverse().slice(0,10).forEach(function(r){
+      var p=PLATFORMS.find(function(x){return x.id===r.pid});
+      var emoji=p?p.emoji:'📦';
+      var sc=r.status==='approved'?'var(--accent2)':r.status==='rejected'?'var(--warn)':'var(--gold)';
+      var st2=r.status==='approved'?'已通过':r.status==='rejected'?'已驳回':'待审核';
+      h+='<div class="comm-row"><div class="comm-info"><div class="comm-icon">'+emoji+'</div>';
+      h+='<div class="comm-detail">'+esc(r.pname)+' · '+r.orders+'单<small>'+fmtD(r.at)+'</small></div></div>';
+      h+='<div style="text-align:right"><div style="font-weight:700;color:'+sc+';font-size:14px">¥'+r.amount.toFixed(2)+'</div><div style="font-size:10px;color:'+sc+'">'+st2+'</div></div></div>';
+    });
+    h+='</div>';
+  }
+  var pr=(st.platformReward||.03)*100;
+  h+='<div class="card"><div class="card-title">💡 佣金规则</div>';
+  h+='<p style="font-size:13px;color:var(--accent2);line-height:1.7;margin-bottom:4px">✅ 你完成任务赚的钱100%归你，不从佣金中扣成</p>';
+  h+='<p style="font-size:12px;color:var(--text2);line-height:1.7">平台获得任务总收益的 <strong style="color:var(--accent)">'+pr.toFixed(1)+'%</strong> 作为推广奖励，其中部分分给团长作为管理奖励。</p>';
+  h+='<p style="font-size:12px;color:var(--text3);line-height:1.7;margin-top:8px">📌 上报收益：在任推邦等平台完成任务后，点"上报推广收益"填写实际收入，管理员审核通过后计入团队数据</p></div>';
+  h+='<div class="comm-section"><h3>📋 返佣明细</h3>';
+  if(e.r.length===0)h+='<div class="empty-state" style="padding:20px"><p>暂无返佣记录<br>邀请好友参与任务开始赚钱</p></div>';
   else e.r.slice().reverse().forEach(function(c){
     var o=(DS.init(),JSON.parse(localStorage.getItem('jyb_o')||'[]')).find(function(x){return x.id===c.oid});
     var pp=o?PLATFORMS.find(function(x){return x.id===o.pid}):null;
@@ -540,17 +844,55 @@ function renderTeam(){
 function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}
 
 function renderProf(){
-  curUser=DS.cur();var h='';
+  curUser=DS.cur();updateLeaderNav();var h='';
   if(!curUser){h+='<div style="text-align:center;padding:40px 20px"><div style="font-size:50px;margin-bottom:16px">👤</div><p style="color:var(--text2);margin-bottom:20px">登录解锁更多功能</p><button class="cta" style="padding:12px 32px;border-radius:24px;background:var(--primary-g);color:#fff;font-weight:600" onclick="openModal(\'modalLogin\')">登录 / 注册</button></div>'}
   else{
-    h+='<div class="profile-header"><div class="profile-avatar">'+curUser.nick.charAt(0).toUpperCase()+'</div><div class="profile-name">'+esc(curUser.nick)+'</div><div class="profile-role">邀请码 '+curUser.code+(curUser.role==='admin'?' · 管理员':'')+'</div></div>';
+    var roleLabel=curUser.role==='admin'?'管理员':isLeader(curUser)?'团长':'成员';
+    h+='<div class="profile-header"><div class="profile-avatar">'+curUser.nick.charAt(0).toUpperCase()+'</div><div class="profile-name">'+esc(curUser.nick)+' <span style="font-size:11px;padding:2px 8px;border-radius:8px;background:'+(isLeader(curUser)?'rgba(255,214,107,.15);color:var(--gold)':'rgba(105,231,255,.1);color:var(--accent)')+'">'+roleLabel+'</span></div><div class="profile-role">邀请码 '+curUser.code+'</div></div>';
     var e=DS.earn(curUser.id);
     h+='<div class="stats-row"><div class="stat-box highlight"><div class="stat-val">¥'+e.t.toFixed(2)+'</div><div class="stat-label">总收益</div></div><div class="stat-box"><div class="stat-val">'+DS.team(curUser.id).length+'</div><div class="stat-label">我的团队</div></div><div class="stat-box"><div class="stat-val">'+fmtD(curUser.at).split(' ')[0]+'</div><div class="stat-label">加入时间</div></div></div>';
+    // Leader apply / progress section
+    if(isLeader(curUser)){
+      h+='<div class="card" style="margin-bottom:12px;background:linear-gradient(135deg,rgba(255,214,107,.08),rgba(255,154,68,.05));border-color:rgba(255,214,107,.15)"><div class="card-title">👑 团长中心</div>';
+      h+='<p style="font-size:12px;color:var(--text2);margin-bottom:8px">你是团长，享受团队成员的平台额外奖励分成</p>';
+      h+='<button class="btn-primary" style="border-radius:10px;font-size:13px" onclick="switchView(\'viewLeader\',document.getElementById(\'navLeader\'))">📊 进入团长仪表盘</button></div>';
+    }else{
+      var apps=getLeaderApps();
+      var myApp=apps.find(function(a){return a.uid===curUser.id});
+      var directCount=DS.team(curUser.id).length;
+      var regDays=Math.floor((Date.now()-new Date(curUser.at).getTime())/(86400000));
+      // Calculate direct members' total approved earnings
+      var teamEarn=0;DS.team(curUser.id).forEach(function(m){var mr=getReports().filter(function(r){return r.uid===m.id&&r.status==='approved'});teamEarn+=mr.reduce(function(s,r){return s+r.amount},0)});
+      var cond1=directCount>=5,cond2=teamEarn>=100,cond3=regDays>=7;
+      if(!myApp||myApp.status==='rejected'){
+        h+='<div class="card" style="margin-bottom:12px;background:linear-gradient(135deg,rgba(124,92,255,.08),rgba(105,231,255,.05));border-color:rgba(124,92,255,.15)">';
+        h+='<div class="card-title">🎯 晋升团长</div>';
+        h+='<p style="font-size:12px;color:var(--text2);margin-bottom:10px">成为团长后，你的团队成员完成任务，你将获得平台额外奖励分成</p>';
+        h+='<div style="margin-bottom:12px">';
+        h+='<div style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:12px"><span style="width:20px">'+( cond1?'✅':'⏳')+'</span><span style="color:'+(cond1?'var(--accent2)':'var(--text2)')+'">直推成员 ≥ 5人</span><span style="margin-left:auto;color:var(--text3)">'+directCount+'/5</span></div>';
+        h+='<div style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:12px"><span style="width:20px">'+(cond2?'✅':'⏳')+'</span><span style="color:'+(cond2?'var(--accent2)':'var(--text2)')+'">团队收益 ≥ ¥100</span><span style="margin-left:auto;color:var(--text3)">¥'+teamEarn.toFixed(0)+'/100</span></div>';
+        h+='<div style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:12px"><span style="width:20px">'+(cond3?'✅':'⏳')+'</span><span style="color:'+(cond3?'var(--accent2)':'var(--text2)')+'">注册 ≥ 7天</span><span style="margin-left:auto;color:var(--text3)">'+regDays+'/7天</span></div>';
+        h+='</div>';
+        if(myApp&&myApp.status==='rejected'){
+          h+='<div style="padding:8px;background:rgba(255,107,107,.08);border-radius:8px;font-size:12px;color:var(--warn);margin-bottom:10px">上次申请被驳回'+(myApp.rejectReason?'：'+esc(myApp.rejectReason):'')+'</div>';
+        }
+        if(cond1&&cond2&&cond3){
+          h+='<button class="btn-primary" style="border-radius:10px;font-size:13px" onclick="openModal(\'modalLeaderApply\')">🎉 立即申请成为团长</button>';
+        }else{
+          var pct=Math.round(((cond1?1:0)+(cond2?1:0)+(cond3?1:0))/3*100);
+          h+='<div style="height:6px;background:var(--glass2);border-radius:3px;overflow:hidden;margin-bottom:6px"><div style="height:100%;width:'+pct+'%;background:var(--primary-g);border-radius:3px;transition:width .3s"></div></div>';
+          h+='<div style="font-size:11px;color:var(--text3);text-align:center">晋升进度 '+pct+'%</div>';
+        }
+        h+='</div>';
+      }else if(myApp.status==='pending'){
+        h+='<div class="card" style="margin-bottom:12px"><div class="card-title">🎯 团长申请中</div><p style="font-size:12px;color:var(--gold)">⏳ 你的团长申请正在审核中，请耐心等待</p><p style="font-size:11px;color:var(--text3);margin-top:4px">申请时间：'+fmtD(myApp.at)+'</p></div>';
+      }
+    }
     h+='<div class="menu-list">';
     h+='<div class="menu-item" onclick="openModal(\'modalShare\')"><span class="menu-icon">📤</span><span class="menu-text">邀请好友</span><span class="menu-arrow">›</span></div>';
     h+='<div class="menu-item" onclick="switchView(\'viewEarnings\',document.querySelectorAll(\'.nav-item\')[1])"><span class="menu-icon">💰</span><span class="menu-text">收益明细</span><span class="menu-arrow">›</span></div>';
     h+='<div class="menu-item" onclick="switchView(\'viewTeam\',document.querySelectorAll(\'.nav-item\')[2])"><span class="menu-icon">👥</span><span class="menu-text">我的团队</span><span class="menu-arrow">›</span></div>';
-    if(curUser.nick==='admin')h+='<div class="menu-item" onclick="openModal(\'modalAdmin\');renderAdmin()"><span class="menu-icon">⚙️</span><span class="menu-text">管理后台</span><span class="menu-badge">管理员</span></div>';
+    if(curUser.nick==='admin')h+='<div class="menu-item" onclick="openModal(\'modalAdmin\');renderAdmin()"><span class="menu-icon">️</span><span class="menu-text">管理后台</span><span class="menu-badge">管理员</span></div>';
     else h+='<div class="menu-item" onclick="tryAdmin()"><span class="menu-icon">🔧</span><span class="menu-text">管理入口</span><span class="menu-arrow">›</span></div>';
     h+='<div class="menu-item" onclick="doLogout()"><span class="menu-icon">🚪</span><span class="menu-text">退出登录</span><span class="menu-arrow">›</span></div></div>'
   }
@@ -561,8 +903,55 @@ function tryAdmin(){var p=prompt('请输入管理密码：');if(p==='qq83476086'
 
 function copyInviteLink(){var l=document.getElementById('shareLinkInput').value;if(navigator.clipboard)navigator.clipboard.writeText(l).then(function(){toast('已复制')}).catch(function(){toast('请手动复制',true)});else{document.getElementById('shareLinkInput').select();document.execCommand('copy');toast('已复制')}}
 
-function switchAdminTab(id,b){document.querySelectorAll('.admin-tab').forEach(function(t){t.classList.remove('active')});b.classList.add('active');document.querySelectorAll('.admin-section').forEach(function(s){s.style.display='none'});document.getElementById(id).style.display=''}
-function renderAdmin(){renderAdmU();renderAdmP();renderAdmS();renderAdmA()}
+/* ===== SHARE ===== */
+function shareWechat(){
+  var l=document.getElementById('shareLinkInput').value;
+  if(navigator.share){navigator.share({title:'聚佣宝 - 一起赚钱',text:'我发现一个推广赚钱平台，注册就能赚佣金！',url:l}).catch(function(){})}
+  else{if(navigator.clipboard)navigator.clipboard.writeText(l).then(function(){toast('链接已复制，快去微信粘贴吧')});else toast('请手动复制链接',true)}
+}
+function shareQQ(){
+  var l=document.getElementById('shareLinkInput').value;
+  var url='https://connect.qq.com/widget/shareqq/index.html?url='+encodeURIComponent(l)+'&title='+encodeURIComponent('聚佣宝-推广赚钱平台')+'&desc='+encodeURIComponent('我发现一个推广赚钱平台，注册就能赚佣金！');
+  window.open(url,'_blank','width=600,height=400');
+}
+function genPoster(){
+  var canvas=document.getElementById('posterCanvas');
+  var ctx=canvas.getContext('2d');
+  canvas.width=360;canvas.height=520;
+  var grad=ctx.createLinearGradient(0,0,360,520);
+  grad.addColorStop(0,'#1a1040');grad.addColorStop(1,'#0a0e27');
+  ctx.fillStyle=grad;ctx.fillRect(0,0,360,520);
+  ctx.fillStyle='#7C5CFF';ctx.fillRect(0,0,360,4);
+  ctx.textAlign='center';
+  ctx.font='bold 28px sans-serif';ctx.fillStyle='#F7FAFF';ctx.fillText('💎 聚佣宝',180,80);
+  ctx.font='14px sans-serif';ctx.fillStyle='#9AA7C7';ctx.fillText('全网推广赚钱平台',180,110);
+  ctx.font='bold 18px sans-serif';ctx.fillStyle='#62FAD3';ctx.fillText('50+平台 · 零门槛 · 高佣金',180,160);
+  ctx.font='13px sans-serif';ctx.fillStyle='#9AA7C7';
+  ctx.fillText('• 网盘拉新 ¥5-15/单',180,210);
+  ctx.fillText('• APP推广 ¥8-25/单',180,235);
+  ctx.fillText('• AI推广 ¥4-10/单',180,260);
+  ctx.fillText('• 电商CPS 佣金5-70%',180,285);
+  ctx.font='bold 16px sans-serif';ctx.fillStyle='#FFD66B';ctx.fillText('扫码注册 立即赚钱',180,340);
+  var link=location.origin+location.pathname;
+  ctx.font='11px sans-serif';ctx.fillStyle='#5A6A8A';ctx.fillText(link,180,380);
+  if(curUser){ctx.font='13px sans-serif';ctx.fillStyle='#69E7FF';ctx.fillText('邀请码：'+curUser.code,180,410)}
+  ctx.font='11px sans-serif';ctx.fillStyle='#3a4a6a';ctx.fillText('长按识别图中二维码',180,460);
+  // QR placeholder
+  ctx.fillStyle='rgba(255,255,255,0.1)';ctx.fillRect(130,420,100,100);
+  ctx.strokeStyle='rgba(255,255,255,0.2)';ctx.strokeRect(130,420,100,100);
+  ctx.font='10px sans-serif';ctx.fillStyle='#5A6A8A';ctx.fillText('QR',180,475);
+  document.getElementById('posterArea').style.display='block';
+}
+function savePoster(){
+  var canvas=document.getElementById('posterCanvas');
+  var link=document.createElement('a');link.download='聚佣宝推广海报.png';link.href=canvas.toDataURL('image/png');link.click();
+  toast('海报已保存')
+}
+
+/* ===== ADMIN ===== */
+function switchAdminTab(id,b){document.querySelectorAll('.admin-tab').forEach(function(t){t.classList.remove('active')});b.classList.add('active');document.querySelectorAll('.admin-section').forEach(function(s){s.style.display='none'});document.getElementById(id).style.display='';if(id==='adminSync')renderSyncStatus();if(id==='adminEarnings')renderAdmEarnings()}
+function renderAdmin(){renderAdmU();renderAdmP();renderAdmS();renderAdmEarnings();renderAdmA();renderSyncStatus()}
+
 function renderAdmU(){
   var u=DS.users();
   var h='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-size:13px;color:var(--text2)">共 '+u.length+' 位用户</span><button style="padding:6px 14px;border-radius:8px;background:var(--glass2);font-size:12px;cursor:pointer" onclick="exportCSV()">📥 导出</button></div>';
@@ -571,273 +960,484 @@ function renderAdmU(){
 }
 function delUser(id){if(!confirm('确定删除？'))return;DS.delUser(id);renderAdmU();toast('已删除')}
 function exportCSV(){var u=DS.users();var c='\uFEFF昵称,邀请码,收益,团队成员,注册时间\n';u.forEach(function(x){var e=DS.earn(x.id);c+=x.nick+','+x.code+','+e.t.toFixed(2)+','+DS.team(x.id).length+','+x.at+'\n'});var b=new Blob([c],{type:'text/csv;charset=utf-8'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='用户数据.csv';a.click();toast('导出成功')}
+
 function renderAdmP(){
   var savedLinks=JSON.parse(localStorage.getItem('jyb_links')||'{}');
+  var cats=['网盘拉新','APP拉新','浏览器推广','AI推广','海外项目','电商CPS','生活服务','游戏推广','社交推广','金融保险','知识付费'];
   var h='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-size:13px;color:var(--text2)">共 '+PLATFORMS.length+' 个推广平台</span>';
-  h+='<button style="padding:6px 14px;border-radius:8px;background:var(--primary-g);font-size:12px;color:#fff;cursor:pointer" onclick="addNewPlatform()">➕ 新增平台</button></div>';
+  h+='<button style="padding:6px 14px;border-radius:8px;background:var(--primary-g);font-size:12px;color:#fff;cursor:pointer" onclick="openModal(\'modalAddPlatform\')">➕ 新增平台</button></div>';
   h+='<input id="platSearch" type="text" placeholder="🔍 搜索平台名称..." style="margin-bottom:10px;padding:8px 12px;border-radius:8px;font-size:12px" oninput="filterPlat()">';
-  CATEGORIES.filter(function(c){return c!=='全部'}).forEach(function(cat){
+  cats.forEach(function(cat){
     var ps=PLATFORMS.filter(function(p){return p.cat===cat});
-    h+='<div class="plat-group" data-cat="'+cat+'"><div class="platform-category-header"><span class="pch-icon">'+(ps[0]?ps[0].emoji:'📌')+'</span><span class="pch-name">'+cat+'</span><span class="pch-count">'+ps.length+'个平台</span></div>';
+    if(ps.length===0)return;
+    h+='<div style="margin-bottom:12px"><div style="font-size:13px;font-weight:600;margin-bottom:6px;color:var(--text2)">'+cat+' <span style="font-size:11px;color:var(--text3)">('+ps.length+'个)</span></div>';
     ps.forEach(function(p){
-      var link=savedLinks[p.id]||p.link||'';
-      h+='<div class="plat-item" data-name="'+p.name+'" style="padding:10px 12px;background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-s);margin-bottom:6px">';
-      h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-size:20px">'+p.emoji+'</span><span style="font-weight:600;font-size:13px;flex:1">'+p.name+'</span>';
-      h+='<button class="a-btn" onclick="editPlatform(\''+p.id+'\')">✏️编辑</button>';
-      h+='<button class="a-btn danger" onclick="delPlatform(\''+p.id+'\')">🗑️</button></div>';
-      h+='<div style="font-size:11px;color:var(--text2);margin-bottom:4px">💰 '+p.rate+' · 来源: '+p.platform+'</div>';
-      h+='<div style="font-size:11px;color:var(--text3)">🔗 '+((link.length>40)?link.substring(0,40)+'...':link)+'</div>';
-      h+='</div>'
+      var curLink=savedLinks[p.id]||p.link||'';
+      h+='<div class="plat-card" data-name="'+p.name.toLowerCase()+'">';
+      h+='<span class="plat-emoji">'+p.emoji+'</span>';
+      h+='<div class="plat-info"><div class="plat-name">'+p.name+'</div>';
+      h+='<div class="plat-meta">'+p.rate+' · '+(curLink.length>30?curLink.substring(0,30)+'...':curLink)+'</div></div>';
+      h+='<div class="plat-actions">';
+      h+='<button class="a-btn" onclick="editPlatform(\''+p.id+'\')" style="background:rgba(124,92,255,.15);color:var(--primary)">✏️编辑</button>';
+      h+='<button class="a-btn danger" onclick="delPlatform(\''+p.id+'\')">️</button>';
+      h+='</div></div>';
     });
-    h+='</div>'
+    h+='</div>';
   });
   document.getElementById('adminProducts').innerHTML=h
 }
 function filterPlat(){
-  var q=(document.getElementById('platSearch').value||'').toLowerCase();
-  document.querySelectorAll('.plat-item').forEach(function(el){
-    el.style.display=el.getAttribute('data-name').toLowerCase().indexOf(q)>-1?'':'none'
-  })
+  var q=document.getElementById('platSearch').value.toLowerCase();
+  document.querySelectorAll('.plat-card').forEach(function(c){c.style.display=c.getAttribute('data-name').indexOf(q)>=0?'':'none'})
 }
+
+/* ===== EDIT PLATFORM (FULL FORM) ===== */
 function editPlatform(id){
   var p=PLATFORMS.find(function(x){return x.id===id});if(!p)return;
+  document.getElementById('editModalTitle').textContent='✏️ 编辑 '+p.name;
+  document.getElementById('editPlatId').value=p.id;
+  document.getElementById('editName').value=p.name;
+  document.getElementById('editRate').value=p.rate;
   var savedLinks=JSON.parse(localStorage.getItem('jyb_links')||'{}');
-  var curLink=savedLinks[id]||p.link||'';
-  var newRate=prompt('修改佣金（当前: '+p.rate+'）：\n输入新的佣金金额或比例',p.rate);
-  if(newRate===null)return;
-  var newLink=prompt('修改推广链接（当前: '+curLink.substring(0,50)+'...）：\n粘贴新的推广链接',curLink);
-  if(newLink===null)return;
-  p.rate=newRate;
-  savedLinks[id]=newLink;
-  localStorage.setItem('jyb_links',JSON.stringify(savedLinks));
-  toast('✅ 已更新 '+p.name);
-  renderAdmP();renderHome()
+  document.getElementById('editLink').value=savedLinks[p.id]||p.link||'';
+  document.getElementById('editReq').value=p.req||'';
+  // Emoji picker
+  var eh='';EMOJI_OPTS.forEach(function(e){eh+='<div class="emoji-opt'+(e===p.emoji?' active':'')+'" onclick="selectEmoji(this,\''+e+'\')">'+e+'</div>'});
+  document.getElementById('emojiPicker').innerHTML=eh;
+  // Images
+  editImgs=p.imgs?p.imgs.slice():[];
+  renderEditImgs();
+  openModal('modalEditPlatform');
 }
+function selectEmoji(el,e){
+  document.querySelectorAll('.emoji-opt').forEach(function(x){x.classList.remove('active')});
+  el.classList.add('active');
+}
+function renderEditImgs(){
+  var h='';
+  editImgs.forEach(function(img,i){
+    var src=img.url||img;
+    h+='<div class="img-preview-item"><img src="'+src+'" onerror="this.src=\'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 72 72%22><rect fill=%22%23111832%22 width=%2272%22 height=%2272%22/><text x=%2236%22 y=%2242%22 text-anchor=%22middle%22 fill=%22%235A6A8A%22 font-size=%2220%22>?</text></svg>\'">';
+    h+='<div class="img-remove" onclick="removeEditImg('+i+')">×</div></div>';
+  });
+  document.getElementById('imgPreviewRow').innerHTML=h;
+}
+function removeEditImg(i){editImgs.splice(i,1);renderEditImgs()}
+function addImgFromUrl(){
+  var url=document.getElementById('editImgUrl').value.trim();
+  if(!url){toast('请输入图片URL',true);return}
+  if(editImgs.length>=5){toast('最多5张图片',true);return}
+  editImgs.push({url:url});
+  document.getElementById('editImgUrl').value='';
+  renderEditImgs();
+  toast('已添加图片');
+}
+function handleImgUpload(e){
+  var files=e.target.files;if(!files.length)return;
+  var remaining=5-editImgs.length;
+  if(remaining<=0){toast('最多5张图片',true);return}
+  var count=0;
+  for(var i=0;i<files.length&&count<remaining;i++){
+    (function(file){
+      if(file.size>500*1024){toast(file.name+' 超过500KB',true);return}
+      var reader=new FileReader();
+      reader.onload=function(ev){
+        editImgs.push({url:ev.target.result,name:file.name});
+        count++;
+        renderEditImgs();
+      };
+      reader.readAsDataURL(file);
+    })(files[i]);
+  }
+  e.target.value='';
+}
+function saveEditPlatform(){
+  var id=document.getElementById('editPlatId').value;
+  var p=PLATFORMS.find(function(x){return x.id===id});if(!p)return;
+  var name=document.getElementById('editName').value.trim();
+  if(!name){toast('请输入平台名称',true);return}
+  var rate=document.getElementById('editRate').value.trim();
+  if(!rate){toast('请输入佣金',true);return}
+  var link=document.getElementById('editLink').value.trim();
+  var req=document.getElementById('editReq').value.trim();
+  // Get selected emoji
+  var activeEmoji=document.querySelector('.emoji-opt.active');
+  var emoji=activeEmoji?activeEmoji.textContent:p.emoji;
+  // Update platform
+  p.name=name;p.emoji=emoji;p.rate=rate;p.req=req;
+  p.price=parseFloat(rate.replace(/[^0-9.]/g,''))||p.price;
+  p.commission=p.price;
+  p.imgs=editImgs.slice();
+  // Save link separately
+  if(link){
+    var savedLinks=JSON.parse(localStorage.getItem('jyb_links')||'{}');
+    savedLinks[id]=link;
+    localStorage.setItem('jyb_links',JSON.stringify(savedLinks));
+  }
+  // Auto sync to cloud
+  if(SYNC.isConfigured()){
+    SYNC.push().then(function(ok){
+      if(ok)toast('✅ 已保存并同步到云端');
+      else toast('✅ 已保存（云端同步失败）');
+    }).catch(function(){toast('✅ 已保存（云端同步失败）')});
+  }else{
+    toast('✅ 已保存 '+name);
+  }
+  closeModal('modalEditPlatform');
+  renderAdmP();renderHome();
+}
+
+/* ===== ADD PLATFORM ===== */
+function saveAddPlatform(){
+  var name=document.getElementById('addName').value.trim();
+  if(!name){toast('请输入平台名称',true);return}
+  var cat=document.getElementById('addCat').value;
+  var rate=document.getElementById('addRate').value.trim();
+  if(!rate){toast('请输入佣金',true);return}
+  var source=document.getElementById('addSource').value.trim()||'自定义';
+  var link=document.getElementById('addLink').value.trim();
+  var req=document.getElementById('addReq').value.trim();
+  var newId='p'+(PLATFORMS.length+1).toString().padStart(2,'0');
+  PLATFORMS.push({
+    id:newId,name:name,emoji:'📌',
+    price:parseFloat(rate.replace(/[^0-9.]/g,''))||0,
+    commission:0,rate:rate,platform:source,
+    cat:cat,link:link||'https://dt.bd.cn',
+    sales:0,tags:['新品'],req:req,imgs:[]
+  });
+  if(link){
+    var savedLinks=JSON.parse(localStorage.getItem('jyb_links')||'{}');
+    savedLinks[newId]=link;
+    localStorage.setItem('jyb_links',JSON.stringify(savedLinks));
+  }
+  // Auto sync
+  if(SYNC.isConfigured()){SYNC.push().then(function(){toast('✅ 已添加 '+name+' 并同步到云端')}).catch(function(){toast('✅ 已添加 '+name)})}
+  else{toast('✅ 已添加 '+name)}
+  closeModal('modalAddPlatform');
+  // Clear form
+  document.getElementById('addName').value='';document.getElementById('addRate').value='';
+  document.getElementById('addSource').value='';document.getElementById('addLink').value='';
+  document.getElementById('addReq').value='';
+  renderAdmP();renderHome();
+}
+
 function delPlatform(id){
   var p=PLATFORMS.find(function(x){return x.id===id});
   if(!p||!confirm('确定删除 '+p.name+' ？'))return;
   var idx=PLATFORMS.indexOf(p);PLATFORMS.splice(idx,1);
-  toast('已删除 '+p.name);renderAdmP();renderHome()
-}
-function addNewPlatform(){
-  var name=prompt('平台名称：');if(!name)return;
-  var cat=prompt('分类（网盘拉新/APP拉新/浏览器推广/AI推广/海外项目/电商CPS/生活服务/游戏推广/社交推广/金融保险/知识付费）：');if(!cat)return;
-  var rate=prompt('佣金（如: 固定¥15 或 60%分成）：');if(!rate)return;
-  var link=prompt('推广链接：');if(!link)return;
-  var newId='p'+(PLATFORMS.length+1).toString().padStart(2,'0');
-  PLATFORMS.push({id:newId,name:name,emoji:'📌',price:parseFloat(rate.replace(/[^0-9.]/g,''))||0,commission:0,rate:rate,platform:'自定义',cat:cat,link:link,sales:0,tags:['新品']});
+  // Also remove from links
   var savedLinks=JSON.parse(localStorage.getItem('jyb_links')||'{}');
-  savedLinks[newId]=link;localStorage.setItem('jyb_links',JSON.stringify(savedLinks));
-  toast('✅ 已添加 '+name);renderAdmP();renderHome()
+  delete savedLinks[id];localStorage.setItem('jyb_links',JSON.stringify(savedLinks));
+  // Auto sync
+  if(SYNC.isConfigured()){SYNC.push().then(function(){toast('已删除 '+p.name+' 并同步到云端')}).catch(function(){toast('已删除 '+p.name)})}
+  else{toast('已删除 '+p.name)}
+  renderAdmP();renderHome();
 }
+
 function renderAdmS(){
   var st=DS.getSet();
-  var h='<div class="card"><div class="card-title">返佣比例设置</div>';
-  h+='<div class="form-group"><label style="font-size:12px;color:var(--text2);display:block;margin-bottom:6px">一级返佣比例（%）</label><input id="s1" type="number" value="'+(st.l1*100)+'" min="0" max="100"><p style="font-size:11px;color:var(--text3);margin-top:4px">直接邀请好友完成任务的佣金比例</p></div>';
-  h+='<div class="form-group" style="margin-top:12px"><label style="font-size:12px;color:var(--text2);display:block;margin-bottom:6px">二级返佣比例（%）</label><input id="s2" type="number" value="'+(st.l2*100)+'" min="0" max="100"><p style="font-size:11px;color:var(--text3);margin-top:4px">好友再邀请好友完成任务的佣金比例</p></div>';
+  var h='<div class="card"><div class="card-title">💰 佣金模型设置</div>';
+  h+='<div style="padding:12px;background:linear-gradient(135deg,rgba(98,250,211,.08),rgba(105,231,255,.05));border-radius:10px;border:1px solid rgba(98,250,211,.1);margin-bottom:14px">';
+  h+='<p style="font-size:12px;color:var(--accent2);font-weight:600;margin-bottom:4px">✅ 一级返佣模式</p>';
+  h+='<p style="font-size:11px;color:var(--text3);line-height:1.6">成员完成任务后100%到手，不从成员佣金中扣成。团长奖励从平台奖励中发放。</p></div>';
+  h+='<div class="form-group"><label style="font-size:12px;color:var(--text2);display:block;margin-bottom:6px">🏦 平台奖励比例（%）</label><input id="sPlatform" type="number" step="0.1" value="'+((st.platformReward||.03)*100).toFixed(1)+'" min="0" max="100"><p style="font-size:11px;color:var(--text3);margin-top:4px">任推邦等平台奖励你团队成员收益的百分比</p></div>';
+  h+='</div>';
+
+  // Tier settings
+  h+='<div class="card"><div class="card-title">🏆 团长等级与分成</div>';
+  h+='<p style="font-size:11px;color:var(--text3);margin-bottom:12px;line-height:1.6">团长根据团队人数和收益自动升级，等级越高分成比例越大</p>';
+  // Silver
+  h+='<div style="padding:12px;background:rgba(192,192,192,.06);border:1px solid rgba(192,192,192,.15);border-radius:10px;margin-bottom:10px">';
+  h+='<div style="font-size:13px;font-weight:600;margin-bottom:8px">🥈 银牌团长</div>';
+  h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">';
+  h+='<div class="form-group" style="margin:0"><label style="font-size:11px;color:var(--text3)">直推人数 ≥</label><input id="sSilverMin" type="number" value="'+(st.silverMin||5)+'" min="1" style="margin-top:4px"></div>';
+  h+='<div class="form-group" style="margin:0"><label style="font-size:11px;color:var(--text3)">团队收益 ≥ ¥</label><input id="sSilverEarn" type="number" value="'+(st.silverEarn||100)+'" min="0" style="margin-top:4px"></div>';
+  h+='</div>';
+  h+='<div class="form-group" style="margin-top:8px;margin-bottom:0"><label style="font-size:11px;color:var(--text3)">分成比例（%）</label><input id="sSilverShare" type="number" step="0.1" value="'+((st.silverShare||.01)*100).toFixed(1)+'" min="0" max="100" style="margin-top:4px"><p style="font-size:10px;color:var(--text3);margin-top:2px">从平台奖励中拿出此比例分给银牌团长</p></div>';
+  h+='</div>';
+  // Gold
+  h+='<div style="padding:12px;background:rgba(255,214,107,.06);border:1px solid rgba(255,214,107,.15);border-radius:10px;margin-bottom:10px">';
+  h+='<div style="font-size:13px;font-weight:600;margin-bottom:8px">🥇 金牌团长</div>';
+  h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">';
+  h+='<div class="form-group" style="margin:0"><label style="font-size:11px;color:var(--text3)">直推人数 ≥</label><input id="sGoldMin" type="number" value="'+(st.goldMin||15)+'" min="1" style="margin-top:4px"></div>';
+  h+='<div class="form-group" style="margin:0"><label style="font-size:11px;color:var(--text3)">团队收益 ≥ ¥</label><input id="sGoldEarn" type="number" value="'+(st.goldEarn||500)+'" min="0" style="margin-top:4px"></div>';
+  h+='</div>';
+  h+='<div class="form-group" style="margin-top:8px;margin-bottom:0"><label style="font-size:11px;color:var(--text3)">分成比例（%）</label><input id="sGoldShare" type="number" step="0.1" value="'+((st.goldShare||.015)*100).toFixed(1)+'" min="0" max="100" style="margin-top:4px"><p style="font-size:10px;color:var(--text3);margin-top:2px">从平台奖励中拿出此比例分给金牌团长</p></div>';
+  h+='</div>';
+  // Preview
+  var preview=1000;
+  var pr=preview*((st.platformReward)||.03);
+  h+='<div style="padding:12px;background:var(--glass2);border-radius:10px;margin-top:4px">';
+  h+='<p style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:8px">📊 收益预览（假设团队月收益¥'+preview+'）</p>';
+  h+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px">';
+  h+='<div style="text-align:center;padding:8px;background:var(--glass);border-radius:6px"><div style="font-size:13px;font-weight:700;color:var(--accent2)">¥'+pr.toFixed(0)+'</div><div style="font-size:10px;color:var(--text3)">平台奖励</div></div>';
+  h+='<div style="text-align:center;padding:8px;background:var(--glass);border-radius:6px"><div style="font-size:13px;font-weight:700;color:#c0c0c0">¥'+(preview*((st.silverShare||.01))).toFixed(0)+'</div><div style="font-size:10px;color:var(--text3)">银牌团长</div></div>';
+  h+='<div style="text-align:center;padding:8px;background:var(--glass);border-radius:6px"><div style="font-size:13px;font-weight:700;color:var(--gold)">¥'+(preview*((st.goldShare||.015))).toFixed(0)+'</div><div style="font-size:10px;color:var(--text3)">金牌团长</div></div>';
+  var netSilver=pr-preview*(st.silverShare||.01);
+  var netGold=pr-preview*(st.goldShare||.015);
+  h+='<div style="text-align:center;padding:8px;background:var(--glass);border-radius:6px"><div style="font-size:13px;font-weight:700;color:var(--accent)">¥'+netSilver.toFixed(0)+'-'+netGold.toFixed(0)+'</div><div style="font-size:10px;color:var(--text3)">你的净利润</div></div>';
+  h+='</div></div>';
   h+='<button style="width:100%;padding:12px;border-radius:10px;background:var(--primary-g);color:#fff;font-weight:600;margin-top:16px;cursor:pointer" onclick="saveSet()">保存设置</button></div>';
   document.getElementById('adminSettings').innerHTML=h
 }
-function saveSet(){var l1=parseFloat(document.getElementById('s1').value)||0,l2=parseFloat(document.getElementById('s2').value)||0;var st=DS.getSet();st.l1=l1/100;st.l2=l2/100;DS.setSet(st);toast('设置已保存')}
+function saveSet(){
+  var st=DS.getSet();
+  st.platformReward=(parseFloat(document.getElementById('sPlatform').value)||0)/100;
+  st.silverMin=parseInt(document.getElementById('sSilverMin').value)||5;
+  st.silverEarn=parseFloat(document.getElementById('sSilverEarn').value)||100;
+  st.silverShare=(parseFloat(document.getElementById('sSilverShare').value)||0)/100;
+  st.goldMin=parseInt(document.getElementById('sGoldMin').value)||15;
+  st.goldEarn=parseFloat(document.getElementById('sGoldEarn').value)||500;
+  st.goldShare=(parseFloat(document.getElementById('sGoldShare').value)||0)/100;
+  st.leaderShare=st.silverShare;
+  DS.setSet(st);toast('设置已保存');renderAdmS();
+}
+
 function renderAdmA(){
-  var apis=[
-    {id:'p01',n:'迅雷网盘',cat:'网盘拉新',ep:'☁️',k:'API Key',s:'API Secret'},
-    {id:'p02',n:'夸克网盘',cat:'网盘拉新',ep:'🌐',k:'API Key',s:'API Secret'},
-    {id:'p03',n:'UC网盘',cat:'网盘拉新',ep:'💾',k:'API Key',s:'API Secret'},
-    {id:'p04',n:'百度网盘',cat:'网盘拉新',ep:'📦',k:'API Key',s:'API Secret'},
-    {id:'p05',n:'移动云盘',cat:'网盘拉新',ep:'📱',k:'API Key',s:'API Secret'},
-    {id:'p06',n:'小红书CPA',cat:'APP拉新',ep:'📕',k:'API Key',s:'API Secret'},
-    {id:'p07',n:'快手极速版',cat:'APP拉新',ep:'🎬',k:'API Key',s:'API Secret'},
-    {id:'p08',n:'抖音极速版',cat:'APP拉新',ep:'🎵',k:'API Key',s:'API Secret'},
-    {id:'p09',n:'拼多多拉新',cat:'APP拉新',ep:'🛍️',k:'API Key',s:'API Secret'},
-    {id:'p10',n:'京东拉新',cat:'APP拉新',ep:'🐶',k:'API Key',s:'API Secret'},
-    {id:'p11',n:'美团拉新',cat:'APP拉新',ep:'🍔',k:'API Key',s:'API Secret'},
-    {id:'p12',n:'迅雷搜索',cat:'浏览器推广',ep:'⚡',k:'API Key',s:'API Secret'},
-    {id:'p13',n:'迅雷浏览器',cat:'浏览器推广',ep:'🔍',k:'API Key',s:'API Secret'},
-    {id:'p14',n:'悟空搜索',cat:'浏览器推广',ep:'🐵',k:'API Key',s:'API Secret'},
-    {id:'p15',n:'UC浏览器',cat:'浏览器推广',ep:'🌍',k:'API Key',s:'API Secret'},
-    {id:'p16',n:'通义千问',cat:'AI推广',ep:'🤖',k:'API Key',s:'API Secret'},
-    {id:'p17',n:'秘塔AI搜索',cat:'AI推广',ep:'🧠',k:'API Key',s:'API Secret'},
-    {id:'p18',n:'即梦AI',cat:'AI推广',ep:'🎨',k:'API Key',s:'API Secret'},
-    {id:'p19',n:'Kimi智能助手',cat:'AI推广',ep:'🌙',k:'API Key',s:'API Secret'},
-    {id:'p20',n:'豆包AI',cat:'AI推广',ep:'🫘',k:'API Key',s:'API Secret'},
-    {id:'p21',n:'Capcut海外剪映',cat:'海外项目',ep:'🎥',k:'API Key',s:'API Secret'},
-    {id:'p22',n:'百度网盘国际版',cat:'海外项目',ep:'🌏',k:'API Key',s:'API Secret'},
-    {id:'p23',n:'Moto Novel',cat:'海外项目',ep:'📚',k:'API Key',s:'API Secret'},
-    {id:'p24',n:'Goodnovel',cat:'海外项目',ep:'📖',k:'API Key',s:'API Secret'},
-    {id:'p25',n:'TikTok推广',cat:'海外项目',ep:'🎶',k:'API Key',s:'API Secret'},
-    {id:'p26',n:'淘宝联盟',cat:'电商CPS',ep:'🛒',k:'AppKey',s:'AppSecret'},
-    {id:'p27',n:'京东联盟',cat:'电商CPS',ep:'🏪',k:'AppKey',s:'AppSecret'},
-    {id:'p28',n:'多多进宝',cat:'电商CPS',ep:'🧡',k:'ClientID',s:'ClientSecret'},
-    {id:'p29',n:'淘宝1分购',cat:'电商CPS',ep:'💝',k:'API Key',s:'API Secret'},
-    {id:'p30',n:'唯品会联盟',cat:'电商CPS',ep:'💜',k:'API Key',s:'API Secret'},
-    {id:'p31',n:'懂车帝',cat:'生活服务',ep:'🚗',k:'API Key',s:'API Secret'},
-    {id:'p32',n:'美团收钱助手',cat:'生活服务',ep:'💳',k:'API Key',s:'API Secret'},
-    {id:'p33',n:'饿了么推广',cat:'生活服务',ep:'🍜',k:'API Key',s:'API Secret'},
-    {id:'p34',n:'滴滴出行',cat:'生活服务',ep:'🚕',k:'API Key',s:'API Secret'},
-    {id:'p35',n:'58同城',cat:'生活服务',ep:'🏘️',k:'API Key',s:'API Secret'},
-    {id:'p36',n:'3387游戏平台',cat:'游戏推广',ep:'🎮',k:'API Key',s:'API Secret'},
-    {id:'p37',n:'原神推广',cat:'游戏推广',ep:'⚔️',k:'API Key',s:'API Secret'},
-    {id:'p38',n:'王者荣耀推广',cat:'游戏推广',ep:'👑',k:'API Key',s:'API Secret'},
-    {id:'p39',n:'小游戏推广联盟',cat:'游戏推广',ep:'🕹️',k:'API Key',s:'API Secret'},
-    {id:'p40',n:'TT语音',cat:'社交推广',ep:'🎙️',k:'API Key',s:'API Secret'},
-    {id:'p41',n:'Soul',cat:'社交推广',ep:'👻',k:'API Key',s:'API Secret'},
-    {id:'p42',n:'探探',cat:'社交推广',ep:'💕',k:'API Key',s:'API Secret'},
-    {id:'p43',n:'陌陌',cat:'社交推广',ep:'💬',k:'API Key',s:'API Secret'},
-    {id:'p44',n:'招商银行信用卡',cat:'金融保险',ep:'💳',k:'API Key',s:'API Secret'},
-    {id:'p45',n:'花呗推广',cat:'金融保险',ep:'🌸',k:'API Key',s:'API Secret'},
-    {id:'p46',n:'京东白条',cat:'金融保险',ep:'🏦',k:'API Key',s:'API Secret'},
-    {id:'p47',n:'众安保险',cat:'金融保险',ep:'🛡️',k:'API Key',s:'API Secret'},
-    {id:'p48',n:'小鹅通分销',cat:'知识付费',ep:'🎓',k:'API Key',s:'API Secret'},
-    {id:'p49',n:'知乎知学堂',cat:'知识付费',ep:'📝',k:'API Key',s:'API Secret'},
-    {id:'p50',n:'得到APP',cat:'知识付费',ep:'📚',k:'API Key',s:'API Secret'}
-  ];
+  var apis=[];
+  PLATFORMS.forEach(function(p){
+    var kName=p.cat==='电商CPS'?'AppKey':'API Key';
+    var sName=p.cat==='电商CPS'?'AppSecret':'API Secret';
+    apis.push({id:p.id,n:p.name,cat:p.cat,ep:p.emoji,k:kName,s:sName});
+  });
   var savedApi=JSON.parse(localStorage.getItem('jyb_api')||'{}');
   var cats=['网盘拉新','APP拉新','浏览器推广','AI推广','海外项目','电商CPS','生活服务','游戏推广','社交推广','金融保险','知识付费'];
-  var h='<div class="card"><div class="card-title">🔑 API接口配置 <span style="font-size:12px;font-weight:400;color:var(--text3)">（50个平台）</span></div>';
-  h+='<p style="font-size:12px;color:var(--text3);margin-bottom:10px">为每个平台配置独立的API密钥，部署后同步到后端</p>';
-  h+='<div style="display:flex;gap:8px;margin-bottom:12px"><input id="apiSearch" type="text" placeholder="🔍 搜索平台名称..." style="flex:1" oninput="filterApi()"><select id="apiCatFilter" style="padding:8px 12px;border-radius:10px;background:var(--glass);border:1px solid var(--border);color:var(--text);font-size:13px" onchange="filterApi()"><option value="">全部分类</option>';
+  var h='<div class="card"><div class="card-title"> API接口配置 <span style="font-size:12px;font-weight:400;color:var(--text3)">（'+PLATFORMS.length+'个平台）</span></div>';
+  h+='<p style="font-size:12px;color:var(--text3);margin-bottom:10px">为每个平台配置独立的API密钥</p>';
+  h+='<div style="display:flex;gap:8px;margin-bottom:12px"><input id="apiSearch" type="text" placeholder=" 搜索平台名称..." style="flex:1" oninput="filterApi()"><select id="apiCatFilter" style="padding:8px 12px;border-radius:10px;background:var(--glass);border:1px solid var(--border);color:var(--text);font-size:13px" onchange="filterApi()"><option value="">全部分类</option>';
   cats.forEach(function(c){h+='<option value="'+c+'">'+c+'</option>'});
-  h+='</select></div>';
-  h+='<div id="apiListContainer" style="max-height:55vh;overflow-y:auto;-webkit-overflow-scrolling:touch">';
-  var curCat='';
-  apis.forEach(function(a){
-    if(a.cat!==curCat){
-      curCat=a.cat;
-      var cc=cats.indexOf(curCat);
-      h+='<div class="cat-group" data-cat="'+curCat+'"><div style="display:flex;align-items:center;gap:6px;margin:12px 0 8px;padding:6px 10px;background:linear-gradient(90deg,var(--glass2),transparent);border-radius:var(--radius-s);font-size:13px;font-weight:700;color:var(--accent)">'+catsEmoji[cc]+' '+curCat+'</div></div>';
-    }
-    var sv=savedApi[a.id]||{};
-    h+='<div class="api-item" data-name="'+a.n+'" data-cat="'+a.cat+'" style="margin-bottom:10px;padding:10px 12px;background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-s)">';
-    h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px"><div style="font-size:13px;font-weight:600;display:flex;align-items:center;gap:4px"><span>'+a.ep+'</span><span>'+a.n+'</span></div>';
-    h+='<span class="api-status" id="st_'+a.id+'" style="font-size:10px;padding:2px 8px;border-radius:10px;'+(sv.k1?'background:rgba(0,245,212,.15);color:var(--accent)':'background:var(--glass2);color:var(--text3)')+'">'+(sv.k1?'✓ 已配置':'未配置')+'</span></div>';
-    h+='<div style="display:flex;gap:6px"><input type="text" id="ak_'+a.id+'" placeholder="'+a.k+'" value="'+(sv.k1||'')+'" style="flex:1;padding:8px 10px;border-radius:8px;background:var(--glass2);border:1px solid var(--border);color:var(--text);font-size:12px"><input type="password" id="as_'+a.id+'" placeholder="'+a.s+'" value="'+(sv.k2||'')+'" style="flex:1;padding:8px 10px;border-radius:8px;background:var(--glass2);border:1px solid var(--border);color:var(--text);font-size:12px"></div>';
-    h+='</div>'
+  h+='</select></div><div id="apiList">';
+  cats.forEach(function(cat){
+    var ps=apis.filter(function(a){return a.cat===cat});
+    if(ps.length===0)return;
+    h+='<div style="margin-bottom:10px"><div style="font-size:12px;font-weight:600;color:var(--text2);margin-bottom:6px">'+cat+'</div>';
+    ps.forEach(function(a){
+      var sv=savedApi[a.id]||{};
+      h+='<div class="api-row" data-name="'+a.n.toLowerCase()+'" data-cat="'+a.cat+'" style="display:flex;gap:6px;align-items:center;padding:8px;background:var(--glass);border:1px solid var(--border);border-radius:8px;margin-bottom:4px">';
+      h+='<span style="font-size:16px;flex-shrink:0">'+a.ep+'</span>';
+      h+='<span style="font-size:12px;font-weight:500;flex:1;min-width:80px">'+a.n+'</span>';
+      h+='<input style="flex:1.5;min-width:100px;padding:6px 10px;font-size:11px;border-radius:6px" placeholder="'+a.k+'" value="'+(sv.k||'')+'" onchange="saveApi(\''+a.id+'\',this.value,\'k\')">';
+      h+='<input style="flex:1.5;min-width:100px;padding:6px 10px;font-size:11px;border-radius:6px" placeholder="'+a.s+'" value="'+(sv.s||'')+'" onchange="saveApi(\''+a.id+'\',this.value,\'s\')">';
+      h+='</div>';
+    });
+    h+='</div>';
   });
-  h+='</div>';
-  h+='<div style="margin-top:12px;padding:10px;background:var(--glass);border-radius:var(--radius-s);display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px;color:var(--text3)">已配置: <span id="apiCountDone" style="color:var(--accent);font-weight:700">0</span>/50</span>';
-  h+='<button style="padding:10px 24px;border-radius:10px;background:var(--accent);border:none;color:#0a0818;font-weight:700;cursor:pointer;font-size:13px" onclick="saveAllApi()">💾 保存全部配置</button></div>';
-  h+='<p style="font-size:10px;color:var(--text3);margin-top:8px;text-align:center">💡 部署到Cloudflare Workers后，密钥自动同步到后端环境变量</p>';
-  h+='</div>';
-  document.getElementById('adminApi').innerHTML=h;
-  updateApiCount()
+  h+='</div></div>';
+  document.getElementById('adminApi').innerHTML=h
+}
+function saveApi(id,val,type){
+  var savedApi=JSON.parse(localStorage.getItem('jyb_api')||'{}');
+  if(!savedApi[id])savedApi[id]={};
+  savedApi[id][type]=val;
+  localStorage.setItem('jyb_api',JSON.stringify(savedApi));
 }
 function filterApi(){
   var q=(document.getElementById('apiSearch').value||'').toLowerCase();
   var cat=document.getElementById('apiCatFilter').value;
-  var items=document.querySelectorAll('.api-item');
-  var groups=document.querySelectorAll('.cat-group');
-  items.forEach(function(el){
-    var match=(!q||el.getAttribute('data-name').toLowerCase().indexOf(q)>-1)&&(!cat||el.getAttribute('data-cat')===cat);
-    el.style.display=match?'':'none'
+  document.querySelectorAll('.api-row').forEach(function(r){
+    var nameOk=!q||r.getAttribute('data-name').indexOf(q)>=0;
+    var catOk=!cat||r.getAttribute('data-cat')===cat;
+    r.style.display=(nameOk&&catOk)?'':'none';
   });
-  groups.forEach(function(el){
-    var c=el.getAttribute('data-cat');
-    var show=!cat||c===cat;
-    el.style.display=show?'':'none'
-  })
-}
-function saveAllApi(){
-  var apiCfg={};
-  for(var i=1;i<=50;i++){
-    var id='p'+(i<10?'0'+i:i);
-    var k1=document.getElementById('ak_'+id);
-    var k2=document.getElementById('as_'+id);
-    if(k1&&k2&&(k1.value||k2.value)){
-      apiCfg[id]={k1:k1.value,k2:k2.value}
-    }
-  }
-  localStorage.setItem('jyb_api',JSON.stringify(apiCfg));
-  var cnt=Object.keys(apiCfg).length;
-  document.getElementById('apiCountDone').textContent=cnt;
-  document.querySelectorAll('.api-item').forEach(function(el){
-    var id=el.querySelector('[id^="ak_"]');
-    if(id){
-      var pid=id.id.replace('ak_','');
-      var stEl=document.getElementById('st_'+pid);
-      if(stEl){
-        var configured=apiCfg[pid]&&apiCfg[pid].k1;
-        stEl.textContent=configured?'✓ 已配置':'未配置';
-        stEl.style.cssText='font-size:10px;padding:2px 8px;border-radius:10px;'+(configured?'background:rgba(0,245,212,.15);color:var(--accent)':'background:var(--glass2);color:var(--text3)')
-      }
-    }
-  });
-  toast('已保存 '+cnt+' 个平台的API配置')
-}
-function updateApiCount(){
-  var apiCfg=JSON.parse(localStorage.getItem('jyb_api')||'{}');
-  var el=document.getElementById('apiCountDone');
-  if(el)el.textContent=Object.keys(apiCfg).length
 }
 
-// ===== 分享功能 =====
-function shareWechat(){
-  var u=DS.cur();if(!u){toast('请先登录',true);return}
-  var link=getInviteLink(u);
-  var title='聚佣宝 - 全网50+推广平台 一起赚钱';
-  var desc='覆盖网盘拉新、APP推广、电商CPS等12大行业，注册即赚！';
-  if(navigator.share){
-    navigator.share({title:title,text:desc,url:link}).catch(function(){})
+/* ===== EARNINGS REPORT & REVIEW ===== */
+var REPORT_KEY='jyb_reports';
+function getReports(){try{return JSON.parse(localStorage.getItem(REPORT_KEY))||[]}catch(e){return[]}}
+function saveReports(r){localStorage.setItem(REPORT_KEY,JSON.stringify(r));if(SYNC.isConfigured())SYNC.push().catch(function(){})}
+
+function openReportModal(){
+  if(!curUser){toast('请先登录',true);openModal('modalLogin');return}
+  var sel=document.getElementById('reportPlatform');
+  var h='<option value="">-- 选择平台 --</option>';
+  PLATFORMS.forEach(function(p){h+='<option value="'+p.id+'">'+p.emoji+' '+p.name+' ('+p.rate+')</option>'});
+  sel.innerHTML=h;
+  document.getElementById('reportAmount').value='';
+  document.getElementById('reportOrders').value='';
+  document.getElementById('reportNote').value='';
+  openModal('modalReportEarning');
+}
+
+function submitEarningReport(){
+  var pid=document.getElementById('reportPlatform').value;
+  if(!pid){toast('请选择推广平台',true);return}
+  var amt=parseFloat(document.getElementById('reportAmount').value);
+  if(!amt||amt<=0){toast('请输入实际收益金额',true);return}
+  var orders=parseInt(document.getElementById('reportOrders').value)||1;
+  var note=document.getElementById('reportNote').value.trim();
+  var p=PLATFORMS.find(function(x){return x.id===pid});
+  var reports=getReports();
+  reports.push({
+    id:'er_'+Date.now(),
+    uid:curUser.id,
+    uname:curUser.nick,
+    pid:pid,
+    pname:p?p.name:'未知平台',
+    amount:amt,
+    orders:orders,
+    note:note,
+    status:'pending',
+    at:new Date().toISOString()
+  });
+  saveReports(reports);
+  closeModal('modalReportEarning');
+  toast('✅ 收益已上报，等待管理员审核');
+}
+
+function renderAdmEarnings(){
+  var reports=getReports();
+  var pending=reports.filter(function(r){return r.status==='pending'});
+  var approved=reports.filter(function(r){return r.status==='approved'});
+  var rejected=reports.filter(function(r){return r.status==='rejected'});
+  var totalApproved=approved.reduce(function(s,r){return s+r.amount},0);
+  var totalPending=pending.reduce(function(s,r){return s+r.amount},0);
+  var totalOrders=approved.reduce(function(s,r){return s+r.orders},0);
+
+  // Summary stats
+  var h='<div class="card" style="margin-bottom:12px">';
+  h+='<div class="card-title">📊 全平台收益总览</div>';
+  h+='<div class="stats-row" style="margin-bottom:0">';
+  h+='<div class="stat-box highlight"><div class="stat-val">¥'+totalApproved.toFixed(0)+'</div><div class="stat-label">已审核总收益</div></div>';
+  h+='<div class="stat-box"><div class="stat-val">'+totalOrders+'</div><div class="stat-label">总完成单数</div></div>';
+  h+='<div class="stat-box"><div class="stat-val" style="color:var(--gold);background:none;-webkit-text-fill-color:var(--gold)">¥'+totalPending.toFixed(0)+'</div><div class="stat-label">待审核金额</div></div>';
+  h+='</div></div>';
+
+  // Pending section
+  h+='<div class="comm-section"><h3>⏳ 待审核 <span style="font-size:12px;color:var(--gold)">('+pending.length+'条)</span></h3>';
+  if(pending.length===0){
+    h+='<div style="text-align:center;padding:20px;color:var(--text3);font-size:13px">暂无待审核的上报</div>';
   }else{
-    copyInviteLink();
-    toast('链接已复制，打开微信发给好友')
+    pending.slice().reverse().forEach(function(r){
+      h+=renderReportRow(r,true);
+    });
+  }
+  h+='</div>';
+
+  // Approved section
+  h+='<div class="comm-section"><h3>✅ 已通过 <span style="font-size:12px;color:var(--accent2)">('+approved.length+'条)</span></h3>';
+  if(approved.length===0){
+    h+='<div style="text-align:center;padding:10px;color:var(--text3);font-size:12px">暂无已审核记录</div>';
+  }else{
+    approved.slice().reverse().slice(0,10).forEach(function(r){
+      h+=renderReportRow(r,false);
+    });
+    if(approved.length>10)h+='<div style="text-align:center;padding:8px;font-size:12px;color:var(--text3)">仅显示最近10条</div>';
+  }
+  h+='</div>';
+
+  // Rejected section
+  if(rejected.length>0){
+    h+='<div class="comm-section"><h3>❌ 已驳回 <span style="font-size:12px;color:var(--warn)">('+rejected.length+'条)</span></h3>';
+    rejected.slice().reverse().slice(0,5).forEach(function(r){
+      h+=renderReportRow(r,false);
+    });
+    h+='</div>';
+  }
+
+  document.getElementById('adminEarnings').innerHTML=h;
+}
+
+function renderReportRow(r,showActions){
+  var p=PLATFORMS.find(function(x){return x.id===r.pid});
+  var emoji=p?p.emoji:'📦';
+  var statusColor=r.status==='approved'?'var(--accent2)':r.status==='rejected'?'var(--warn)':'var(--gold)';
+  var statusText=r.status==='approved'?'已通过':r.status==='rejected'?'已驳回':'待审核';
+  var h='<div class="comm-row" style="flex-direction:column;align-items:stretch;gap:8px">';
+  h+='<div style="display:flex;align-items:center;gap:10px">';
+  h+='<div class="comm-icon">'+emoji+'</div>';
+  h+='<div class="comm-detail" style="flex:1"><strong>'+esc(r.uname)+'</strong> · '+esc(r.pname);
+  h+='<small>'+r.orders+'单 · '+fmtD(r.at)+'</small></div>';
+  h+='<div style="text-align:right"><div style="font-weight:700;color:'+statusColor+';font-size:16px">¥'+r.amount.toFixed(2)+'</div>';
+  h+='<div style="font-size:10px;color:'+statusColor+'">'+statusText+'</div></div></div>';
+  if(r.note)h+='<div style="font-size:11px;color:var(--text3);padding:4px 0 4px 46px">📝 '+esc(r.note)+'</div>';
+  if(showActions&&r.status==='pending'){
+    h+='<div style="display:flex;gap:8px;justify-content:flex-end">';
+    h+='<button class="a-btn" style="background:rgba(98,250,211,.15);color:var(--accent2);padding:6px 16px;font-size:12px" onclick="approveEarning(\''+r.id+'\')">✅ 通过</button>';
+    h+='<button class="a-btn danger" style="padding:6px 16px;font-size:12px" onclick="rejectEarning(\''+r.id+'\')">❌ 驳回</button>';
+    h+='</div>';
+  }
+  h+='</div>';
+  return h;
+}
+
+function approveEarning(id){
+  var reports=getReports();
+  var r=reports.find(function(x){return x.id===id});
+  if(!r)return;
+  if(!confirm('确认通过 '+r.uname+' 在 '+r.pname+' 上报的 ¥'+r.amount.toFixed(2)+' 收益？'))return;
+  r.status='approved';
+  r.vt=new Date().toISOString();
+  saveReports(reports);
+  toast('✅ 已审核通过');
+  renderAdmEarnings();
+}
+
+function rejectEarning(id){
+  var reports=getReports();
+  var r=reports.find(function(x){return x.id===id});
+  if(!r)return;
+  var reason=prompt('驳回原因（可选）：','');
+  if(reason===null)return;
+  r.status='rejected';
+  r.vt=new Date().toISOString();
+  r.rejectReason=reason;
+  saveReports(reports);
+  toast('已驳回');
+  renderAdmEarnings();
+}
+
+/* ===== CLOUD SYNC UI ===== */
+function renderSyncStatus(){
+  var st=SYNC.getStatus();
+  var savedConfig=JSON.parse(localStorage.getItem('jyb_sync')||'null');
+  var h='<div class="sync-status '+(st.ok?'ok':'off')+'">';
+  h+='<span class="sync-dot"></span>';
+  h+='<span>'+st.msg+'</span>';
+  if(st.ok)h+='<span style="margin-left:auto;font-size:11px;color:var(--text3)">';
+  var lastSync=localStorage.getItem('jyb_sync_ts');
+  if(lastSync){var d=new Date(parseInt(lastSync));h+='上次同步: '+(d.getMonth()+1)+'/'+d.getDate()+' '+d.getHours()+':'+String(d.getMinutes()).padStart(2,'0')}
+  h+='</span>';
+  h+='</div>';
+  document.getElementById('syncStatusBox').innerHTML=h;
+  if(savedConfig){
+    document.getElementById('syncApiKey').value=savedConfig.k||'';
+    document.getElementById('syncBinId').value=savedConfig.b||'';
   }
 }
-function shareQQ(){
-  var u=DS.cur();if(!u){toast('请先登录',true);return}
-  var link=getInviteLink(u);
-  var title='聚佣宝 - 全网50+推广平台 一起赚钱';
-  var qqUrl='https://connect.qq.com/widget/shareqq/index.html?url='+encodeURIComponent(link)+'&title='+encodeURIComponent(title)+'&desc='+encodeURIComponent('覆盖网盘拉新、APP推广、电商CPS等12大行业');
-  window.open(qqUrl,'_blank','width=600,height=400')
+function saveSyncConfig(){
+  var k=document.getElementById('syncApiKey').value.trim();
+  var b=document.getElementById('syncBinId').value.trim();
+  if(!k||!b){toast('请填写API Key和Bin ID',true);return}
+  SYNC.saveConfig(k,b);
+  // Push current data to cloud
+  toast('正在同步到云端...');
+  SYNC.push().then(function(ok){
+    if(ok){toast('☁️ 配置已保存，数据已同步到云端')}
+    else{toast('配置已保存，但云端同步失败，请检查Key和Bin ID',true)}
+    renderSyncStatus();
+  }).catch(function(){toast('配置已保存',false);renderSyncStatus()});
 }
-function getInviteLink(u){
-  var base=location.origin+location.pathname;
-  return base+'?invite='+u.code
+function syncFromCloud(){
+  if(!SYNC.isConfigured()){toast('请先配置API Key和Bin ID',true);return}
+  toast('正在从云端拉取...');
+  SYNC.pull().then(function(ok){
+    if(ok){toast('️ 云端数据已同步到本地');renderAdmin();renderHome();renderProf();renderEarn();renderTeam()}
+    else{toast('云端拉取失败，请检查配置',true)}
+  }).catch(function(){toast('云端拉取失败',true)});
 }
-function genPoster(){
-  var u=DS.cur();if(!u){toast('请先登录',true);return}
-  var canvas=document.getElementById('posterCanvas');
-  var ctx=canvas.getContext('2d');
-  canvas.width=640;canvas.height=960;
-  var grad=ctx.createLinearGradient(0,0,640,960);
-  grad.addColorStop(0,'#0f0524');grad.addColorStop(0.5,'#1a0a3e');grad.addColorStop(1,'#070A14');
-  ctx.fillStyle=grad;ctx.fillRect(0,0,640,960);
-  ctx.fillStyle='rgba(124,92,255,0.15)';ctx.beginPath();ctx.arc(500,150,200,0,Math.PI*2);ctx.fill();
-  ctx.fillStyle='rgba(105,231,255,0.1)';ctx.beginPath();ctx.arc(100,700,250,0,Math.PI*2);ctx.fill();
-  ctx.fillStyle='#fff';ctx.font='bold 42px sans-serif';ctx.textAlign='center';ctx.fillText('💎 聚佣宝',320,120);
-  ctx.fillStyle='#69E7FF';ctx.font='bold 28px sans-serif';ctx.fillText('全网50+推广平台',320,180);
-  ctx.fillText('一站赚钱',320,220);
-  ctx.fillStyle='#9AA7C7';ctx.font='16px sans-serif';
-  var cats=['网盘拉新','APP推广','浏览器推广','AI推广','海外项目','电商CPS','生活服务','游戏推广','社交推广','金融保险','知识付费'];
-  cats.forEach(function(c,i){ctx.fillText('· '+c,320,280+i*30)});
-  ctx.fillStyle='#FFD66B';ctx.font='bold 22px sans-serif';ctx.fillText('🎁 注册即享专属福利',320,660);
-  ctx.fillStyle='rgba(255,255,255,0.08)';roundRect(ctx,160,700,320,80,16);ctx.fill();
-  ctx.strokeStyle='rgba(105,231,255,0.4)';ctx.lineWidth=2;ctx.setLineDash([6,4]);roundRect(ctx,160,700,320,80,16);ctx.stroke();ctx.setLineDash([]);
-  ctx.fillStyle='#69E7FF';ctx.font='bold 32px monospace';ctx.fillText(u.code,320,745);
-  ctx.fillStyle='#5A6A8A';ctx.font='13px sans-serif';ctx.fillText('邀请码 · 长按图中二维码注册',320,770);
-  ctx.fillStyle='#7C5CFF';roundRect(ctx,180,810,280,50,25);ctx.fill();
-  ctx.fillStyle='#fff';ctx.font='bold 16px sans-serif';ctx.fillText('📱 扫码立即加入',320,842);
-  ctx.fillStyle='#5A6A8A';ctx.font='12px sans-serif';ctx.fillText(getInviteLink(u),320,900);
-  document.getElementById('posterArea').style.display='block'
-}
-function roundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y)}
-function savePoster(){
-  var canvas=document.getElementById('posterCanvas');
-  var link=document.createElement('a');link.download='聚佣宝推广海报.png';link.href=canvas.toDataURL('image/png');link.click();toast('海报已保存')
-}
-// ===== 数据同步（导入导出） =====
+
+/* ===== EXPORT/IMPORT ===== */
 function exportAllData(){
   var data={
-    users:DS.users(),
+    platforms:PLATFORMS,
     links:JSON.parse(localStorage.getItem('jyb_links')||'{}'),
-    api:JSON.parse(localStorage.getItem('jyb_api')||'{}'),
-    settings:JSON.parse(localStorage.getItem('jyb_s')||'{}'),
-    orders:JSON.parse(localStorage.getItem('jyb_o')||'[]'),
-    commission:JSON.parse(localStorage.getItem('jyb_cm')||'{}'),
-    time:new Date().toISOString()
+    users:DS.users(),orders:JSON.parse(localStorage.getItem('jyb_o')||'[]'),
+    comms:JSON.parse(localStorage.getItem('jyb_cm')||'[]'),
+    settings:DS.getSet(),exportTime:new Date().toISOString()
   };
   var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
-  var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='聚佣宝数据备份_'+new Date().toISOString().slice(0,10)+'.json';a.click();toast('✅ 数据已导出')
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='聚佣宝数据_'+Date.now()+'.json';a.click();
+  toast('数据已导出')
 }
 function importData(){
   var input=document.createElement('input');input.type='file';input.accept='.json';
@@ -847,21 +1447,326 @@ function importData(){
     reader.onload=function(ev){
       try{
         var data=JSON.parse(ev.target.result);
-        if(data.users)localStorage.setItem('jyb_u',JSON.stringify(data.users));
+        if(data.platforms)PLATFORMS=data.platforms;
         if(data.links)localStorage.setItem('jyb_links',JSON.stringify(data.links));
-        if(data.api)localStorage.setItem('jyb_api',JSON.stringify(data.api));
-        if(data.settings)localStorage.setItem('jyb_s',JSON.stringify(data.settings));
+        if(data.users)localStorage.setItem('jyb_u',JSON.stringify(data.users));
         if(data.orders)localStorage.setItem('jyb_o',JSON.stringify(data.orders));
-        if(data.commission)localStorage.setItem('jyb_cm',JSON.stringify(data.commission));
-        init();toast('✅ 数据已导入 ('+data.time.slice(0,10)+')')
-      }catch(err){toast('文件格式错误',true)}
+        if(data.comms)localStorage.setItem('jyb_cm',JSON.stringify(data.comms));
+        if(data.settings)localStorage.setItem('jyb_s',JSON.stringify(data.settings));
+        toast('数据已导入');renderAdmin();renderHome();renderProf();
+      }catch(err){toast('导入失败：文件格式错误',true)}
     };
-    reader.readAsText(file)
+    reader.readAsText(file);
   };
-  input.click()
+  input.click();
 }
 
-document.getElementById('btnNotif').addEventListener('click',function(){toast('暂无新消息')});
+/* ===== TEAM LEADER SYSTEM ===== */
+var LEADER_KEY='jyb_leaders';
+function getLeaderApps(){try{return JSON.parse(localStorage.getItem(LEADER_KEY))||[]}catch(e){return[]}}
+function saveLeaderApps(a){localStorage.setItem(LEADER_KEY,JSON.stringify(a));if(SYNC.isConfigured())SYNC.push().catch(function(){})}
+
+function isLeader(u){return u&&(u.role==='leader'||u.role==='admin')}
+
+function getLeaderTier(uid){
+  var st=DS.getSet();
+  var members=DS.team(uid);
+  var reports=getReports().filter(function(r){return r.status==='approved'});
+  var memberIds=members.map(function(m){return m.id});
+  var teamEarn=0;
+  reports.forEach(function(r){if(memberIds.indexOf(r.uid)>=0)teamEarn+=r.amount});
+  var sMin=st.silverMin||5,sEarn=st.silverEarn||100;
+  var gMin=st.goldMin||15,gEarn=st.goldEarn||500;
+  if(members.length>=gMin&&teamEarn>=gEarn)return{tier:'gold',label:'金牌团长',emoji:'🥇',share:st.goldShare||.015};
+  if(members.length>=sMin&&teamEarn>=sEarn)return{tier:'silver',label:'银牌团长',emoji:'🥈',share:st.silverShare||.01};
+  return{tier:'none',label:'普通团长',emoji:'👑',share:st.leaderShare||.01};
+}
+
+function submitLeaderApply(){
+  if(!curUser){toast('请先登录',true);return}
+  var name=document.getElementById('applyName').value.trim();
+  var wechat=document.getElementById('applyWechat').value.trim();
+  var reason=document.getElementById('applyReason').value.trim();
+  if(!name){toast('请填写真实姓名',true);return}
+  if(!wechat){toast('请填写微信号',true);return}
+  // Check if already applied
+  var apps=getLeaderApps();
+  var existing=apps.find(function(a){return a.uid===curUser.id&&a.status==='pending'});
+  if(existing){toast('你已有待审核的申请',true);return}
+  if(isLeader(curUser)){toast('你已经是团长了',true);return}
+  apps.push({
+    id:'la_'+Date.now(),
+    uid:curUser.id,
+    uname:curUser.nick,
+    name:name,
+    wechat:wechat,
+    reason:reason,
+    status:'pending',
+    at:new Date().toISOString()
+  });
+  saveLeaderApps(apps);
+  closeModal('modalLeaderApply');
+  document.getElementById('applyName').value='';
+  document.getElementById('applyWechat').value='';
+  document.getElementById('applyReason').value='';
+  toast('✅ 申请已提交，等待管理员审核');
+}
+
+function approveLeader(uid){
+  var apps=getLeaderApps();
+  var a=apps.find(function(x){return x.uid===uid&&x.status==='pending'});
+  if(a){a.status='approved';a.vt=new Date().toISOString();saveLeaderApps(apps)}
+  // Update user role
+  var users=DS.users();
+  var u=users.find(function(x){return x.id===uid});
+  if(u){u.role='leader';localStorage.setItem('jyb_u',JSON.stringify(users))}
+  toast('✅ 已批准为团长');
+  renderAdmLeaders();
+}
+
+function rejectLeader(uid){
+  var reason=prompt('驳回原因（可选）：');
+  if(reason===null)return;
+  var apps=getLeaderApps();
+  var a=apps.find(function(x){return x.uid===uid&&x.status==='pending'});
+  if(a){a.status='rejected';a.vt=new Date().toISOString();a.rejectReason=reason;saveLeaderApps(apps)}
+  toast('已驳回');
+  renderAdmLeaders();
+}
+
+function revokeLeader(uid){
+  if(!confirm('确定取消此人的团长资格？'))return;
+  var users=DS.users();
+  var u=users.find(function(x){return x.id===uid});
+  if(u){u.role='user';localStorage.setItem('jyb_u',JSON.stringify(users))}
+  toast('已取消团长资格');
+  renderAdmLeaders();
+}
+
+/* Leader Dashboard - shows detailed per-member breakdown */
+function renderLeaderDashboard(){
+  curUser=DS.cur();
+  if(!curUser||!isLeader(curUser)){
+    document.getElementById('leaderContent').innerHTML='<div class="empty-state"><div class="empty-icon">👑</div><p>仅团长可访问此页面</p></div>';
+    return;
+  }
+  var members=DS.team(curUser.id);
+  var reports=getReports();
+  var st=DS.getSet();
+  var tier=getLeaderTier(curUser.id);
+  var sharePct=(tier.share*100).toFixed(1);
+  // Calculate per-member stats
+  var memberStats=members.map(function(m){
+    var mReports=reports.filter(function(r){return r.uid===m.id&&r.status==='approved'});
+    var totalEarn=mReports.reduce(function(s,r){return s+r.amount},0);
+    var totalOrders=mReports.reduce(function(s,r){return s+r.orders},0);
+    var pendingReports=reports.filter(function(r){return r.uid===m.id&&r.status==='pending'});
+    var pendingAmt=pendingReports.reduce(function(s,r){return s+r.amount},0);
+    var subTeam=DS.team(m.id);
+    var leaderBonus=totalEarn*(tier.share);
+    return {user:m,reports:mReports,totalEarn:totalEarn,totalOrders:totalOrders,pendingAmt:pendingAmt,subCount:subTeam.length,leaderBonus:leaderBonus};
+  });
+  var totalTeamEarn=memberStats.reduce(function(s,ms){return s+ms.totalEarn},0);
+  var totalPending=memberStats.reduce(function(s,ms){return s+ms.pendingAmt},0);
+  var totalOrders=memberStats.reduce(function(s,ms){return s+ms.totalOrders},0);
+  var myLeaderBonus=totalTeamEarn*(tier.share);
+
+  var h='<div class="leader-card">';
+  h+='<div class="leader-badge">'+tier.emoji+' '+tier.label+'</div>';
+  h+='<h3 style="font-size:18px;font-weight:700;margin-bottom:4px">'+esc(curUser.nick)+'</h3>';
+  h+='<p style="font-size:12px;color:var(--text2)">邀请码：'+curUser.code+' · 分成比例'+sharePct+'%</p></div>';
+
+  h+='<div class="stats-row">';
+  h+='<div class="stat-box highlight"><div class="stat-val">'+members.length+'</div><div class="stat-label">团队成员</div></div>';
+  h+='<div class="stat-box"><div class="stat-val">¥'+totalTeamEarn.toFixed(0)+'</div><div class="stat-label">团队总收益</div></div>';
+  h+='<div class="stat-box"><div class="stat-val" style="color:var(--gold);background:none;-webkit-text-fill-color:var(--gold)">¥'+myLeaderBonus.toFixed(1)+'</div><div class="stat-label">我的团长奖励</div></div></div>';
+
+  h+='<div class="card" style="margin-bottom:16px"><div class="card-title">💡 团长收益说明</div>';
+  h+='<p style="font-size:12px;color:var(--text2);line-height:1.6">成员完成任务赚的钱100%归成员，不从佣金中扣。</p>';
+  h+='<p style="font-size:12px;color:var(--text2);line-height:1.6;margin-top:4px">平台额外发放团队成员收益的 <strong style="color:var(--accent2)">'+sharePct+'%</strong> 作为你的'+tier.label+'管理奖励。</p>';
+  // Next tier upgrade hint
+  if(tier.tier==='none'){
+    var sMin=st.silverMin||5,sEarn=st.silverEarn||100;
+    h+='<p style="font-size:11px;color:var(--gold);margin-top:8px">🎯 再招募 '+(Math.max(0,sMin-members.length))+' 人且团队收益达 ¥'+sEarn+' 可升级为🥈银牌团长（分成'+((st.silverShare||.01)*100).toFixed(1)+'%）</p>';
+  }else if(tier.tier==='silver'){
+    var gMin=st.goldMin||15,gEarn=st.goldEarn||500;
+    h+='<p style="font-size:11px;color:var(--gold);margin-top:8px">🎯 再招募 '+(Math.max(0,gMin-members.length))+' 人且团队收益达 ¥'+gEarn+' 可升级为🥇金牌团长（分成'+((st.goldShare||.015)*100).toFixed(1)+'%）</p>';
+  }else{
+    h+='<p style="font-size:11px;color:var(--accent2);margin-top:8px">✨ 已达最高等级</p>';
+  }
+  h+='</div>';
+
+  h+='<div class="comm-section"><h3>👥 团队成员明细</h3>';
+  if(members.length===0){
+    h+='<div class="empty-state" style="padding:20px"><p>还没有团队成员<br>分享邀请码招募推广者加入</p></div>';
+  }else{
+    memberStats.forEach(function(ms){
+      var m=ms.user;
+      var mRole=m.role==='leader'?'<span style="font-size:10px;padding:1px 6px;border-radius:4px;background:rgba(255,214,107,.12);color:var(--gold);margin-left:4px">团长</span>':'';
+      h+='<div class="leader-member-card">';
+      h+='<div class="leader-member-header">';
+      h+='<div class="leader-member-avatar">'+m.nick.charAt(0).toUpperCase()+'</div>';
+      h+='<div style="flex:1"><div style="font-size:14px;font-weight:600">'+esc(m.nick)+mRole+'</div>';
+      h+='<div style="font-size:11px;color:var(--text3)">邀请码 '+m.code+' · 下级'+ms.subCount+'人</div></div>';
+      h+='</div>';
+      h+='<div class="leader-member-stats">';
+      h+='<div class="leader-member-stat"><div class="lm-val">¥'+ms.totalEarn.toFixed(0)+'</div><div class="lm-label">已审收益</div></div>';
+      h+='<div class="leader-member-stat"><div class="lm-val">'+ms.totalOrders+'</div><div class="lm-label">完成单数</div></div>';
+      h+='<div class="leader-member-stat"><div class="lm-val" style="color:var(--gold)">¥'+ms.leaderBonus.toFixed(1)+'</div><div class="lm-label">我的奖励</div></div>';
+      h+='<div class="leader-member-stat"><div class="lm-val" style="color:var(--text3)">¥'+ms.pendingAmt.toFixed(0)+'</div><div class="lm-label">待审核</div></div>';
+      h+='</div>';
+      if(ms.reports.length>0){
+        h+='<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border)">';
+        ms.reports.slice(-3).reverse().forEach(function(r){
+          var p=PLATFORMS.find(function(x){return x.id===r.pid});
+          h+='<div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text3);padding:2px 0">';
+          h+='<span>'+(p?p.emoji:'')+' '+esc(r.pname)+' '+r.orders+'单</span>';
+          h+='<span style="color:var(--accent2)">¥'+r.amount.toFixed(2)+'</span></div>';
+        });
+        h+='</div>';
+      }
+      h+='</div>';
+    });
+  }
+  h+='</div>';
+  h+='<button class="btn-primary" style="border-radius:14px;font-size:14px" onclick="openModal(\'modalShare\')">📤 邀请新成员加入</button>';
+
+  document.getElementById('leaderContent').innerHTML=h;
+}
+
+/* Admin Leader Management */
+function renderAdmLeaders(){
+  var apps=getLeaderApps();
+  var users=DS.users();
+  var leaders=users.filter(function(u){return u.role==='leader'});
+  var reports=getReports();
+  var st=DS.getSet();
+  var prPct=((st.platformReward||.03)*100).toFixed(1);
+  var lsPct=((st.leaderShare||.01)*100).toFixed(1);
+  var netPct=((st.platformReward||.03)-(st.leaderShare||.01))*100;
+
+  var h='';
+
+  // Platform overview
+  var allApproved=reports.filter(function(r){return r.status==='approved'});
+  var totalTeamEarn=allApproved.reduce(function(s,r){return s+r.amount},0);
+  var totalPlatformReward=totalTeamEarn*(st.platformReward||.03);
+  var totalLeaderPay=totalTeamEarn*(st.leaderShare||.01);
+  var totalNetProfit=totalPlatformReward-totalLeaderPay;
+
+  h+='<div class="card" style="margin-bottom:12px;background:linear-gradient(135deg,rgba(98,250,211,.06),rgba(124,92,255,.04));border-color:rgba(98,250,211,.12)">';
+  h+='<div class="card-title">🏦 平台收益总览</div>';
+  h+='<div class="stats-row" style="margin-bottom:0">';
+  h+='<div class="stat-box"><div class="stat-val">¥'+totalTeamEarn.toFixed(0)+'</div><div class="stat-label">团队总收益</div></div>';
+  h+='<div class="stat-box highlight"><div class="stat-val">¥'+totalPlatformReward.toFixed(0)+'</div><div class="stat-label">平台奖励('+prPct+'%)</div></div>';
+  h+='<div class="stat-box"><div class="stat-val" style="color:var(--accent);background:none;-webkit-text-fill-color:var(--accent)">¥'+totalNetProfit.toFixed(0)+'</div><div class="stat-label">你的净利润('+netPct.toFixed(1)+'%)</div></div>';
+  h+='</div></div>';
+
+  // Leader summary
+  h+='<div class="card" style="margin-bottom:12px"><div class="card-title">👑 团长总览</div>';
+  h+='<div class="stats-row" style="margin-bottom:0">';
+  h+='<div class="stat-box"><div class="stat-val">'+leaders.length+'</div><div class="stat-label">现任团长</div></div>';
+  h+='<div class="stat-box"><div class="stat-val" style="color:var(--gold);background:none;-webkit-text-fill-color:var(--gold)">¥'+totalLeaderPay.toFixed(0)+'</div><div class="stat-label">团长分成('+lsPct+'%)</div></div>';
+  h+='<div class="stat-box highlight"><div class="stat-val">'+apps.filter(function(a){return a.status==='pending'}).length+'</div><div class="stat-label">待审核申请</div></div>';
+  h+='</div></div>';
+
+  // Pending applications
+  var pending=apps.filter(function(a){return a.status==='pending'});
+  if(pending.length>0){
+    h+='<div class="comm-section"><h3>⏳ 待审核申请 ('+pending.length+')</h3>';
+    pending.slice().reverse().forEach(function(a){
+      h+='<div class="comm-row" style="flex-direction:column;align-items:stretch;gap:8px">';
+      h+='<div style="display:flex;align-items:center;gap:10px">';
+      h+='<div class="leader-member-avatar">'+a.uname.charAt(0).toUpperCase()+'</div>';
+      h+='<div style="flex:1"><div style="font-size:14px;font-weight:600">'+esc(a.uname)+'</div>';
+      h+='<div style="font-size:11px;color:var(--text3)">姓名：'+esc(a.name)+' · 微信：'+esc(a.wechat)+'</div></div>';
+      h+='<span class="apply-status-badge pending">待审核</span></div>';
+      if(a.reason)h+='<div style="font-size:12px;color:var(--text2);padding:4px 0 4px 46px">📝 '+esc(a.reason)+'</div>';
+      h+='<div style="font-size:11px;color:var(--text3);padding-left:46px">申请时间：'+fmtD(a.at)+'</div>';
+      h+='<div style="display:flex;gap:8px;justify-content:flex-end">';
+      h+='<button class="a-btn" style="background:rgba(98,250,211,.15);color:var(--accent2);padding:6px 16px;font-size:12px" onclick="approveLeader(\''+a.uid+'\')">✅ 批准</button>';
+      h+='<button class="a-btn danger" style="padding:6px 16px;font-size:12px" onclick="rejectLeader(\''+a.uid+'\')">❌ 驳回</button>';
+      h+='</div></div>';
+    });
+    h+='</div>';
+  }
+
+  // Current leaders with detailed stats
+  h+='<div class="comm-section"><h3>👑 现任团长 ('+leaders.length+')</h3>';
+  if(leaders.length===0){
+    h+='<div style="text-align:center;padding:20px;color:var(--text3);font-size:13px">暂无团长</div>';
+  }else{
+    leaders.forEach(function(ld){
+      var members=DS.team(ld.id);
+      var ldEarnings=DS.earn(ld.id);
+      var ldTier=getLeaderTier(ld.id);
+      var memberTotalEarn=0,memberTotalOrders=0,memberPending=0;
+      members.forEach(function(m){
+        var mReports=reports.filter(function(r){return r.uid===m.id});
+        var approved=mReports.filter(function(r){return r.status==='approved'});
+        var pending2=mReports.filter(function(r){return r.status==='pending'});
+        memberTotalEarn+=approved.reduce(function(s,r){return s+r.amount},0);
+        memberTotalOrders+=approved.reduce(function(s,r){return s+r.orders},0);
+        memberPending+=pending2.reduce(function(s,r){return s+r.amount},0);
+      });
+      var ldBonus=memberTotalEarn*ldTier.share;
+      var tierBadgeColor=ldTier.tier==='gold'?'background:linear-gradient(135deg,#FFD66B,#FF9A44)':ldTier.tier==='silver'?'background:linear-gradient(135deg,#C0C0C0,#A0A0A0)':'background:linear-gradient(135deg,#7C5CFF,#5C9CFF)';
+      h+='<div class="leader-member-card">';
+      h+='<div class="leader-member-header">';
+      h+='<div class="leader-member-avatar" style="'+tierBadgeColor+'">'+ld.nick.charAt(0).toUpperCase()+'</div>';
+      h+='<div style="flex:1"><div style="font-size:14px;font-weight:600">'+esc(ld.nick)+' <span style="font-size:11px;color:var(--gold)">'+ldTier.emoji+ldTier.label+'</span></div>';
+      h+='<div style="font-size:11px;color:var(--text3)">邀请码 '+ld.code+' · 分成'+(ldTier.share*100).toFixed(1)+'% · '+fmtD(ld.at)+'</div></div>';
+      h+='<button class="a-btn danger" style="font-size:11px" onclick="revokeLeader(\''+ld.id+'\')">取消团长</button>';
+      h+='</div>';
+      h+='<div class="leader-member-stats">';
+      h+='<div class="leader-member-stat"><div class="lm-val">'+members.length+'</div><div class="lm-label">直接成员</div></div>';
+      h+='<div class="leader-member-stat"><div class="lm-val">¥'+memberTotalEarn.toFixed(0)+'</div><div class="lm-label">团队已审收益</div></div>';
+      h+='<div class="leader-member-stat"><div class="lm-val" style="color:var(--gold)">¥'+ldBonus.toFixed(1)+'</div><div class="lm-label">团长奖励('+lsPct+'%)</div></div>';
+      h+='<div class="leader-member-stat"><div class="lm-val" style="color:var(--text3)">¥'+memberPending.toFixed(0)+'</div><div class="lm-label">待审核</div></div>';
+      h+='</div>';
+      // Show member list
+      if(members.length>0){
+        h+='<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border)">';
+        h+='<div style="font-size:11px;color:var(--text3);margin-bottom:4px">团队成员：</div>';
+        members.forEach(function(m){
+          var mRep=reports.filter(function(r){return r.uid===m.id&&r.status==='approved'});
+          var mAmt=mRep.reduce(function(s,r){return s+r.amount},0);
+          h+='<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;font-size:12px">';
+          h+='<span style="color:var(--text2)">'+esc(m.nick)+'</span>';
+          h+='<span style="color:var(--text3)">'+DS.team(m.id).length+'名下级</span>';
+          h+='<span style="color:var(--accent2);font-weight:600">¥'+mAmt.toFixed(2)+'</span></div>';
+        });
+        h+='</div>';
+      }
+      h+='</div>';
+    });
+  }
+  h+='</div>';
+
+  // Application history
+  var history=apps.filter(function(a){return a.status!=='pending'});
+  if(history.length>0){
+    h+='<div class="comm-section"><h3>📋 历史申请</h3>';
+    history.slice().reverse().slice(0,10).forEach(function(a){
+      var badge=a.status==='approved'?'<span class="apply-status-badge approved">已通过</span>':'<span class="apply-status-badge rejected">已驳回</span>';
+      h+='<div class="comm-row"><div class="comm-info"><div class="comm-icon">'+(a.status==='approved'?'✅':'❌')+'</div>';
+      h+='<div class="comm-detail">'+esc(a.uname)+' ('+esc(a.name)+')<small>'+fmtD(a.at)+'</small></div></div>';
+      h+=badge+'</div>';
+    });
+    h+='</div>';
+  }
+
+  document.getElementById('adminLeaders').innerHTML=h;
+}
+
+// Update navLeader visibility
+function updateLeaderNav(){
+  curUser=DS.cur();
+  var nav=document.getElementById('navLeader');
+  if(nav){nav.style.display=(curUser&&isLeader(curUser))?'':'none'}
+}
+
+// ===== INIT =====
 init();
 </script>
 </body>
