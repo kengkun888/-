@@ -671,13 +671,13 @@ function init(){
 }
 
 function toast(m,e){var t=document.getElementById('toast');t.textContent=m;t.className='toast'+(e?' error':'')+' show';setTimeout(function(){t.className='toast'},2500)}
-function openModal(id){document.getElementById(id).classList.add('active');if(id==='modalShare'&&curUser){document.getElementById('shareLinkInput').value=location.origin+location.pathname+'?ref='+curUser.code}}
+function openModal(id){document.getElementById(id).classList.add('active');if(id==='modalShare'&&curUser){document.getElementById('shareLinkInput').value=getBaseURL()+'?ref='+curUser.code}}
 function closeModal(id){document.getElementById(id).classList.remove('active')}
 document.querySelectorAll('.modal-overlay').forEach(function(m){m.addEventListener('click',function(e){if(e.target===m)closeModal(m.id)})});
 
 function switchView(v,b){document.querySelectorAll('.view').forEach(function(x){x.classList.remove('active')});document.getElementById(v).classList.add('active');document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active')});b.classList.add('active');curUser=DS.cur();if(v==='viewEarnings')renderEarn();if(v==='viewTeam')renderTeam();if(v==='viewProfile')renderProf();if(v==='viewLeader')renderLeaderDashboard();updateLeaderNav();window.scrollTo(0,0)}
 function updHeader(){curUser=DS.cur()}
-function updHero(){curUser=DS.cur();var b=document.getElementById('heroCta');if(curUser){b.textContent='🎯 开始推广';b.onclick=function(){switchView('viewTeam',document.querySelectorAll('.nav-item')[2])}}else{b.textContent='🚀 立即加入';b.onclick=function(){openModal('modalLogin')}}}
+function updHero(){curUser=DS.cur();var b=document.getElementById('heroCta');if(curUser){b.textContent='👥 我的团队';b.onclick=function(){switchView('viewTeam',document.querySelectorAll('.nav-item')[3])}}else{b.textContent='🚀 立即加入';b.onclick=function(){openModal('modalLogin')}}}
 
 function showLogin(){document.getElementById('loginForm').style.display='';document.getElementById('registerForm').style.display='none'}
 function showRegister(){document.getElementById('loginForm').style.display='none';document.getElementById('registerForm').style.display='';var r=sessionStorage.getItem('jyb_ref');if(r)document.getElementById('regInviter').value=r}
@@ -800,11 +800,20 @@ function renderEarn(){
     });
     h+='</div>';
   }
-  var pr=(st.platformReward||.03)*100;
-  h+='<div class="card"><div class="card-title">💡 佣金规则</div>';
-  h+='<p style="font-size:13px;color:var(--accent2);line-height:1.7;margin-bottom:4px">✅ 你完成任务赚的钱100%归你，不从佣金中扣成</p>';
-  h+='<p style="font-size:12px;color:var(--text2);line-height:1.7">平台获得任务总收益的 <strong style="color:var(--accent)">'+pr.toFixed(1)+'%</strong> 作为推广奖励，其中部分分给团长作为管理奖励。</p>';
-  h+='<p style="font-size:12px;color:var(--text3);line-height:1.7;margin-top:8px">📌 上报收益：在任推邦等平台完成任务后，点"上报推广收益"填写实际收入，管理员审核通过后计入团队数据</p></div>';
+  h+='<div class="card"><div class="card-title">💡 佣金规则与晋升机制</div>';
+  h+='<div style="padding:10px;background:rgba(98,250,211,.06);border:1px solid rgba(98,250,211,.1);border-radius:10px;margin-bottom:10px">';
+  h+='<div style="font-size:12px;font-weight:600;color:var(--accent2);margin-bottom:4px">👤 普通成员</div>';
+  h+='<p style="font-size:12px;color:var(--text2);line-height:1.6">推广任务赚的钱100%归你，不扣任何费用。上报收益后管理员审核确认。</p></div>';
+  h+='<div style="padding:10px;background:rgba(192,192,192,.06);border:1px solid rgba(192,192,192,.12);border-radius:10px;margin-bottom:10px">';
+  h+='<div style="font-size:12px;font-weight:600;color:#c0c0c0;margin-bottom:4px">🥈 银牌团长</div>';
+  h+='<p style="font-size:12px;color:var(--text2);line-height:1.6">享受团队成员完成任务时，平台额外发放的管理奖励分成。</p></div>';
+  h+='<div style="padding:10px;background:rgba(255,214,107,.06);border:1px solid rgba(255,214,107,.12);border-radius:10px;margin-bottom:10px">';
+  h+='<div style="font-size:12px;font-weight:600;color:var(--gold);margin-bottom:4px">🥇 金牌团长</div>';
+  h+='<p style="font-size:12px;color:var(--text2);line-height:1.6">团队规模更大，享受更高比例的额外管理奖励分成。</p></div>';
+  h+='<div style="padding:10px;background:linear-gradient(135deg,rgba(124,92,255,.06),rgba(105,231,255,.04));border:1px solid rgba(124,92,255,.12);border-radius:10px">';
+  h+='<div style="font-size:12px;font-weight:600;color:var(--primary);margin-bottom:6px">🎯 成员晋升机制</div>';
+  h+='<p style="font-size:11px;color:var(--text2);line-height:1.7">成员招募一定人数且团队产生收益后，可申请晋升为团长。团长下属的成员如也达标，同样可申请成为团长，享受对应等级奖励。所有团长平级，互不影响。</p></div>';
+  h+='<p style="font-size:11px;color:var(--text3);line-height:1.7;margin-top:10px">📌 上报收益：完成任务后，点"上报推广收益"填写实际收入，管理员审核通过后计入团队数据</p></div>';
   h+='<div class="comm-section"><h3>📋 返佣明细</h3>';
   if(e.r.length===0)h+='<div class="empty-state" style="padding:20px"><p>暂无返佣记录<br>邀请好友参与任务开始赚钱</p></div>';
   else e.r.slice().reverse().forEach(function(c){
@@ -822,26 +831,36 @@ function fmtD(s){var d=new Date(s);return(d.getMonth()+1)+'/'+d.getDate()+' '+d.
 function renderTeam(){
   curUser=DS.cur();
   if(!curUser){document.getElementById('teamContent').innerHTML='<div class="empty-state"><div class="empty-icon">🔐</div><p>登录后查看团队</p><br><button class="cta" style="padding:10px 24px;border-radius:20px;background:var(--primary-g);color:#fff;font-weight:600" onclick="openModal(\'modalLogin\')">立即登录</button></div>';return}
-  var h='<div class="invite-card"><h3 style="font-size:16px;font-weight:700;margin-bottom:4px">🎯 邀请好友 赚取佣金</h3>';
-  h+='<p class="invite-desc">分享你的专属邀请码，好友注册即建立推荐关系</p>';
-  h+='<div class="code-display">'+curUser.code+'</div>';
-  h+='<div class="invite-actions"><button class="btn-primary" onclick="openModal(\'modalShare\')">📤 邀请好友</button></div></div>';
-  var m=DS.team(curUser.id),sm=DS.subteam(curUser.id);
+  var baseU=getBaseURL();
+  var h='<div class="invite-card"><h3 style="font-size:16px;font-weight:700;margin-bottom:4px">🎯 推广赚佣金</h3>';
+  h+='<p class="invite-desc">分享邀请码或推广链接，好友注册自动加入你的团队</p>';
+  h+='<div style="display:flex;gap:8px;margin-bottom:12px">';
+  h+='<div style="flex:1;text-align:center;padding:10px;background:var(--glass);border-radius:10px;border:1px solid var(--border)"><div style="font-size:11px;color:var(--text3);margin-bottom:4px">邀请码</div><div class="code-display" style="font-size:20px;padding:4px 0;margin:0">'+curUser.code+'</div></div>';
+  h+='<div style="flex:1;text-align:center;padding:10px;background:var(--glass);border-radius:10px;border:1px solid var(--border)"><div style="font-size:11px;color:var(--text3);margin-bottom:4px">推广链接</div><div style="font-size:10px;color:var(--accent);word-break:break-all;line-height:1.4;padding:4px 0">'+baseU+'?ref='+curUser.code+'</div></div>';
+  h+='</div>';
+  h+='<div style="display:flex;gap:8px">';
+  h+='<button class="btn-primary" style="flex:1;border-radius:10px;font-size:13px" onclick="openModal(\'modalShare\')">📤 分享邀请</button>';
+  h+='<button style="flex:1;border-radius:10px;font-size:13px;background:var(--glass);border:1px solid var(--border);color:var(--text);cursor:pointer;padding:10px 0" onclick="copyPromoLink()">📋 复制链接</button>';
+  h+='</div></div>';
+  var m=DS.team(curUser.id);
+  var reports=getReports().filter(function(r){return r.status==='approved'});
+  var todayStr=new Date().toISOString().split('T')[0];
+  var totalEarn=0,todayEarn=0;
+  m.forEach(function(x){reports.filter(function(r){return r.uid===x.id}).forEach(function(r){totalEarn+=r.amount;if(r.at&&r.at.split('T')[0]===todayStr)todayEarn+=r.amount})});
   h+='<div class="stats-row">';
-  h+='<div class="stat-box"><div class="stat-val">'+m.length+'</div><div class="stat-label">一级成员</div></div>';
-  h+='<div class="stat-box"><div class="stat-val">'+sm.length+'</div><div class="stat-label">二级成员</div></div>';
-  h+='<div class="stat-box highlight"><div class="stat-val">'+(m.length+sm.length)+'</div><div class="stat-label">团队总人数</div></div></div>';
-  h+='<div class="comm-section"><h3><span class="level-badge l1">一级</span> 直接邀请</h3>';
-  if(m.length===0)h+='<div class="empty-state" style="padding:20px"><p>还没有邀请好友</p></div>';
-  else m.forEach(function(x){h+='<div class="team-member"><div class="team-avatar">'+x.nick.charAt(0).toUpperCase()+'</div><div class="team-info"><div class="team-name">'+esc(x.nick)+'</div><div class="team-meta">'+x.code+' · '+fmtD(x.at)+'</div></div><div class="team-comm">下级'+DS.team(x.id).length+'人</div></div>'});
+  h+='<div class="stat-box highlight"><div class="stat-val">'+m.length+'</div><div class="stat-label">团队总人数</div></div>';
+  h+='<div class="stat-box"><div class="stat-val" style="color:var(--gold);background:none;-webkit-text-fill-color:var(--gold)">¥'+totalEarn.toFixed(0)+'</div><div class="stat-label">累计收益</div></div>';
+  h+='<div class="stat-box"><div class="stat-val" style="color:var(--accent2);background:none;-webkit-text-fill-color:var(--accent2)">¥'+todayEarn.toFixed(0)+'</div><div class="stat-label">今日收益</div></div></div>';
+  h+='<div class="comm-section"><h3>👥 团队成员</h3>';
+  if(m.length===0){h+='<div class="empty-state" style="padding:20px"><p>还没有邀请好友<br>分享推广链接开始赚钱</p></div>';}
+  else{m.forEach(function(x){var xr=reports.filter(function(r){return r.uid===x.id});var xT=xr.reduce(function(s,r){return s+r.amount},0);var xD=xr.filter(function(r){return r.at&&r.at.split('T')[0]===todayStr}).reduce(function(s,r){return s+r.amount},0);h+='<div class="team-member"><div class="team-avatar">'+x.nick.charAt(0).toUpperCase()+'</div><div class="team-info"><div class="team-name">'+esc(x.nick)+'</div><div class="team-meta">'+x.code+' · '+fmtD(x.at)+'</div></div><div style="text-align:right"><div style="font-size:13px;font-weight:700;color:var(--accent2)">¥'+xT.toFixed(0)+'</div><div style="font-size:10px;color:var(--text3)">今日¥'+xD.toFixed(0)+'</div></div></div>'});}
   h+='</div>';
-  h+='<div class="comm-section"><h3><span class="level-badge l2">二级</span> 间接邀请</h3>';
-  if(sm.length===0)h+='<div class="empty-state" style="padding:20px"><p>暂无二级成员</p></div>';
-  else sm.forEach(function(x){var inv=DS.users().find(function(u){return u.id===x.inv});h+='<div class="team-member"><div class="team-avatar" style="background:rgba(255,214,107,.12)">'+x.nick.charAt(0).toUpperCase()+'</div><div class="team-info"><div class="team-name">'+esc(x.nick)+'</div><div class="team-meta">由 '+(inv?esc(inv.nick):'未知')+' 邀请</div></div></div>'});
-  h+='</div>';
+  if(!isLeader(curUser)){var apps=getLeaderApps();var myApp=apps.find(function(a){return a.uid===curUser.id});if(!myApp||myApp.status==='rejected'){h+='<div class="card" style="margin:16px 0 0;background:linear-gradient(135deg,rgba(124,92,255,.08),rgba(105,231,255,.05));border:1px solid rgba(124,92,255,.15);border-radius:12px;padding:16px">';h+='<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span style="font-size:24px">🎯</span><div><div style="font-size:14px;font-weight:700">申请成为团长</div><div style="font-size:11px;color:var(--text3)">享受团队成员的平台额外奖励分成</div></div></div>';h+='<button class="btn-primary" style="border-radius:10px;font-size:13px;width:100%" onclick="openModal(\'modalLeaderApply\')">📤 提交团长申请</button></div>';}else if(myApp.status==='pending'){h+='<div class="card" style="margin:16px 0 0;background:rgba(255,214,107,.06);border:1px solid rgba(255,214,107,.12);border-radius:12px;padding:14px"><p style="font-size:13px;color:var(--gold)">⏳ 团长申请审核中，请耐心等待</p></div>';}else{h+='<div class="card" style="margin:16px 0 0;background:rgba(98,250,211,.06);border:1px solid rgba(98,250,211,.12);border-radius:12px;padding:14px"><p style="font-size:13px;color:var(--accent2)">✅ 你已成为团长！</p><button class="btn-primary" style="border-radius:10px;font-size:13px;width:100%;margin-top:8px" onclick="switchView(\'viewLeader\',document.getElementById(\'navLeader\'))">📊 进入团长仪表盘</button></div>';}}
   document.getElementById('teamContent').innerHTML=h
 }
 function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}
+function getBaseURL(){return location.origin+location.pathname}
+function copyPromoLink(){var l=getBaseURL()+'?ref='+(curUser?curUser.code:'');if(navigator.clipboard)navigator.clipboard.writeText(l).then(function(){toast('推广链接已复制')}).catch(function(){toast('请手动复制',true)});else{toast('请手动复制链接',true)}}
 
 function renderProf(){
   curUser=DS.cur();updateLeaderNav();var h='';
@@ -932,15 +951,17 @@ function genPoster(){
   ctx.fillText('• AI推广 ¥4-10/单',180,260);
   ctx.fillText('• 电商CPS 佣金5-70%',180,285);
   ctx.font='bold 16px sans-serif';ctx.fillStyle='#FFD66B';ctx.fillText('扫码注册 立即赚钱',180,340);
-  var link=location.origin+location.pathname;
-  ctx.font='11px sans-serif';ctx.fillStyle='#5A6A8A';ctx.fillText(link,180,380);
+  var promoUrl=getBaseURL()+(curUser?'?ref='+curUser.code:'');
+  ctx.font='11px sans-serif';ctx.fillStyle='#5A6A8A';ctx.fillText(promoUrl,180,380);
   if(curUser){ctx.font='13px sans-serif';ctx.fillStyle='#69E7FF';ctx.fillText('邀请码：'+curUser.code,180,410)}
-  ctx.font='11px sans-serif';ctx.fillStyle='#3a4a6a';ctx.fillText('长按识别图中二维码',180,460);
-  // QR placeholder
-  ctx.fillStyle='rgba(255,255,255,0.1)';ctx.fillRect(130,420,100,100);
-  ctx.strokeStyle='rgba(255,255,255,0.2)';ctx.strokeRect(130,420,100,100);
-  ctx.font='10px sans-serif';ctx.fillStyle='#5A6A8A';ctx.fillText('QR',180,475);
-  document.getElementById('posterArea').style.display='block';
+  ctx.font='11px sans-serif';ctx.fillStyle='#3a4a6a';ctx.fillText('长按识别图中二维码',180,500);
+  // Generate real QR code via API
+  var qrUrl='https://api.qrserver.com/v1/create-qr-code/?size=120x120&data='+encodeURIComponent(promoUrl)+'&bgcolor=ffffff&color=000000';
+  var qrImg=new Image();
+  qrImg.crossOrigin='anonymous';
+  qrImg.onload=function(){ctx.drawImage(qrImg,120,415,120,120);document.getElementById('posterArea').style.display='block'};
+  qrImg.onerror=function(){ctx.fillStyle='rgba(255,255,255,0.15)';ctx.fillRect(130,420,100,100);ctx.strokeStyle='rgba(255,255,255,0.3)';ctx.strokeRect(130,420,100,100);ctx.font='11px sans-serif';ctx.fillStyle='#5A6A8A';ctx.fillText('请手动扫码',180,475);document.getElementById('posterArea').style.display='block'};
+  qrImg.src=qrUrl;
 }
 function savePoster(){
   var canvas=document.getElementById('posterCanvas');
